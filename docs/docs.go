@@ -5,7 +5,7 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
-    "swagger": "3.0.1",
+    "openapi": "3.0.1",
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
