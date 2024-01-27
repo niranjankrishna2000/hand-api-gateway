@@ -2605,12 +2605,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Version:          "1.0",
+	Host:             "handcrowdfunding.online",
+	BasePath:         "/docs/index.html",
+	Schemes:          []string{"http"},
+	Title:            "Hand",
+	Description:      "Crowdfunding Platform",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

@@ -5,4 +5,4 @@ server:
 	go run cmd/main.go
 
 swag: ## Generate swagger docs
-	swag init -g ./pkg/**/routes/*.go -o ./docs/
+	swag init -g ./pkg/**/routes/*.go -o ./cmd/

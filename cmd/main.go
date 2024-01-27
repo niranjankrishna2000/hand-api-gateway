@@ -27,8 +27,8 @@ func main() {
 	docs.SwaggerInfo.Title = "Hand CrowdFunding API"
 	docs.SwaggerInfo.Description = "Helping hand for all"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = "localhost:1111"
-	docs.SwaggerInfo.BasePath = ""
+	docs.SwaggerInfo.Host = "handcrowdfunding.online"
+	docs.SwaggerInfo.BasePath = "/docs/index.html"
 	//docs.SwaggerInfo.Schemes = []string{"http","https"}
    
 	c, err := config.LoadConfig()
