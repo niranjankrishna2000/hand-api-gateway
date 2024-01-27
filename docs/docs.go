@@ -1807,6 +1807,13 @@ const docTemplate = `{
             }
         }
     },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
     "definitions": {
         "pb.AdminDashboardResponse": {
             "type": "object",

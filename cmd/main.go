@@ -29,9 +29,9 @@ import (
 //	@version		1.0
 //	@description	API for crowdfunding website
 
-//	@securityDefinitions.apiKey	JWT
+//	@securityDefinitions.apiKey	api_key
 //	@in							header
-//	@name						token
+//	@name						Authorization
 
 //	@host		www.handcrowdfunding.online 
 //	@BasePath	/
