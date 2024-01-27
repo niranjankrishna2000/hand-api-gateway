@@ -9,12 +9,12 @@ import (
 	"hand/pkg/auth"
 	"hand/pkg/user"
 
-	"github.com/gin-gonic/gin"
 	docs "hand/docs"
+
+	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
-
 
 // @SecurityDefinition BearerAuth
 // @TokenUrl /auth/token
@@ -30,7 +30,7 @@ func main() {
 	docs.SwaggerInfo.Host = "handcrowdfunding.online"
 	docs.SwaggerInfo.BasePath = ""
 	docs.SwaggerInfo.Schemes = []string{"http"}
-   
+
 	c, err := config.LoadConfig()
 
 	if err != nil {
