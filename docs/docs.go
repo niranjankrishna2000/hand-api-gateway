@@ -2607,7 +2607,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "handcrowdfunding.online",
-	BasePath:         "",
+	BasePath:         "/",
 	Schemes:          []string{"http"},
 	Title:            "Hand",
 	Description:      "Crowdfunding Platform",
