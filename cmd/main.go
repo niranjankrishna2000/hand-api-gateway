@@ -22,6 +22,21 @@ import (
 // @securityDefinitions.Bearer		name Authorization
 // @securityDefinitions.Bearer		in header
 // @securityDefinitions.BasicAuth	type basic
+
+
+
+// @title   Hand crowdfunding API
+// @version  1.0
+// @description API for crowdfunding website
+
+// @securityDefinitions.apiKey JWT
+// @in       header
+// @name      token
+
+// @host   www.handcrowdfunding.online 
+// @BasePath  /
+
+// @schemes http 
 func main() {
 
 	docs.SwaggerInfo.Title = "Hand CrowdFunding API"

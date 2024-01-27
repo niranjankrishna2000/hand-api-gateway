@@ -955,7 +955,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "BearerAuth": []
+                        "JWT": []
                     }
                 ],
                 "description": "User can see feeds",
@@ -1615,6 +1615,13 @@ const docTemplate = `{
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header"
         }
     },
     "definitions": {
@@ -2606,16 +2613,17 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "handcrowdfunding.online",
-	BasePath:         "",
+	Host:             "www.handcrowdfunding.online",
+	BasePath:         "/",
 	Schemes:          []string{"http"},
-	Title:            "Hand",
-	Description:      "Crowdfunding Platform",
+	Title:            "Hand crowdfunding API",
+	Description:      "API for crowdfunding website",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
 	RightDelim:       "}}",
 }
+
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
