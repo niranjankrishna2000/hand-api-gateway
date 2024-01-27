@@ -1,0 +1,1684 @@
+definitions:
+  pb.AdminDashboardResponse:
+    properties:
+      alltime:
+        $ref: '#/definitions/pb.Stats'
+      annual:
+        $ref: '#/definitions/pb.Stats'
+      daily:
+        $ref: '#/definitions/pb.Stats'
+      monthly:
+        $ref: '#/definitions/pb.Stats'
+      response:
+        type: string
+      status:
+        type: integer
+      weekly:
+        $ref: '#/definitions/pb.Stats'
+    type: object
+  pb.AdminLoginResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      token:
+        type: string
+    type: object
+  pb.ApproveCampaignResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_admin_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.CampaignDetailsResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_admin_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.CampaignRequestListResponse:
+    properties:
+      post:
+        items:
+          $ref: '#/definitions/pkg_admin_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.Category:
+    properties:
+      category:
+        type: string
+      categoryid:
+        type: integer
+    type: object
+  pb.CategoryListResponse:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/pb.Category'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.CategoryPostsResponse:
+    properties:
+      category:
+        $ref: '#/definitions/pb.Category'
+      posts:
+        items:
+          $ref: '#/definitions/pkg_admin_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.CategoryStatsResponse:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/pb.Category'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ChangeUserPermissionResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      user:
+        $ref: '#/definitions/pb.User'
+    type: object
+  pb.ClearHistoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.Comment:
+    properties:
+      comment:
+        type: string
+      id:
+        type: integer
+      postid:
+        type: integer
+      time:
+        type: string
+      userid:
+        type: integer
+    type: object
+  pb.CommentPostResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pb.PostDetails'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.CreatePostResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DeleteCategoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DeletePostResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DeleteReportResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DonateResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+      link:
+        type: string
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.Donation:
+    properties:
+      amount:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
+      paymentid:
+        type: string
+      post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+    type: object
+  pb.DonationHistoryResponse:
+    properties:
+      donations:
+        items:
+          $ref: '#/definitions/pb.Donation'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.EditPostResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.FeedsResponse:
+    properties:
+      Posts:
+        items:
+          $ref: '#/definitions/pkg_admin_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.GetUserDetailsResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      user:
+        $ref: '#/definitions/pb.User'
+    type: object
+  pb.LikePostResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pb.PostDetails'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.LoginResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/pb.User'
+    type: object
+  pb.LoginWithOtpResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.MakePaymentRazorPayResponse:
+    properties:
+      FinalPrice:
+        type: integer
+      PaymentID:
+        type: integer
+      Razor_id:
+        type: string
+      UserID:
+        type: integer
+      Username:
+        type: string
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.NewCategoryResponse:
+    properties:
+      category:
+        $ref: '#/definitions/pb.Category'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.Notification:
+    properties:
+      id:
+        type: integer
+      post:
+        $ref: '#/definitions/pb.PostDetails'
+      text:
+        type: string
+      time:
+        type: string
+      userid:
+        type: integer
+    type: object
+  pb.NotificationResponse:
+    properties:
+      notifications:
+        items:
+          $ref: '#/definitions/pb.Notification'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.PostDetails:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/pb.Comment'
+        type: array
+      post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+    type: object
+  pb.PostDetailsResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pkg_admin_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.PostStatsResponse:
+    properties:
+      posts:
+        items:
+          $ref: '#/definitions/pkg_admin_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.RejectCampaignResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_admin_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ReportCommentResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pb.PostDetails'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ReportDetailsResponse:
+    properties:
+      post:
+        $ref: '#/definitions/pb.ReportedPost'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ReportPostResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pkg_user_pb.Post'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ReportedListResponse:
+    properties:
+      post:
+        items:
+          $ref: '#/definitions/pb.ReportedPost'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.ReportedPost:
+    properties:
+      post:
+        $ref: '#/definitions/pkg_admin_pb.Post'
+      reason:
+        type: string
+    type: object
+  pb.SignUpResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      user:
+        $ref: '#/definitions/pb.User'
+    type: object
+  pb.Stats:
+    properties:
+      activecampaigns:
+        type: integer
+      collectedmoney:
+        type: integer
+      likes:
+        type: integer
+      posts:
+        type: integer
+      users:
+        type: integer
+    type: object
+  pb.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
+    type: object
+  pb.UserFeedsResponse:
+    properties:
+      Posts:
+        items:
+          $ref: '#/definitions/pkg_user_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.UserListResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: integer
+      user:
+        items:
+          $ref: '#/definitions/pb.User'
+        type: array
+    type: object
+  pb.UserPostDetailsResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pb.PostDetails'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pkg_admin_pb.Post:
+    properties:
+      amount:
+        type: integer
+      collected:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      place:
+        type: string
+      status:
+        type: string
+      text:
+        type: string
+      userid:
+        type: integer
+    type: object
+  pkg_user_pb.Post:
+    properties:
+      account_no:
+        type: string
+      address:
+        type: string
+      amount:
+        type: integer
+      collected:
+        type: integer
+      date:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      likes:
+        type: integer
+      place:
+        type: string
+      text:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  routes.AdminLoginRequestBody:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  routes.ApproveCampaignBody:
+    properties:
+      postId:
+        maximum: 999
+        type: integer
+    required:
+    - postId
+    type: object
+  routes.CommentPostRequestBody:
+    properties:
+      postid:
+        type: integer
+      text:
+        type: string
+    type: object
+  routes.CreatePostRequestBody:
+    properties:
+      accno:
+        type: string
+      address:
+        type: string
+      amount:
+        type: integer
+      date:
+        type: string
+      image:
+        type: string
+      place:
+        type: string
+      text:
+        type: string
+    type: object
+  routes.DonateRequestBody:
+    properties:
+      amount:
+        type: integer
+      postID:
+        type: integer
+    type: object
+  routes.EditPostRequestBody:
+    properties:
+      accno:
+        type: string
+      address:
+        type: string
+      amount:
+        type: integer
+      date:
+        type: string
+      image:
+        type: string
+      place:
+        type: string
+      postid:
+        type: integer
+      text:
+        type: string
+    type: object
+  routes.LoginRequestBody:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  routes.LoginWithOtpRequestBody:
+    properties:
+      phone:
+        type: string
+    required:
+    - phone
+    type: object
+  routes.OtpValidateRequestBody:
+    properties:
+      confirm:
+        type: string
+      otp:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      phone:
+        type: string
+    required:
+    - confirm
+    - otp
+    - password
+    - phone
+    type: object
+  routes.ReportCommentRequestBody:
+    properties:
+      commentId:
+        type: integer
+      text:
+        type: string
+    type: object
+  routes.ReportPostRequestBody:
+    properties:
+      postId:
+        type: integer
+      text:
+        type: string
+    type: object
+  routes.SignUpRequestBody:
+    properties:
+      confirmpassword:
+        type: string
+      email:
+        type: string
+      name:
+        maxLength: 20
+        minLength: 3
+        type: string
+      password:
+        minLength: 6
+        type: string
+      phone:
+        type: string
+    required:
+    - confirmpassword
+    - email
+    - password
+    - phone
+    type: object
+info:
+  contact: {}
+paths:
+  /admin/campaigns/approve:
+    patch:
+      consumes:
+      - application/json
+      description: Admin can Approve Campaign
+      parameters:
+      - description: 'Post ID '
+        in: body
+        name: approveCampaignBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.ApproveCampaignBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ApproveCampaignResponse'
+      summary: Admin can Approv Campaign
+      tags:
+      - Admin Campaign
+  /admin/campaigns/details:
+    get:
+      consumes:
+      - application/json
+      description: Admin can get Campaign Details
+      parameters:
+      - description: post id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CampaignDetailsResponse'
+      summary: Admin can get Campaign Details
+      tags:
+      - Admin Campaign
+  /admin/campaigns/reject:
+    patch:
+      consumes:
+      - application/json
+      description: Admin can Reject Campaign
+      parameters:
+      - description: 'user id '
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.RejectCampaignResponse'
+      summary: Admin can Reject Campaign
+      tags:
+      - Admin Campaign
+  /admin/campaigns/reported:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see reported posts
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ReportedListResponse'
+      summary: Admin can see reported posts
+      tags:
+      - Admin Reported
+  /admin/campaigns/reported/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Admin can Delete reported post
+      parameters:
+      - description: 'Post ID '
+        in: query
+        name: postId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DeleteReportResponse'
+      summary: Admin can Delete reported post
+      tags:
+      - Admin Reported
+  /admin/campaigns/reported/details:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see details reported post
+      parameters:
+      - description: 'Post ID '
+        in: query
+        name: postId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ReportDetailsResponse'
+      summary: Admin can see details reported post
+      tags:
+      - Admin Reported
+  /admin/campaigns/requestlist:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see campaogn requests
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CampaignRequestListResponse'
+      summary: Admin can see campaign request
+      tags:
+      - Admin Campaign
+  /admin/categories/categorylist:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see Categories
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CategoryListResponse'
+      summary: Admin can see Categories
+      tags:
+      - Admin Categories
+  /admin/categories/categorylist/posts:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see Category posts
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CategoryPostsResponse'
+      summary: Admin can see Category posts
+      tags:
+      - Admin Categories
+  /admin/categories/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Admin can Delete Category
+      parameters:
+      - description: 'Category ID '
+        in: query
+        name: categoryId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DeleteCategoryResponse'
+      summary: Admin can Delete Category
+      tags:
+      - Admin Categories
+  /admin/categories/new:
+    post:
+      consumes:
+      - application/json
+      description: Admin can create New Category
+      parameters:
+      - description: category name
+        in: query
+        name: category
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.NewCategoryResponse'
+      summary: Admin can create New Category
+      tags:
+      - Admin Categories
+  /admin/dashboard:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see website statistics
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.AdminDashboardResponse'
+      summary: Admin can see website statistics
+      tags:
+      - Admin Dashboard
+  /admin/dashboard/User:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see User toplist
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CategoryStatsResponse'
+      summary: Admin can see User toplist
+      tags:
+      - Admin Dashboard
+  /admin/dashboard/category:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see Category toplist
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CategoryStatsResponse'
+      summary: Admin can see Category toplist
+      tags:
+      - Admin Dashboard
+  /admin/dashboard/posts:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see Post toplist
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.PostStatsResponse'
+      summary: Admin can see Post toplist
+      tags:
+      - Admin Dashboard
+  /admin/feeds:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see feeds
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.FeedsResponse'
+      summary: Admin can see feeds
+      tags:
+      - Admin Feeds
+  /admin/post/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Admin can delete post
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DeletePostResponse'
+      summary: Admin can delete post
+      tags:
+      - Admin Feeds
+  /admin/post/details:
+    get:
+      consumes:
+      - application/json
+      description: Admin can get post detail
+      parameters:
+      - description: post id Data
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.PostDetailsResponse'
+      summary: Admin can get post detail
+      tags:
+      - Admin Feeds
+  /admin/users/changepermission:
+    patch:
+      consumes:
+      - application/json
+      description: Admin can Change User Permission
+      parameters:
+      - description: 'user id '
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ChangeUserPermissionResponse'
+      summary: Admin can Change User Permission
+      tags:
+      - Admin Users
+  /admin/users/details:
+    get:
+      consumes:
+      - application/json
+      description: Admin can get user details
+      parameters:
+      - description: 'user id '
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetUserDetailsResponse'
+      summary: Admin can get user detail
+      tags:
+      - Admin Users
+  /admin/users/list:
+    get:
+      consumes:
+      - application/json
+      description: Admin can see User List
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.UserListResponse'
+      summary: Admin can see User List
+      tags:
+      - Admin Users
+  /adminlogin:
+    post:
+      consumes:
+      - application/json
+      description: Admin can login here
+      parameters:
+      - description: Admin Login Data
+        in: body
+        name: b
+        required: true
+        schema:
+          $ref: '#/definitions/routes.AdminLoginRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.AdminLoginResponse'
+      summary: Admin Login
+      tags:
+      - Admin Auth
+  /forgot-password:
+    post:
+      consumes:
+      - application/json
+      description: Forgot Password?User can login with otp here
+      parameters:
+      - description: User Login Data
+        in: body
+        name: b
+        required: true
+        schema:
+          $ref: '#/definitions/routes.LoginWithOtpRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.LoginWithOtpResponse'
+      summary: User Login with otp
+      tags:
+      - User Auth
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: User can login here
+      parameters:
+      - description: User Login Data
+        in: body
+        name: b
+        required: true
+        schema:
+          $ref: '#/definitions/routes.LoginRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.LoginResponse'
+      summary: User Login
+      tags:
+      - User Auth
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: User can logout here
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: User Logout
+      tags:
+      - User Auth
+  /otp-validate:
+    patch:
+      consumes:
+      - application/json
+      description: User can validate otp here
+      parameters:
+      - description: Validate otp Data
+        in: body
+        name: b
+        required: true
+        schema:
+          $ref: '#/definitions/routes.OtpValidateRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.LoginResponse'
+      summary: User Otp Validation
+      tags:
+      - User Auth
+  /signup:
+    post:
+      consumes:
+      - application/json
+      description: Adding new user to the database
+      parameters:
+      - description: User Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.SignUpRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.SignUpResponse'
+      summary: signup
+      tags:
+      - User Auth
+  /user/feeds:
+    get:
+      consumes:
+      - application/json
+      description: User can see feeds
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.UserFeedsResponse'
+      security:
+      - BearerAuth: []
+      summary: User can see feeds
+      tags:
+      - User Post
+  /user/notifications:
+    get:
+      consumes:
+      - application/json
+      description: User can see Notifications
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.NotificationResponse'
+      summary: User can see Notifications
+      tags:
+      - User Notifications
+  /user/notifications/clear:
+    delete:
+      consumes:
+      - application/json
+      description: User can Clear Notification
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ClearHistoryResponse'
+      summary: User can Clear Notification
+      tags:
+      - User Notifications
+  /user/notifications/delete:
+    delete:
+      consumes:
+      - application/json
+      description: User can delete Notification
+      parameters:
+      - description: Notification Id
+        in: query
+        name: notificationId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
+      summary: User can Delete Notification
+      tags:
+      - User Notifications
+  /user/notifications/details:
+    get:
+      consumes:
+      - application/json
+      description: User can see Notification Details
+      parameters:
+      - description: Notification Id
+        in: query
+        name: notificationId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
+      summary: User can see Notification Details
+      tags:
+      - User Notifications
+  /user/post/comment:
+    post:
+      consumes:
+      - application/json
+      description: User can Comment new post
+      parameters:
+      - description: Comment post Data
+        in: body
+        name: commentBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CommentPostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
+      summary: User can Comment new post
+      tags:
+      - User Post
+  /user/post/comment/delete:
+    delete:
+      consumes:
+      - application/json
+      description: User can Report post
+      parameters:
+      - description: Comment ID
+        in: query
+        name: commentId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
+      summary: User can report a post
+      tags:
+      - User Post
+  /user/post/comment/report:
+    post:
+      consumes:
+      - application/json
+      description: User can Report Comment
+      parameters:
+      - description: Report Comment Data
+        in: body
+        name: reportCommentBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.ReportCommentRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ReportCommentResponse'
+      summary: User can report a Comment
+      tags:
+      - User Post
+  /user/post/details:
+    get:
+      consumes:
+      - application/json
+      description: User can get post detail
+      parameters:
+      - description: post id Data
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.UserPostDetailsResponse'
+      security:
+      - JWT: []
+      summary: User can get post detail
+      tags:
+      - User Post
+  /user/post/details/report:
+    post:
+      consumes:
+      - application/json
+      description: User can Report post
+      parameters:
+      - description: Report Post Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.ReportPostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ReportPostResponse'
+      summary: User can report a post
+      tags:
+      - User Post
+  /user/post/donate/:
+    post:
+      consumes:
+      - application/json
+      description: User can donate for campaigns
+      parameters:
+      - description: Donate Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.DonateRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DonateResponse'
+      summary: User can donate for campaign
+      tags:
+      - User Donations
+  /user/post/donate/download-invoice:
+    get:
+      description: Download the invoice PDF file
+      parameters:
+      - description: invoice id
+        in: query
+        name: invoiceID
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+      security:
+      - Bearer: []
+      summary: Download Invoice PDF
+      tags:
+      - User Invoice
+  /user/post/donate/generate-invoice:
+    post:
+      description: generate the invoice PDF file
+      parameters:
+      - description: invoice id
+        in: query
+        name: invoiceID
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: OK
+      summary: generate Invoice PDF
+      tags:
+      - User Invoice
+  /user/post/donate/history:
+    get:
+      consumes:
+      - application/json
+      description: User can see Donation History
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DonationHistoryResponse'
+      summary: User can see Donation History
+      tags:
+      - User Donations
+  /user/post/donate/history/clear:
+    delete:
+      consumes:
+      - application/json
+      description: User can Clear History
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ClearHistoryResponse'
+      summary: User can Clear History
+      tags:
+      - User Donations
+  /user/post/donate/razorpay:
+    get:
+      consumes:
+      - application/json
+      description: User can pay for donation
+      parameters:
+      - description: pay id Data
+        in: query
+        name: payid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.MakePaymentRazorPayResponse'
+      summary: User can pay for donation
+      tags:
+      - User Donations
+  /user/post/edit:
+    patch:
+      consumes:
+      - application/json
+      description: User can edit post
+      parameters:
+      - description: Edit post Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.EditPostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.EditPostResponse'
+      summary: User can edit post
+      tags:
+      - User Post
+  /user/post/like:
+    post:
+      consumes:
+      - application/json
+      description: User can Like post
+      parameters:
+      - description: PostID
+        in: query
+        name: postid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.LikePostResponse'
+      summary: User can Like a post
+      tags:
+      - User Post
+  /user/post/new:
+    post:
+      consumes:
+      - application/json
+      description: User can create new post
+      parameters:
+      - description: Create post Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CreatePostRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.CreatePostResponse'
+      summary: User can create new post
+      tags:
+      - User Post
+  /user/post/upload-image:
+    post:
+      consumes:
+      - multipart/form-data
+      description: User can upload image
+      parameters:
+      - description: image
+        in: formData
+        name: image
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: User can upload image
+      tags:
+      - User Post
+swagger: "2.0"

@@ -1,0 +1,2593 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/admin/campaigns/approve": {
+            "patch": {
+                "description": "Admin can Approve Campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Campaign"
+                ],
+                "summary": "Admin can Approv Campaign",
+                "parameters": [
+                    {
+                        "description": "Post ID ",
+                        "name": "approveCampaignBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ApproveCampaignBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ApproveCampaignResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/details": {
+            "get": {
+                "description": "Admin can get Campaign Details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Campaign"
+                ],
+                "summary": "Admin can get Campaign Details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "post id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignDetailsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/reject": {
+            "patch": {
+                "description": "Admin can Reject Campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Campaign"
+                ],
+                "summary": "Admin can Reject Campaign",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user id ",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.RejectCampaignResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/reported": {
+            "get": {
+                "description": "Admin can see reported posts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Reported"
+                ],
+                "summary": "Admin can see reported posts",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportedListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/reported/delete": {
+            "delete": {
+                "description": "Admin can Delete reported post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Reported"
+                ],
+                "summary": "Admin can Delete reported post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID ",
+                        "name": "postId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteReportResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/reported/details": {
+            "get": {
+                "description": "Admin can see details reported post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Reported"
+                ],
+                "summary": "Admin can see details reported post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID ",
+                        "name": "postId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportDetailsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/campaigns/requestlist": {
+            "get": {
+                "description": "Admin can see campaogn requests",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Campaign"
+                ],
+                "summary": "Admin can see campaign request",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignRequestListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/categories/categorylist": {
+            "get": {
+                "description": "Admin can see Categories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Categories"
+                ],
+                "summary": "Admin can see Categories",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/categories/categorylist/posts": {
+            "get": {
+                "description": "Admin can see Category posts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Categories"
+                ],
+                "summary": "Admin can see Category posts",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryPostsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/categories/delete": {
+            "delete": {
+                "description": "Admin can Delete Category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Categories"
+                ],
+                "summary": "Admin can Delete Category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Category ID ",
+                        "name": "categoryId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteCategoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/categories/new": {
+            "post": {
+                "description": "Admin can create New Category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Categories"
+                ],
+                "summary": "Admin can create New Category",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "category name",
+                        "name": "category",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NewCategoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/dashboard": {
+            "get": {
+                "description": "Admin can see website statistics",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Admin can see website statistics",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AdminDashboardResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/dashboard/User": {
+            "get": {
+                "description": "Admin can see User toplist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Admin can see User toplist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryStatsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/dashboard/category": {
+            "get": {
+                "description": "Admin can see Category toplist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Admin can see Category toplist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryStatsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/dashboard/posts": {
+            "get": {
+                "description": "Admin can see Post toplist",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Admin can see Post toplist",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostStatsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/feeds": {
+            "get": {
+                "description": "Admin can see feeds",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Feeds"
+                ],
+                "summary": "Admin can see feeds",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.FeedsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/post/delete": {
+            "delete": {
+                "description": "Admin can delete post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Feeds"
+                ],
+                "summary": "Admin can delete post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeletePostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/post/details": {
+            "get": {
+                "description": "Admin can get post detail",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Feeds"
+                ],
+                "summary": "Admin can get post detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "post id Data",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostDetailsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/changepermission": {
+            "patch": {
+                "description": "Admin can Change User Permission",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Users"
+                ],
+                "summary": "Admin can Change User Permission",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user id ",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ChangeUserPermissionResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/details": {
+            "get": {
+                "description": "Admin can get user details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Users"
+                ],
+                "summary": "Admin can get user detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "user id ",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUserDetailsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/list": {
+            "get": {
+                "description": "Admin can see User List",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Users"
+                ],
+                "summary": "Admin can see User List",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "page",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/adminlogin": {
+            "post": {
+                "description": "Admin can login here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin Auth"
+                ],
+                "summary": "Admin Login",
+                "parameters": [
+                    {
+                        "description": "Admin Login Data",
+                        "name": "b",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.AdminLoginRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AdminLoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/forgot-password": {
+            "post": {
+                "description": "Forgot Password?User can login with otp here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Auth"
+                ],
+                "summary": "User Login with otp",
+                "parameters": [
+                    {
+                        "description": "User Login Data",
+                        "name": "b",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.LoginWithOtpRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginWithOtpResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "User can login here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Auth"
+                ],
+                "summary": "User Login",
+                "parameters": [
+                    {
+                        "description": "User Login Data",
+                        "name": "b",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.LoginRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "description": "User can logout here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Auth"
+                ],
+                "summary": "User Logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/otp-validate": {
+            "patch": {
+                "description": "User can validate otp here",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Auth"
+                ],
+                "summary": "User Otp Validation",
+                "parameters": [
+                    {
+                        "description": "Validate otp Data",
+                        "name": "b",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.OtpValidateRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/signup": {
+            "post": {
+                "description": "Adding new user to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Auth"
+                ],
+                "summary": "signup",
+                "parameters": [
+                    {
+                        "description": "User Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.SignUpRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.SignUpResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/feeds": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "User can see feeds",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can see feeds",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserFeedsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/notifications": {
+            "get": {
+                "description": "User can see Notifications",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Notifications"
+                ],
+                "summary": "User can see Notifications",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/notifications/clear": {
+            "delete": {
+                "description": "User can Clear Notification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Notifications"
+                ],
+                "summary": "User can Clear Notification",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ClearHistoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/notifications/delete": {
+            "delete": {
+                "description": "User can delete Notification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Notifications"
+                ],
+                "summary": "User can Delete Notification",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Notification Id",
+                        "name": "notificationId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/notifications/details": {
+            "get": {
+                "description": "User can see Notification Details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Notifications"
+                ],
+                "summary": "User can see Notification Details",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Notification Id",
+                        "name": "notificationId",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/comment": {
+            "post": {
+                "description": "User can Comment new post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can Comment new post",
+                "parameters": [
+                    {
+                        "description": "Comment post Data",
+                        "name": "commentBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CommentPostRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/comment/delete": {
+            "delete": {
+                "description": "User can Report post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can report a post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Comment ID",
+                        "name": "commentId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/comment/report": {
+            "post": {
+                "description": "User can Report Comment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can report a Comment",
+                "parameters": [
+                    {
+                        "description": "Report Comment Data",
+                        "name": "reportCommentBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ReportCommentRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportCommentResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/details": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "description": "User can get post detail",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can get post detail",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "post id Data",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserPostDetailsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/details/report": {
+            "post": {
+                "description": "User can Report post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can report a post",
+                "parameters": [
+                    {
+                        "description": "Report Post Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ReportPostRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/donate/": {
+            "post": {
+                "description": "User can donate for campaigns",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Donations"
+                ],
+                "summary": "User can donate for campaign",
+                "parameters": [
+                    {
+                        "description": "Donate Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.DonateRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DonateResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/donate/download-invoice": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "Download the invoice PDF file",
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "User Invoice"
+                ],
+                "summary": "Download Invoice PDF",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "invoice id",
+                        "name": "invoiceID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/donate/generate-invoice": {
+            "post": {
+                "description": "generate the invoice PDF file",
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "tags": [
+                    "User Invoice"
+                ],
+                "summary": "generate Invoice PDF",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "invoice id",
+                        "name": "invoiceID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/user/post/donate/history": {
+            "get": {
+                "description": "User can see Donation History",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Donations"
+                ],
+                "summary": "User can see Donation History",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DonationHistoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/donate/history/clear": {
+            "delete": {
+                "description": "User can Clear History",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Donations"
+                ],
+                "summary": "User can Clear History",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ClearHistoryResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/donate/razorpay": {
+            "get": {
+                "description": "User can pay for donation",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Donations"
+                ],
+                "summary": "User can pay for donation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "pay id Data",
+                        "name": "payid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.MakePaymentRazorPayResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/edit": {
+            "patch": {
+                "description": "User can edit post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can edit post",
+                "parameters": [
+                    {
+                        "description": "Edit post Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.EditPostRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditPostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/like": {
+            "post": {
+                "description": "User can Like post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can Like a post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "PostID",
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LikePostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/new": {
+            "post": {
+                "description": "User can create new post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can create new post",
+                "parameters": [
+                    {
+                        "description": "Create post Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CreatePostRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CreatePostResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/post/upload-image": {
+            "post": {
+                "description": "User can upload image",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "User can upload image",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "image",
+                        "name": "image",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "pb.AdminDashboardResponse": {
+            "type": "object",
+            "properties": {
+                "alltime": {
+                    "$ref": "#/definitions/pb.Stats"
+                },
+                "annual": {
+                    "$ref": "#/definitions/pb.Stats"
+                },
+                "daily": {
+                    "$ref": "#/definitions/pb.Stats"
+                },
+                "monthly": {
+                    "$ref": "#/definitions/pb.Stats"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "weekly": {
+                    "$ref": "#/definitions/pb.Stats"
+                }
+            }
+        },
+        "pb.AdminLoginResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "pb.ApproveCampaignResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_admin_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CampaignDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_admin_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CampaignRequestListResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_admin_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.Category": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "categoryid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CategoryListResponse": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Category"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CategoryPostsResponse": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "$ref": "#/definitions/pb.Category"
+                },
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_admin_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CategoryStatsResponse": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Category"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ChangeUserPermissionResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/pb.User"
+                }
+            }
+        },
+        "pb.ClearHistoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.Comment": {
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "postid": {
+                    "type": "integer"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "userid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CommentPostResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.CreatePostResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DeleteCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DeletePostResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DeleteReportResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DonateResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.Donation": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "paymentid": {
+                    "type": "string"
+                },
+                "post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                }
+            }
+        },
+        "pb.DonationHistoryResponse": {
+            "type": "object",
+            "properties": {
+                "donations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Donation"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.EditPostResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.FeedsResponse": {
+            "type": "object",
+            "properties": {
+                "Posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_admin_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.GetUserDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/pb.User"
+                }
+            }
+        },
+        "pb.LikePostResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.LoginResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/pb.User"
+                }
+            }
+        },
+        "pb.LoginWithOtpResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.MakePaymentRazorPayResponse": {
+            "type": "object",
+            "properties": {
+                "FinalPrice": {
+                    "type": "integer"
+                },
+                "PaymentID": {
+                    "type": "integer"
+                },
+                "Razor_id": {
+                    "type": "string"
+                },
+                "UserID": {
+                    "type": "integer"
+                },
+                "Username": {
+                    "type": "string"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.NewCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "$ref": "#/definitions/pb.Category"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.Notification": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "userid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.NotificationResponse": {
+            "type": "object",
+            "properties": {
+                "notifications": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Notification"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.PostDetails": {
+            "type": "object",
+            "properties": {
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Comment"
+                    }
+                },
+                "post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                }
+            }
+        },
+        "pb.PostDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pkg_admin_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.PostStatsResponse": {
+            "type": "object",
+            "properties": {
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_admin_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.RejectCampaignResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_admin_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ReportCommentResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ReportDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pb.ReportedPost"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ReportPostResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pkg_user_pb.Post"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ReportedListResponse": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.ReportedPost"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ReportedPost": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "$ref": "#/definitions/pkg_admin_pb.Post"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            }
+        },
+        "pb.SignUpResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/pb.User"
+                }
+            }
+        },
+        "pb.Stats": {
+            "type": "object",
+            "properties": {
+                "activecampaigns": {
+                    "type": "integer"
+                },
+                "collectedmoney": {
+                    "type": "integer"
+                },
+                "likes": {
+                    "type": "integer"
+                },
+                "posts": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "pb.UserFeedsResponse": {
+            "type": "object",
+            "properties": {
+                "Posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_user_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.UserListResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "user": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.User"
+                    }
+                }
+            }
+        },
+        "pb.UserPostDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pkg_admin_pb.Post": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "collected": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "userid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pkg_user_pb.Post": {
+            "type": "object",
+            "properties": {
+                "account_no": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "collected": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "likes": {
+                    "type": "integer"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.AdminLoginRequestBody": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                }
+            }
+        },
+        "routes.ApproveCampaignBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999
+                }
+            }
+        },
+        "routes.CommentPostRequestBody": {
+            "type": "object",
+            "properties": {
+                "postid": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.CreatePostRequestBody": {
+            "type": "object",
+            "properties": {
+                "accno": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.DonateRequestBody": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "postID": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.EditPostRequestBody": {
+            "type": "object",
+            "properties": {
+                "accno": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "postid": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.LoginRequestBody": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                }
+            }
+        },
+        "routes.LoginWithOtpRequestBody": {
+            "type": "object",
+            "required": [
+                "phone"
+            ],
+            "properties": {
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.OtpValidateRequestBody": {
+            "type": "object",
+            "required": [
+                "confirm",
+                "otp",
+                "password",
+                "phone"
+            ],
+            "properties": {
+                "confirm": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.ReportCommentRequestBody": {
+            "type": "object",
+            "properties": {
+                "commentId": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.ReportPostRequestBody": {
+            "type": "object",
+            "properties": {
+                "postId": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.SignUpRequestBody": {
+            "type": "object",
+            "required": [
+                "confirmpassword",
+                "email",
+                "password",
+                "phone"
+            ],
+            "properties": {
+                "confirmpassword": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 3
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,253 @@
+syntax = "proto3";
+
+package admin;
+
+option go_package = "./pkg/admin/pb";
+
+service AdminService {
+  rpc Feeds(FeedsRequest) returns (FeedsResponse) {}
+  rpc PostDetails(PostDetailsRequest) returns (PostDetailsResponse) {}
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse) {}
+  rpc CampaignRequestList(CampaignRequestListRequest) returns (CampaignRequestListResponse) {}
+  rpc CampaignDetails(CampaignDetailsRequest) returns (CampaignDetailsResponse) {}
+  rpc ApproveCampaign(ApproveCampaignRequest) returns (ApproveCampaignResponse) {}
+  rpc RejectCampaign(RejectCampaignRequest) returns (RejectCampaignResponse) {}
+  rpc ReportedList(ReportedListRequest) returns (ReportedListResponse) {}
+  rpc ReportDetails(ReportDetailsRequest) returns (ReportDetailsResponse) {}
+  rpc DeleteReport(DeleteReportRequest) returns (DeleteReportResponse) {}
+  rpc CategoryList(CategoryListRequest) returns (CategoryListResponse) {}
+  rpc CategoryPosts(CategoryPostsRequest) returns (CategoryPostsResponse) {}
+  rpc NewCategory(NewCategoryRequest) returns (NewCategoryResponse) {}
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse) {}
+  rpc AdminDashboard(AdminDashboardRequest) returns (AdminDashboardResponse) {}
+  rpc PostStats(PostStatsRequest) returns (PostStatsResponse) {}
+  rpc CategoryStats(CategoryStatsRequest) returns (CategoryStatsResponse) {}
+
+}
+
+
+message FeedsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string searchkey =3;
+}
+
+message FeedsResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Post Posts= 3;
+}
+
+message PostDetailsRequest {
+  int32 postID = 1;
+  int32 adminid = 2;
+}
+
+message PostDetailsResponse {
+  int64 status = 1;
+  string response = 2;
+  Post Post= 3;
+}
+
+message Post {
+  int32 id=1;
+  string text = 2;
+  string place = 3;
+  int64 amount = 4;
+  int64 collected=5;
+  string image = 6;
+  string date = 7;
+  int32 userid = 8;
+  string status = 9;
+}
+
+//DeletePost
+message DeletePostRequest {
+  int32 id = 1;
+}
+
+message DeletePostResponse {
+  int64 status = 1;
+  string response = 2;
+}
+
+
+//CampaignRequestList
+message CampaignRequestListRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string searchkey =3;
+}
+
+message CampaignRequestListResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated  Post post = 3 ;
+}
+
+//CampaignDetails
+message CampaignDetailsRequest {
+  int32 id = 1;
+}
+
+message CampaignDetailsResponse {
+  int64 status = 1;
+  string response = 2;
+  Post post = 3 ;
+}
+
+//ApproveCampaign
+message ApproveCampaignRequest {
+  int32 id = 1;
+}
+
+message ApproveCampaignResponse {
+  int64 status = 1;
+  string response = 2;
+  Post post = 3;
+}
+
+//RejectCampaign
+message RejectCampaignRequest {
+  int32 id = 1;
+}
+
+message RejectCampaignResponse {
+  int64 status = 1;
+  string response = 2;
+  Post post =3;
+}
+///////////////////////////////////////////////////////
+message ReportedListRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string searchkey =3;
+}
+
+message ReportedListResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated ReportedPost post =3;
+}
+
+message ReportedPost {
+  Post post=1;
+  string reason=2;
+}
+
+message ReportDetailsRequest {
+  int32 postid=1;
+}
+
+message ReportDetailsResponse {
+  int64 status = 1;
+  string response = 2;
+  ReportedPost post =3;
+}
+
+message DeleteReportRequest {
+  int32 postid=1;
+}
+
+message DeleteReportResponse {
+  int64 status = 1;
+  string response = 2;
+}
+
+
+message Category {
+  int32 categoryid=1;
+  string category=2;
+}
+
+message CategoryListRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string searchkey =3;
+}
+
+message CategoryListResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Category categories = 3;
+}
+
+
+message CategoryPostsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 categoryid = 3;
+}
+
+message CategoryPostsResponse {
+  int64 status = 1;
+  string response = 2;
+  Category category = 3;
+  repeated Post posts = 4;
+}
+
+message NewCategoryRequest {
+  string category =1;
+}
+
+message NewCategoryResponse {
+  int64 status = 1;
+  string response = 2;
+  Category category = 3;
+}
+
+message DeleteCategoryRequest {
+  int32 categoryid =1;
+}
+
+message DeleteCategoryResponse {
+  int64 status = 1;
+  string response = 2;
+}
+
+message AdminDashboardRequest {
+ // string Category =1;
+}
+
+message AdminDashboardResponse {
+  int64 status = 1;
+  string response = 2;
+  Stats daily =3;
+  Stats weekly=4;
+  Stats monthly=5;
+  Stats annual=6;
+  Stats alltime=7;
+
+}
+
+message Stats {
+  int64 collectedmoney=1;
+  int64 posts=2;
+  int64 likes=3;
+  int64 users=4;
+  int64 activecampaigns=5;  
+}
+
+message PostStatsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message PostStatsResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Post posts=3;
+}
+
+message CategoryStatsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message CategoryStatsResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Category categories=3;
+}
+
+//userstats needed
