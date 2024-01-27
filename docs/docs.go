@@ -5,7 +5,7 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
-    "swagger": "2.0",
+    "swagger": "3.0",
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
@@ -955,7 +955,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "JWT": []
+                        "api_key": []
                     }
                 ],
                 "description": "User can see feeds",
@@ -1225,7 +1225,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "JWT": []
+                        "api_key": []
                     }
                 ],
                 "description": "User can get post detail",
@@ -1330,7 +1330,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "api_key": []
                     }
                 ],
                 "description": "Download the invoice PDF file",
@@ -1618,9 +1618,9 @@ const docTemplate = `{
         }
     },
     "securityDefinitions": {
-        "JWT": {
+        "api_key": {
             "type": "apiKey",
-            "name": "token",
+            "name": "api_key",
             "in": "header"
         }
     },
