@@ -15,15 +15,15 @@ import (
 
 // Admin User Stats godoc
 //
-// @Summary  Admin can see User toplist
-// @Description Admin can see User toplist
-// @Tags   Admin Dashboard
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Success  200   {object} pb.CategoryStatsResponse
-// @Router   /admin/dashboard/User  [get]
+//	@Summary		Admin can see User toplist
+//	@Description	Admin can see User toplist
+//	@Tags			Admin Dashboard
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit	query		string	false	"limit"
+//	@Param			page	query		string	false	"Page number"
+//	@Success		200		{object}	pb.CategoryStatsResponse
+//	@Router			/admin/dashboard/User  [get]
 func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

@@ -13,15 +13,15 @@ import (
 
 // Admin Category Stats godoc
 //
-// @Summary  Admin can see Category toplist
-// @Description Admin can see Category toplist
-// @Tags   Admin Dashboard
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Success  200   {object} pb.CategoryStatsResponse
-// @Router   /admin/dashboard/category  [get]
+//	@Summary		Admin can see Category toplist
+//	@Description	Admin can see Category toplist
+//	@Tags			Admin Dashboard
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit	query		string	false	"limit"
+//	@Param			page	query		string	false	"Page number"
+//	@Success		200		{object}	pb.CategoryStatsResponse
+//	@Router			/admin/dashboard/category  [get]
 func CategoryStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

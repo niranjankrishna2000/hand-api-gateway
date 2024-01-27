@@ -18,14 +18,14 @@ type LoginRequestBody struct {
 
 // User Login godoc
 //
-// @Summary  User Login
-// @Description User can login here
-// @Tags   User Auth
-// @Accept   json
-// @Produce  json
-// @Param   b body  LoginRequestBody true "User Login Data"
-// @Success  200   {object} pb.LoginResponse
-// @Router   /login [post]
+//	@Summary		User Login
+//	@Description	User can login here
+//	@Tags			User Auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			b	body		LoginRequestBody	true	"User Login Data"
+//	@Success		200	{object}	pb.LoginResponse
+//	@Router			/login [post]
 func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 	loginBody := LoginRequestBody{}
 

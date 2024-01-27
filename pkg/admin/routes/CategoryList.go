@@ -13,16 +13,16 @@ import (
 
 // Admin Category List godoc
 //
-// @Summary  Admin can see Categories
-// @Description Admin can see Categories
-// @Tags   Admin Categories
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.CategoryListResponse
-// @Router   /admin/categories/categorylist  [get]
+//	@Summary		Admin can see Categories
+//	@Description	Admin can see Categories
+//	@Tags			Admin Categories
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.CategoryListResponse
+//	@Router			/admin/categories/categorylist  [get]
 func CategoryList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

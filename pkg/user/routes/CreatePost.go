@@ -22,14 +22,14 @@ type CreatePostRequestBody struct {
 
 // User create Post godoc
 //
-// @Summary  User can create new post
-// @Description User can create new post
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Param   body body  CreatePostRequestBody true "Create post Data"
-// @Success  200   {object} pb.CreatePostResponse
-// @Router   /user/post/new  [post]
+//	@Summary		User can create new post
+//	@Description	User can create new post
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		CreatePostRequestBody	true	"Create post Data"
+//	@Success		200		{object}	pb.CreatePostResponse
+//	@Router			/user/post/new  [post]
 func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Create post started...")
 	body := CreatePostRequestBody{}

@@ -14,14 +14,14 @@ import (
 
 // Admin get User detail godoc
 //
-// @Summary  Admin can get user detail
-// @Description Admin can get user details
-// @Tags   Admin Users
-// @Accept   json
-// @Produce  json
-// @Param   id query  string true "user id "
-// @Success  200   {object} pb.GetUserDetailsResponse
-// @Router   /admin/users/details  [get]
+//	@Summary		Admin can get user detail
+//	@Description	Admin can get user details
+//	@Tags			Admin Users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"user id "
+//	@Success		200	{object}	pb.GetUserDetailsResponse
+//	@Router			/admin/users/details  [get]
 func UserDetails(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

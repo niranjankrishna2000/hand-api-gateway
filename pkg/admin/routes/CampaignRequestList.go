@@ -13,16 +13,16 @@ import (
 
 // Admin campaign list godoc
 //
-// @Summary  Admin can see campaign request
-// @Description Admin can see campaogn requests
-// @Tags   Admin Campaign
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.CampaignRequestListResponse
-// @Router   /admin/campaigns/requestlist  [get]
+//	@Summary		Admin can see campaign request
+//	@Description	Admin can see campaogn requests
+//	@Tags			Admin Campaign
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.CampaignRequestListResponse
+//	@Router			/admin/campaigns/requestlist  [get]
 func CampaignRequestList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

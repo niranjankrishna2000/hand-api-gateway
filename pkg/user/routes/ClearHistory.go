@@ -12,13 +12,13 @@ import (
 
 // User Clear History godoc
 //
-// @Summary  User can Clear History
-// @Description User can Clear History
-// @Tags   User Donations
-// @Accept   json
-// @Produce  json
-// @Success  200   {object} pb.ClearHistoryResponse
-// @Router   /user/post/donate/history/clear  [delete]
+//	@Summary		User can Clear History
+//	@Description	User can Clear History
+//	@Tags			User Donations
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	pb.ClearHistoryResponse
+//	@Router			/user/post/donate/history/clear  [delete]
 func ClearHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	userId := ctx.GetInt64("userId")
 	if userId <= 0 {

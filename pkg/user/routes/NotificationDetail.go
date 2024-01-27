@@ -13,14 +13,14 @@ import (
 
 // User Notification Detail godoc
 //
-// @Summary  User can see Notification Details
-// @Description User can see Notification Details
-// @Tags   User Notifications
-// @Accept   json
-// @Produce  json
-// @Param			notificationId	query		string	false	"Notification Id"
-// @Success  200   {object} pb.CommentPostResponse
-// @Router   /user/notifications/details  [get]
+//	@Summary		User can see Notification Details
+//	@Description	User can see Notification Details
+//	@Tags			User Notifications
+//	@Accept			json
+//	@Produce		json
+//	@Param			notificationId	query		string	false	"Notification Id"
+//	@Success		200				{object}	pb.CommentPostResponse
+//	@Router			/user/notifications/details  [get]
 func NotificationDetail(ctx *gin.Context, c pb.UserServiceClient) {
 	notificationIDstr := ctx.Query("notificationId")
 	notificationID, err := strconv.Atoi(notificationIDstr)

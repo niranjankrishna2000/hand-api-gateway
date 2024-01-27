@@ -15,14 +15,14 @@ import (
 
 // User Donate Payment godoc
 //
-// @Summary Download Invoice PDF
-// @Description Download the invoice PDF file
-// @Tags			User Invoice
-// @Security		Bearer
-// @Param   invoiceID query  string true "invoice id"
-// @Produce octet-stream
-// @Success 200 {file} application/pdf
-// @Router /user/post/donate/download-invoice  [get]
+//	@Summary		Download Invoice PDF
+//	@Description	Download the invoice PDF file
+//	@Tags			User Invoice
+//	@Security		Bearer
+//	@Param			invoiceID	query	string	true	"invoice id"
+//	@Produce		octet-stream
+//	@Success		200	{file}	application/pdf
+//	@Router			/user/post/donate/download-invoice  [get]
 func DownloadInvoice(ctx *gin.Context, c pb.UserServiceClient) {
 	// Set the appropriate headers for the file download
 	invoiceID := strings.ToLower(ctx.Query("invoiceID"))

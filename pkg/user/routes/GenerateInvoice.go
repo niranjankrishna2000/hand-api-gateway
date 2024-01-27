@@ -15,13 +15,13 @@ import (
 
 // User Generate Invoice godoc
 //
-// @Summary generate Invoice PDF
-// @Description generate the invoice PDF file
-// @Tags			User Invoice
-// @Param   invoiceID query  string true "invoice id"
-// @Produce octet-stream
-// @Success 200
-// @Router /user/post/donate/generate-invoice  [post]
+//	@Summary		generate Invoice PDF
+//	@Description	generate the invoice PDF file
+//	@Tags			User Invoice
+//	@Param			invoiceID	query	string	true	"invoice id"
+//	@Produce		octet-stream
+//	@Success		200
+//	@Router			/user/post/donate/generate-invoice  [post]
 func GenerateInvoice(ctx *gin.Context, c pb.UserServiceClient, usvc user.AuthServiceClient) {
 	// Set the appropriate headers for the file download
 

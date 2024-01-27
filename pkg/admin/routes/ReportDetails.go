@@ -13,14 +13,14 @@ import (
 
 // Admin Details reported post godoc
 //
-// @Summary  Admin can see details reported post
-// @Description Admin can see details reported post
-// @Tags   Admin Reported
-// @Accept   json
-// @Produce  json
-// @Param   postId query  string true "Post ID "
-// @Success  200   {object} pb.ReportDetailsResponse
-// @Router   /admin/campaigns/reported/details  [get]
+//	@Summary		Admin can see details reported post
+//	@Description	Admin can see details reported post
+//	@Tags			Admin Reported
+//	@Accept			json
+//	@Produce		json
+//	@Param			postId	query		string	true	"Post ID "
+//	@Success		200		{object}	pb.ReportDetailsResponse
+//	@Router			/admin/campaigns/reported/details  [get]
 func ReportDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

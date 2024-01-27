@@ -21,14 +21,14 @@ type SignUpRequestBody struct {
 
 // Signup  godoc
 //
-// @Summary  signup
-// @Description Adding new user to the database
-// @Tags   User Auth
-// @Accept   json
-// @Produce  json
-// @Param   body body  SignUpRequestBody true "User Data"
-// @Success  200   {object} pb.SignUpResponse
-// @Router   /signup [post]
+//	@Summary		signup
+//	@Description	Adding new user to the database
+//	@Tags			User Auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		SignUpRequestBody	true	"User Data"
+//	@Success		200		{object}	pb.SignUpResponse
+//	@Router			/signup [post]
 func SignUp(ctx *gin.Context, c pb.AuthServiceClient) {
 	signupBody := SignUpRequestBody{}
 

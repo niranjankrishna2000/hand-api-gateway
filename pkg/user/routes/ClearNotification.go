@@ -12,13 +12,13 @@ import (
 
 // User Clear Notification godoc
 //
-// @Summary  User can Clear Notification
-// @Description User can Clear Notification
-// @Tags   User Notifications
-// @Accept   json
-// @Produce  json
-// @Success  200   {object} pb.ClearHistoryResponse
-// @Router   /user/notifications/clear  [delete]
+//	@Summary		User can Clear Notification
+//	@Description	User can Clear Notification
+//	@Tags			User Notifications
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	pb.ClearHistoryResponse
+//	@Router			/user/notifications/clear  [delete]
 func ClearNotification(ctx *gin.Context, c pb.UserServiceClient) {
 	userId := ctx.GetInt64("userId")
 	if userId <= 0 {

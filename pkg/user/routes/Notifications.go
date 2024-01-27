@@ -13,15 +13,15 @@ import (
 
 // User Notifications godoc
 //
-// @Summary  User can see Notifications
-// @Description User can see Notifications
-// @Tags   User Notifications
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Success  200   {object} pb.NotificationResponse
-// @Router   /user/notifications  [get]
+//	@Summary		User can see Notifications
+//	@Description	User can see Notifications
+//	@Tags			User Notifications
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit	query		string	false	"limit"
+//	@Param			page	query		string	false	"Page number"
+//	@Success		200		{object}	pb.NotificationResponse
+//	@Router			/user/notifications  [get]
 func Notifications(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Donation history")
 	pageStr := ctx.Query("page")

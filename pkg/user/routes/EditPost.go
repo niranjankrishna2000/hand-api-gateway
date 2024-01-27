@@ -23,14 +23,14 @@ type EditPostRequestBody struct {
 
 // User Edit Post godoc
 //
-// @Summary  User can edit post
-// @Description User can edit post
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Param   body body  EditPostRequestBody true "Edit post Data"
-// @Success  200   {object} pb.EditPostResponse
-// @Router   /user/post/edit  [patch]
+//	@Summary		User can edit post
+//	@Description	User can edit post
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		EditPostRequestBody	true	"Edit post Data"
+//	@Success		200		{object}	pb.EditPostResponse
+//	@Router			/user/post/edit  [patch]
 func EditPost(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Edit post started...")
 	body := EditPostRequestBody{}

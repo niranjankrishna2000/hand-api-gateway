@@ -12,14 +12,14 @@ import (
 )
 // User Notification Delete godoc
 //
-// @Summary  User can Delete Notification 
-// @Description User can delete Notification 
-// @Tags   User Notifications
-// @Accept   json
-// @Produce  json
-// @Param			notificationId	query		string	false	"Notification Id"
-// @Success  200   {object} pb.CommentPostResponse
-// @Router   /user/notifications/delete  [delete]
+//	@Summary		User can Delete Notification 
+//	@Description	User can delete Notification 
+//	@Tags			User Notifications
+//	@Accept			json
+//	@Produce		json
+//	@Param			notificationId	query		string	false	"Notification Id"
+//	@Success		200				{object}	pb.CommentPostResponse
+//	@Router			/user/notifications/delete  [delete]
 func DeleteNotification(ctx *gin.Context, c pb.UserServiceClient) {
 	notificationIDstr := ctx.Query("notificationId")
 	notificationID, err := strconv.Atoi(notificationIDstr)

@@ -15,16 +15,16 @@ import (
 
 // Admin User List godoc
 //
-// @Summary  Admin can see User List
-// @Description Admin can see User List
-// @Tags   Admin Users
-// @Accept   json
-// @Produce  json
-// @Param			page	query		string	false	"page"
-// @Param			limit	query		string	false	"limit"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.UserListResponse
-// @Router   /admin/users/list  [get]
+//	@Summary		Admin can see User List
+//	@Description	Admin can see User List
+//	@Tags			Admin Users
+//	@Accept			json
+//	@Produce		json
+//	@Param			page		query		string	false	"page"
+//	@Param			limit		query		string	false	"limit"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.UserListResponse
+//	@Router			/admin/users/list  [get]
 func UserList(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

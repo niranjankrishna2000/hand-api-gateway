@@ -13,16 +13,16 @@ import (
 
 // Admin Reported List godoc
 //
-// @Summary  Admin can see reported posts
-// @Description Admin can see reported posts
-// @Tags   Admin Reported
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.ReportedListResponse
-// @Router   /admin/campaigns/reported  [get]
+//	@Summary		Admin can see reported posts
+//	@Description	Admin can see reported posts
+//	@Tags			Admin Reported
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.ReportedListResponse
+//	@Router			/admin/campaigns/reported  [get]
 func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

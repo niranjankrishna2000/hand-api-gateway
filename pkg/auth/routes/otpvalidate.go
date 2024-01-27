@@ -20,14 +20,14 @@ type OtpValidateRequestBody struct {
 
 // User otp validation godoc
 //
-// @Summary  User Otp Validation
-// @Description User can validate otp here
-// @Tags   User Auth
-// @Accept   json
-// @Produce  json
-// @Param   b body  OtpValidateRequestBody true "Validate otp Data"
-// @Success  200   {object} pb.LoginResponse
-// @Router   /otp-validate [patch]
+//	@Summary		User Otp Validation
+//	@Description	User can validate otp here
+//	@Tags			User Auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			b	body		OtpValidateRequestBody	true	"Validate otp Data"
+//	@Success		200	{object}	pb.LoginResponse
+//	@Router			/otp-validate [patch]
 func OtpValidate(ctx *gin.Context, c pb.AuthServiceClient) {
 	otpBody := OtpValidateRequestBody{}
 

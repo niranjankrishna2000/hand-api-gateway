@@ -17,14 +17,14 @@ type LoginWithOtpRequestBody struct {
 
 // User Login with Otp godoc
 //
-// @Summary  User Login with otp
-// @Description Forgot Password?User can login with otp here
-// @Tags   User Auth
-// @Accept   json
-// @Produce  json
-// @Param   b body  LoginWithOtpRequestBody true "User Login Data"
-// @Success  200   {object} pb.LoginWithOtpResponse
-// @Router   /forgot-password [post]
+//	@Summary		User Login with otp
+//	@Description	Forgot Password?User can login with otp here
+//	@Tags			User Auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			b	body		LoginWithOtpRequestBody	true	"User Login Data"
+//	@Success		200	{object}	pb.LoginWithOtpResponse
+//	@Router			/forgot-password [post]
 func LoginWithOtp(ctx *gin.Context, c pb.AuthServiceClient) {
 	b := LoginWithOtpRequestBody{}
 

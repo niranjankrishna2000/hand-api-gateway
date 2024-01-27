@@ -13,16 +13,16 @@ import (
 
 // Admin feeds godoc
 //
-// @Summary  Admin can see feeds
-// @Description Admin can see feeds
-// @Tags   Admin Feeds
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.FeedsResponse
-// @Router   /admin/feeds  [get]
+//	@Summary		Admin can see feeds
+//	@Description	Admin can see feeds
+//	@Tags			Admin Feeds
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.FeedsResponse
+//	@Router			/admin/feeds  [get]
 func Feeds(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

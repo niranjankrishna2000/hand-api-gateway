@@ -16,27 +16,27 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @SecurityDefinition BearerAuth
-// @TokenUrl /auth/token
-// @securityDefinitions.Bearer		type apiKey
-// @securityDefinitions.Bearer		name Authorization
-// @securityDefinitions.Bearer		in header
-// @securityDefinitions.BasicAuth	type basic
+//	@SecurityDefinition				BearerAuth
+//	@TokenUrl						/auth/token
+//	@securityDefinitions.Bearer		type apiKey
+//	@securityDefinitions.Bearer		name Authorization
+//	@securityDefinitions.Bearer		in header
+//	@securityDefinitions.BasicAuth	type basic
 
 
 
-// @title   Hand crowdfunding API
-// @version  1.0
-// @description API for crowdfunding website
+//	@title			Hand crowdfunding API
+//	@version		1.0
+//	@description	API for crowdfunding website
 
-// @securityDefinitions.apiKey JWT
-// @in       header
-// @name      token
+//	@securityDefinitions.apiKey	JWT
+//	@in							header
+//	@name						token
 
-// @host   www.handcrowdfunding.online 
-// @BasePath  /
+//	@host		www.handcrowdfunding.online 
+//	@BasePath	/
 
-// @schemes http 
+//	@schemes	http 
 func main() {
 
 	docs.SwaggerInfo.Title = "Hand CrowdFunding API"

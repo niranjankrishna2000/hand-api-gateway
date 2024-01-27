@@ -17,14 +17,14 @@ type DonateRequestBody struct {
 
 // User Donate godoc
 //
-// @Summary  User can donate for campaign
-// @Description User can donate for campaigns
-// @Tags   User Donations
-// @Accept   json
-// @Produce  json
-// @Param   body body  DonateRequestBody true "Donate Data"
-// @Success  200   {object} pb.DonateResponse
-// @Router   /user/post/donate/  [post]
+//	@Summary		User can donate for campaign
+//	@Description	User can donate for campaigns
+//	@Tags			User Donations
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		DonateRequestBody	true	"Donate Data"
+//	@Success		200		{object}	pb.DonateResponse
+//	@Router			/user/post/donate/  [post]
 func Donate(ctx *gin.Context, c pb.UserServiceClient) {
 	body := DonateRequestBody{}
 

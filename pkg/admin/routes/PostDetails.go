@@ -13,14 +13,14 @@ import (
 
 // Admin get Post detail godoc
 //
-// @Summary  Admin can get post detail
-// @Description Admin can get post detail
-// @Tags   Admin Feeds
-// @Accept   json
-// @Produce  json
-// @Param   id query  string true "post id Data"
-// @Success  200   {object} pb.PostDetailsResponse
-// @Router   /admin/post/details  [get]
+//	@Summary		Admin can get post detail
+//	@Description	Admin can get post detail
+//	@Tags			Admin Feeds
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"post id Data"
+//	@Success		200	{object}	pb.PostDetailsResponse
+//	@Router			/admin/post/details  [get]
 func PostDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

@@ -16,14 +16,14 @@ type ReportCommentRequestBody struct {
 
 // User report Comment godoc
 //
-// @Summary  User can report a Comment
-// @Description User can Report Comment
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Param   reportCommentBody body  ReportCommentRequestBody true "Report Comment Data"
-// @Success  200   {object} pb.ReportCommentResponse
-// @Router   /user/post/comment/report  [post]
+//	@Summary		User can report a Comment
+//	@Description	User can Report Comment
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Param			reportCommentBody	body		ReportCommentRequestBody	true	"Report Comment Data"
+//	@Success		200					{object}	pb.ReportCommentResponse
+//	@Router			/user/post/comment/report  [post]
 func ReportComment(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Reporting comment started...")
 	reportCommentBody := ReportCommentRequestBody{}

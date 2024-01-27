@@ -12,14 +12,14 @@ import (
 
 // Admin Delete reported post godoc
 //
-// @Summary  Admin can Delete reported post
-// @Description Admin can Delete reported post
-// @Tags   Admin Reported
-// @Accept   json
-// @Produce  json
-// @Param   postId query  string true "Post ID "
-// @Success  200   {object} pb.DeleteReportResponse
-// @Router   /admin/campaigns/reported/delete  [delete]
+//	@Summary		Admin can Delete reported post
+//	@Description	Admin can Delete reported post
+//	@Tags			Admin Reported
+//	@Accept			json
+//	@Produce		json
+//	@Param			postId	query		string	true	"Post ID "
+//	@Success		200		{object}	pb.DeleteReportResponse
+//	@Router			/admin/campaigns/reported/delete  [delete]
 func DeleteReport(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

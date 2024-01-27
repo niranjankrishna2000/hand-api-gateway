@@ -17,14 +17,14 @@ type ApproveCampaignBody struct {
 
 // Admin Approve Campaign godoc
 //
-// @Summary  Admin can Approv Campaign
-// @Description Admin can Approve Campaign
-// @Tags   Admin Campaign
-// @Accept   json
-// @Produce  json
-// @Param   approveCampaignBody body ApproveCampaignBody  true "Post ID "
-// @Success  200   {object} pb.ApproveCampaignResponse
-// @Router   /admin/campaigns/approve  [patch]
+//	@Summary		Admin can Approv Campaign
+//	@Description	Admin can Approve Campaign
+//	@Tags			Admin Campaign
+//	@Accept			json
+//	@Produce		json
+//	@Param			approveCampaignBody	body		ApproveCampaignBody	true	"Post ID "
+//	@Success		200					{object}	pb.ApproveCampaignResponse
+//	@Router			/admin/campaigns/approve  [patch]
 func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating ApproveCampaign...")
 

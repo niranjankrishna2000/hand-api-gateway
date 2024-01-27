@@ -13,17 +13,17 @@ import (
 
 // User feeds godoc
 //
-// @Summary  User can see feeds
-// @Description User can see feeds
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Security		BearerAuth
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.UserFeedsResponse
-// @Router   /user/feeds  [get]
+//	@Summary		User can see feeds
+//	@Description	User can see feeds
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Security		BearerAuth
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.UserFeedsResponse
+//	@Router			/user/feeds  [get]
 func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Feeds")
 	pageStr := ctx.Query("page")

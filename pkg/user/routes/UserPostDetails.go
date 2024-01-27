@@ -13,15 +13,15 @@ import (
 
 // User get Post detail godoc
 //
-// @Summary  User can get post detail
-// @Description User can get post detail
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Security		JWT
-// @Param   id query  string true "post id Data"
-// @Success  200   {object} pb.UserPostDetailsResponse
-// @Router   /user/post/details  [get]
+//	@Summary		User can get post detail
+//	@Description	User can get post detail
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Security		JWT
+//	@Param			id	query		string	true	"post id Data"
+//	@Success		200	{object}	pb.UserPostDetailsResponse
+//	@Router			/user/post/details  [get]
 func UserPostDetails(ctx *gin.Context, c pb.UserServiceClient) {
 	postIDstr := ctx.Query("id")
 	postID, err := strconv.Atoi(postIDstr)

@@ -14,14 +14,14 @@ import (
 
 // Admin Change User Permission godoc
 //
-// @Summary  Admin can Change User Permission
-// @Description Admin can Change User Permission
-// @Tags   Admin Users
-// @Accept   json
-// @Produce  json
-// @Param   id query  string true "user id "
-// @Success  200   {object} pb.ChangeUserPermissionResponse
-// @Router   /admin/users/changepermission  [patch]
+//	@Summary		Admin can Change User Permission
+//	@Description	Admin can Change User Permission
+//	@Tags			Admin Users
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"user id "
+//	@Success		200	{object}	pb.ChangeUserPermissionResponse
+//	@Router			/admin/users/changepermission  [patch]
 func ChangeUserPermission(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

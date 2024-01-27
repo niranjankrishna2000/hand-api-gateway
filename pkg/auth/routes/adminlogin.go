@@ -18,14 +18,14 @@ type AdminLoginRequestBody struct {
 
 // Admin Login godoc
 //
-// @Summary  Admin Login
-// @Description Admin can login here
-// @Tags   Admin Auth
-// @Accept   json
-// @Produce  json
-// @Param   b body  AdminLoginRequestBody true "Admin Login Data"
-// @Success  200   {object} pb.AdminLoginResponse
-// @Router   /adminlogin [post]
+//	@Summary		Admin Login
+//	@Description	Admin can login here
+//	@Tags			Admin Auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			b	body		AdminLoginRequestBody	true	"Admin Login Data"
+//	@Success		200	{object}	pb.AdminLoginResponse
+//	@Router			/adminlogin [post]
 func AdminLogin(ctx *gin.Context, c pb.AuthServiceClient) {
 	b := AdminLoginRequestBody{}
 

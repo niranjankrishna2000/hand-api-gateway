@@ -17,14 +17,14 @@ type ReportPostRequestBody struct {
 
 // User report Post godoc
 //
-// @Summary  User can report a post
-// @Description User can Report post
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Param   body body  ReportPostRequestBody true "Report Post Data"
-// @Success  200   {object} pb.ReportPostResponse
-// @Router   /user/post/details/report  [post]
+//	@Summary		User can report a post
+//	@Description	User can Report post
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		ReportPostRequestBody	true	"Report Post Data"
+//	@Success		200		{object}	pb.ReportPostResponse
+//	@Router			/user/post/details/report  [post]
 func ReportPost(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Reporting post started...")
 	body := ReportPostRequestBody{}

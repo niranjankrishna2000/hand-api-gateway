@@ -13,14 +13,14 @@ import (
 
 // User Upload image godoc
 //
-// @Summary  User can upload image
-// @Description User can upload image
-// @Tags   User Post
-// @Accept			multipart/form-data
-// @Produce  json
-// @Param           image      formData     file   true   "image"
-// @Success  200   {string} fileLink
-// @Router   /user/post/upload-image [post]
+//	@Summary		User can upload image
+//	@Description	User can upload image
+//	@Tags			User Post
+//	@Accept			multipart/form-data
+//	@Produce		json
+//	@Param			image	formData	file	true	"image"
+//	@Success		200		{string}	fileLink
+//	@Router			/user/post/upload-image [post]
 func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Upload image started")
 	userId := ctx.GetInt64("userId")

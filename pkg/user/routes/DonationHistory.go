@@ -13,16 +13,16 @@ import (
 
 // User Donation History godoc
 //
-// @Summary  User can see Donation History
-// @Description User can see Donation History
-// @Tags   User Donations
-// @Accept   json
-// @Produce  json
-// @Param			limit	query		string	false	"limit"
-// @Param			page	query		string	false	"Page number"
-// @Param			searchkey	query		string	false	"searchkey"
-// @Success  200   {object} pb.DonationHistoryResponse
-// @Router   /user/post/donate/history  [get]
+//	@Summary		User can see Donation History
+//	@Description	User can see Donation History
+//	@Tags			User Donations
+//	@Accept			json
+//	@Produce		json
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.DonationHistoryResponse
+//	@Router			/user/post/donate/history  [get]
 func DonationHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Donation history")
 	pageStr := ctx.Query("page")

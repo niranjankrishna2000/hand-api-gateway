@@ -13,14 +13,14 @@ import (
 
 // User Donate Payment godoc
 //
-// @Summary  User can pay for donation
-// @Description User can pay for donation
-// @Tags   User Donations
-// @Accept   json
-// @Produce  json
-// @Param   payid query  string true "pay id Data"
-// @Success  200   {object} pb.MakePaymentRazorPayResponse
-// @Router   /user/post/donate/razorpay  [get]
+//	@Summary		User can pay for donation
+//	@Description	User can pay for donation
+//	@Tags			User Donations
+//	@Accept			json
+//	@Produce		json
+//	@Param			payid	query		string	true	"pay id Data"
+//	@Success		200		{object}	pb.MakePaymentRazorPayResponse
+//	@Router			/user/post/donate/razorpay  [get]
 func MakePaymentRazorPay(ctx *gin.Context, c pb.UserServiceClient) {
 	payIDstr := ctx.Query("payid")
 	payID, err := strconv.Atoi(payIDstr)

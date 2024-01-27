@@ -14,14 +14,14 @@ import (
 
 // Admin get Campaign Details godoc
 //
-// @Summary  Admin can get Campaign Details
-// @Description Admin can get Campaign Details
-// @Tags   Admin Campaign
-// @Accept   json
-// @Produce  json
-// @Param   id query  string true "post id"
-// @Success  200   {object} pb.CampaignDetailsResponse
-// @Router   /admin/campaigns/details  [get]
+//	@Summary		Admin can get Campaign Details
+//	@Description	Admin can get Campaign Details
+//	@Tags			Admin Campaign
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"post id"
+//	@Success		200	{object}	pb.CampaignDetailsResponse
+//	@Router			/admin/campaigns/details  [get]
 func CampaignDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 

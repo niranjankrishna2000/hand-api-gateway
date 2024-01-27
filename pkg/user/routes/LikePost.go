@@ -12,14 +12,14 @@ import (
 
 // User Like Post godoc
 //
-// @Summary  User can Like a post
-// @Description User can Like post
-// @Tags   User Post
-// @Accept   json
-// @Produce  json
-// @Param   postid query  string true "PostID"
-// @Success  200   {object} pb.LikePostResponse
-// @Router   /user/post/like  [post]
+//	@Summary		User can Like a post
+//	@Description	User can Like post
+//	@Tags			User Post
+//	@Accept			json
+//	@Produce		json
+//	@Param			postid	query		string	true	"PostID"
+//	@Success		200		{object}	pb.LikePostResponse
+//	@Router			/user/post/like  [post]
 func LikePost(ctx *gin.Context, c pb.UserServiceClient) {
 	postIDstr := ctx.Query("postid")
 	postID, err := strconv.Atoi(postIDstr)
