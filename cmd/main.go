@@ -10,7 +10,7 @@ import (
 	"hand/pkg/user"
 
 	"github.com/gin-gonic/gin"
-	//docs "hand/docs"
+	docs "hand/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -24,12 +24,12 @@ import (
 // @securityDefinitions.BasicAuth	type basic
 func main() {
 
-	// docs.SwaggerInfo.Title = "Hand CrowdFunding API"
-	// docs.SwaggerInfo.Description = "Helping hand for all"
-	// docs.SwaggerInfo.Version = "1.0"
-	// docs.SwaggerInfo.Host = "localhost:1111"
-	// docs.SwaggerInfo.BasePath = ""
-	// //docs.SwaggerInfo.Schemes = []string{"http","https"}
+	docs.SwaggerInfo.Title = "Hand CrowdFunding API"
+	docs.SwaggerInfo.Description = "Helping hand for all"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "localhost:1111"
+	docs.SwaggerInfo.BasePath = ""
+	//docs.SwaggerInfo.Schemes = []string{"http","https"}
    
 	c, err := config.LoadConfig()
 
