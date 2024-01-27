@@ -19,6 +19,7 @@ type ReportCommentRequestBody struct {
 //	@Summary		User can report a Comment
 //	@Description	User can Report Comment
 //	@Tags			User Post
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			reportCommentBody	body		ReportCommentRequestBody	true	"Report Comment Data"

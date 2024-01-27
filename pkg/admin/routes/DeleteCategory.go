@@ -16,6 +16,7 @@ import (
 // @Summary  Admin can Delete Category
 // @Description Admin can Delete Category
 // @Tags   Admin Categories
+// @Security		api_key
 // @Accept   json
 // @Produce  json
 // @Param   categoryId query  string true "Category ID "

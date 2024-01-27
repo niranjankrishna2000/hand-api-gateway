@@ -16,6 +16,7 @@ import (
 //	@Summary		User can see Notification Details
 //	@Description	User can see Notification Details
 //	@Tags			User Notifications
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			notificationId	query		string	false	"Notification Id"

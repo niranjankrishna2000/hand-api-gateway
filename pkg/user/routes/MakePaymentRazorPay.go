@@ -16,6 +16,7 @@ import (
 //	@Summary		User can pay for donation
 //	@Description	User can pay for donation
 //	@Tags			User Donations
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			payid	query		string	true	"pay id Data"

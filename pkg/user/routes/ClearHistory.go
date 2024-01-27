@@ -15,6 +15,7 @@ import (
 //	@Summary		User can Clear History
 //	@Description	User can Clear History
 //	@Tags			User Donations
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	pb.ClearHistoryResponse

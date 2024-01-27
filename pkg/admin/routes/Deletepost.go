@@ -17,6 +17,7 @@ import (
 //	@Summary		Admin can delete post
 //	@Description	Admin can delete post
 //	@Tags			Admin Feeds
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"id"

@@ -28,6 +28,7 @@ type EditPostRequestBody struct {
 //	@Tags			User Post
 //	@Accept			json
 //	@Produce		json
+//	@Security		api_key
 //	@Param			body	body		EditPostRequestBody	true	"Edit post Data"
 //	@Success		200		{object}	pb.EditPostResponse
 //	@Router			/user/post/edit  [patch]

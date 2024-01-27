@@ -18,6 +18,7 @@ import (
 //	@Tags			User Donations
 //	@Accept			json
 //	@Produce		json
+//	@Security		api_key
 //	@Param			limit		query		string	false	"limit"
 //	@Param			page		query		string	false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"

@@ -17,6 +17,11 @@ const docTemplate = `{
     "paths": {
         "/admin/campaigns/approve": {
             "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can Approve Campaign",
                 "consumes": [
                     "application/json"
@@ -51,6 +56,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/details": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can get Campaign Details",
                 "consumes": [
                     "application/json"
@@ -83,6 +93,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/reject": {
             "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can Reject Campaign",
                 "consumes": [
                     "application/json"
@@ -115,6 +130,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/reported": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see reported posts",
                 "consumes": [
                     "application/json"
@@ -158,6 +178,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/reported/delete": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can Delete reported post",
                 "consumes": [
                     "application/json"
@@ -190,6 +215,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/reported/details": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see details reported post",
                 "consumes": [
                     "application/json"
@@ -222,6 +252,11 @@ const docTemplate = `{
         },
         "/admin/campaigns/requestlist": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see campaogn requests",
                 "consumes": [
                     "application/json"
@@ -265,6 +300,11 @@ const docTemplate = `{
         },
         "/admin/categories/categorylist": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see Categories",
                 "consumes": [
                     "application/json"
@@ -308,6 +348,11 @@ const docTemplate = `{
         },
         "/admin/categories/categorylist/posts": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see Category posts",
                 "consumes": [
                     "application/json"
@@ -351,6 +396,11 @@ const docTemplate = `{
         },
         "/admin/categories/delete": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can Delete Category",
                 "consumes": [
                     "application/json"
@@ -383,6 +433,11 @@ const docTemplate = `{
         },
         "/admin/categories/new": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can create New Category",
                 "consumes": [
                     "application/json"
@@ -415,6 +470,11 @@ const docTemplate = `{
         },
         "/admin/dashboard": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see website statistics",
                 "consumes": [
                     "application/json"
@@ -438,6 +498,11 @@ const docTemplate = `{
         },
         "/admin/dashboard/User": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see User toplist",
                 "consumes": [
                     "application/json"
@@ -475,6 +540,11 @@ const docTemplate = `{
         },
         "/admin/dashboard/category": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see Category toplist",
                 "consumes": [
                     "application/json"
@@ -512,6 +582,11 @@ const docTemplate = `{
         },
         "/admin/dashboard/posts": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see Post toplist",
                 "consumes": [
                     "application/json"
@@ -549,6 +624,11 @@ const docTemplate = `{
         },
         "/admin/feeds": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see feeds",
                 "consumes": [
                     "application/json"
@@ -592,6 +672,11 @@ const docTemplate = `{
         },
         "/admin/post/delete": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can delete post",
                 "consumes": [
                     "application/json"
@@ -624,6 +709,11 @@ const docTemplate = `{
         },
         "/admin/post/details": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can get post detail",
                 "consumes": [
                     "application/json"
@@ -656,6 +746,11 @@ const docTemplate = `{
         },
         "/admin/users/changepermission": {
             "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can Change User Permission",
                 "consumes": [
                     "application/json"
@@ -688,6 +783,11 @@ const docTemplate = `{
         },
         "/admin/users/details": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can get user details",
                 "consumes": [
                     "application/json"
@@ -720,6 +820,11 @@ const docTemplate = `{
         },
         "/admin/users/list": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "Admin can see User List",
                 "consumes": [
                     "application/json"
@@ -1001,6 +1106,11 @@ const docTemplate = `{
         },
         "/user/notifications": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can see Notifications",
                 "consumes": [
                     "application/json"
@@ -1038,6 +1148,11 @@ const docTemplate = `{
         },
         "/user/notifications/clear": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Clear Notification",
                 "consumes": [
                     "application/json"
@@ -1061,6 +1176,11 @@ const docTemplate = `{
         },
         "/user/notifications/delete": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can delete Notification",
                 "consumes": [
                     "application/json"
@@ -1092,6 +1212,11 @@ const docTemplate = `{
         },
         "/user/notifications/details": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can see Notification Details",
                 "consumes": [
                     "application/json"
@@ -1123,6 +1248,11 @@ const docTemplate = `{
         },
         "/user/post/comment": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Comment new post",
                 "consumes": [
                     "application/json"
@@ -1157,6 +1287,11 @@ const docTemplate = `{
         },
         "/user/post/comment/delete": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Report post",
                 "consumes": [
                     "application/json"
@@ -1189,6 +1324,11 @@ const docTemplate = `{
         },
         "/user/post/comment/report": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Report Comment",
                 "consumes": [
                     "application/json"
@@ -1260,6 +1400,11 @@ const docTemplate = `{
         },
         "/user/post/details/report": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Report post",
                 "consumes": [
                     "application/json"
@@ -1294,6 +1439,11 @@ const docTemplate = `{
         },
         "/user/post/donate/": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can donate for campaigns",
                 "consumes": [
                     "application/json"
@@ -1362,6 +1512,11 @@ const docTemplate = `{
         },
         "/user/post/donate/generate-invoice": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "generate the invoice PDF file",
                 "produces": [
                     "application/octet-stream"
@@ -1388,6 +1543,11 @@ const docTemplate = `{
         },
         "/user/post/donate/history": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can see Donation History",
                 "consumes": [
                     "application/json"
@@ -1431,6 +1591,11 @@ const docTemplate = `{
         },
         "/user/post/donate/history/clear": {
             "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Clear History",
                 "consumes": [
                     "application/json"
@@ -1454,6 +1619,11 @@ const docTemplate = `{
         },
         "/user/post/donate/razorpay": {
             "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can pay for donation",
                 "consumes": [
                     "application/json"
@@ -1486,6 +1656,11 @@ const docTemplate = `{
         },
         "/user/post/edit": {
             "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can edit post",
                 "consumes": [
                     "application/json"
@@ -1520,6 +1695,11 @@ const docTemplate = `{
         },
         "/user/post/like": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can Like post",
                 "consumes": [
                     "application/json"
@@ -1552,6 +1732,11 @@ const docTemplate = `{
         },
         "/user/post/new": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can create new post",
                 "consumes": [
                     "application/json"
@@ -1586,6 +1771,11 @@ const docTemplate = `{
         },
         "/user/post/upload-image": {
             "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
                 "description": "User can upload image",
                 "consumes": [
                     "multipart/form-data"
@@ -1615,13 +1805,6 @@ const docTemplate = `{
                     }
                 }
             }
-        }
-    },
-    "securityDefinitions": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
         }
     },
     "definitions": {
@@ -2612,18 +2795,17 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.0",
-	Host:             "www.handcrowdfunding.online",
-	BasePath:         "/",
-	Schemes:          []string{"http"},
-	Title:            "Hand crowdfunding API",
-	Description:      "API for crowdfunding website",
+	Version:          "",
+	Host:             "",
+	BasePath:         "",
+	Schemes:          []string{},
+	Title:            "",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
 	RightDelim:       "}}",
 }
-
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)

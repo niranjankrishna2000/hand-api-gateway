@@ -25,6 +25,7 @@ type CreatePostRequestBody struct {
 //	@Summary		User can create new post
 //	@Description	User can create new post
 //	@Tags			User Post
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			body	body		CreatePostRequestBody	true	"Create post Data"

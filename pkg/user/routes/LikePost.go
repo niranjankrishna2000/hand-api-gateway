@@ -15,6 +15,7 @@ import (
 //	@Summary		User can Like a post
 //	@Description	User can Like post
 //	@Tags			User Post
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			postid	query		string	true	"PostID"

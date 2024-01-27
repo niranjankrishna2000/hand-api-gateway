@@ -15,6 +15,7 @@ import (
 //	@Summary		Admin can Delete reported post
 //	@Description	Admin can Delete reported post
 //	@Tags			Admin Reported
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			postId	query		string	true	"Post ID "

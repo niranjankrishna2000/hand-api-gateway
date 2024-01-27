@@ -14,6 +14,7 @@ import (
 //
 //	@Summary		User can Delete Notification 
 //	@Description	User can delete Notification 
+//	@Security		api_key
 //	@Tags			User Notifications
 //	@Accept			json
 //	@Produce		json

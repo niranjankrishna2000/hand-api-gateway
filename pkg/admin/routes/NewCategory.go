@@ -15,6 +15,7 @@ import (
 // @Summary  Admin can create New Category
 // @Description Admin can create New Category
 // @Tags   Admin Categories
+// @Security		api_key
 // @Accept   json
 // @Produce  json
 // @Param   category query  string true "category name"

@@ -18,6 +18,7 @@ import (
 //	@Summary		Admin can see User List
 //	@Description	Admin can see User List
 //	@Tags			Admin Users
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			page		query		string	false	"page"

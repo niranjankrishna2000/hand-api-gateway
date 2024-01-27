@@ -20,6 +20,7 @@ type DonateRequestBody struct {
 //	@Summary		User can donate for campaign
 //	@Description	User can donate for campaigns
 //	@Tags			User Donations
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			body	body		DonateRequestBody	true	"Donate Data"

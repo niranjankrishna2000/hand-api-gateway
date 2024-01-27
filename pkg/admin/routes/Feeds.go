@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can see feeds
 //	@Description	Admin can see feeds
 //	@Tags			Admin Feeds
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			limit		query		string	false	"limit"

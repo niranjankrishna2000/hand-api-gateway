@@ -18,6 +18,7 @@ import (
 //	@Summary		generate Invoice PDF
 //	@Description	generate the invoice PDF file
 //	@Tags			User Invoice
+//	@Security		api_key
 //	@Param			invoiceID	query	string	true	"invoice id"
 //	@Produce		octet-stream
 //	@Success		200

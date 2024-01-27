@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can get post detail
 //	@Description	Admin can get post detail
 //	@Tags			Admin Feeds
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"post id Data"

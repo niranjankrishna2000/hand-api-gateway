@@ -18,7 +18,7 @@ import (
 //	@Tags			User Post
 //	@Accept			json
 //	@Produce		json
-//	@Security		JWT
+//	@Security		api_key
 //	@Param			id	query		string	true	"post id Data"
 //	@Success		200	{object}	pb.UserPostDetailsResponse
 //	@Router			/user/post/details  [get]

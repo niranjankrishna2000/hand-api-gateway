@@ -17,6 +17,7 @@ import (
 //	@Summary		Admin can get Campaign Details
 //	@Description	Admin can get Campaign Details
 //	@Tags			Admin Campaign
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"post id"

@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can see campaign request
 //	@Description	Admin can see campaogn requests
 //	@Tags			Admin Campaign
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			limit		query		string	false	"limit"

@@ -17,6 +17,7 @@ import (
 //	@Summary		Admin can Change User Permission
 //	@Description	Admin can Change User Permission
 //	@Tags			Admin Users
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"user id "

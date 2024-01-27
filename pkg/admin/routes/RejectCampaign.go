@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can Reject Campaign
 //	@Description	Admin can Reject Campaign
 //	@Tags			Admin Campaign
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"user id "

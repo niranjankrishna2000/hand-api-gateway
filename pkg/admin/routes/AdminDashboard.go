@@ -15,6 +15,7 @@ import (
 //	@Summary		Admin can see website statistics
 //	@Description	Admin can see website statistics
 //	@Tags			Admin Dashboard
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	pb.AdminDashboardResponse

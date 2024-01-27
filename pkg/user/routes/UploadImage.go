@@ -18,6 +18,7 @@ import (
 //	@Tags			User Post
 //	@Accept			multipart/form-data
 //	@Produce		json
+//	@Security		api_key
 //	@Param			image	formData	file	true	"image"
 //	@Success		200		{string}	fileLink
 //	@Router			/user/post/upload-image [post]

@@ -15,6 +15,7 @@ import (
 //	@Summary		User can Clear Notification
 //	@Description	User can Clear Notification
 //	@Tags			User Notifications
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	pb.ClearHistoryResponse

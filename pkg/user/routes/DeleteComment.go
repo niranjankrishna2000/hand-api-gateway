@@ -14,6 +14,7 @@ import (
 //
 // @Summary  User can report a post
 // @Description User can Report post
+// @Security		api_key
 // @Tags   User Post
 // @Accept   json
 // @Produce  json

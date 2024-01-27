@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can see details reported post
 //	@Description	Admin can see details reported post
 //	@Tags			Admin Reported
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			postId	query		string	true	"Post ID "

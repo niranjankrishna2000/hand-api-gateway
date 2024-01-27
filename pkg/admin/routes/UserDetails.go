@@ -17,6 +17,7 @@ import (
 //	@Summary		Admin can get user detail
 //	@Description	Admin can get user details
 //	@Tags			Admin Users
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			id	query		string	true	"user id "

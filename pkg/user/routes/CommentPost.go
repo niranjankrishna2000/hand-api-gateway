@@ -18,6 +18,7 @@ type CommentPostRequestBody struct {
 //
 // @Summary  User can Comment new post
 // @Description User can Comment new post
+// @Security		api_key
 // @Tags   User Post
 // @Accept   json
 // @Produce  json

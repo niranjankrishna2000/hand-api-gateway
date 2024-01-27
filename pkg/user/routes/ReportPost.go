@@ -20,6 +20,7 @@ type ReportPostRequestBody struct {
 //	@Summary		User can report a post
 //	@Description	User can Report post
 //	@Tags			User Post
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			body	body		ReportPostRequestBody	true	"Report Post Data"

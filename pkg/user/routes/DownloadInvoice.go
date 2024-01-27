@@ -18,7 +18,7 @@ import (
 //	@Summary		Download Invoice PDF
 //	@Description	Download the invoice PDF file
 //	@Tags			User Invoice
-//	@Security		Bearer
+//	@Security		api_key
 //	@Param			invoiceID	query	string	true	"invoice id"
 //	@Produce		octet-stream
 //	@Success		200	{file}	application/pdf

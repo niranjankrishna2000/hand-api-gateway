@@ -20,6 +20,7 @@ type ApproveCampaignBody struct {
 //	@Summary		Admin can Approv Campaign
 //	@Description	Admin can Approve Campaign
 //	@Tags			Admin Campaign
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			approveCampaignBody	body		ApproveCampaignBody	true	"Post ID "

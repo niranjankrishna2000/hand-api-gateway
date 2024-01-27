@@ -16,6 +16,7 @@ import (
 //	@Summary		Admin can see Category posts
 //	@Description	Admin can see Category posts
 //	@Tags			Admin Categories
+//	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			limit		query		string	false	"limit"
