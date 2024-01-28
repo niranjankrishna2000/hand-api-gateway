@@ -36,6 +36,7 @@ const (
 	AdminService_AdminDashboard_FullMethodName      = "/admin.AdminService/AdminDashboard"
 	AdminService_PostStats_FullMethodName           = "/admin.AdminService/PostStats"
 	AdminService_CategoryStats_FullMethodName       = "/admin.AdminService/CategoryStats"
+	AdminService_UserStats_FullMethodName           = "/admin.AdminService/UserStats"
 )
 
 // AdminServiceClient is the client API for AdminService service.
@@ -59,6 +60,7 @@ type AdminServiceClient interface {
 	AdminDashboard(ctx context.Context, in *AdminDashboardRequest, opts ...grpc.CallOption) (*AdminDashboardResponse, error)
 	PostStats(ctx context.Context, in *PostStatsRequest, opts ...grpc.CallOption) (*PostStatsResponse, error)
 	CategoryStats(ctx context.Context, in *CategoryStatsRequest, opts ...grpc.CallOption) (*CategoryStatsResponse, error)
+	UserStats(ctx context.Context, in *UserStatsRequest, opts ...grpc.CallOption) (*UserStatsResponse, error)
 }
 
 type adminServiceClient struct {
@@ -222,6 +224,15 @@ func (c *adminServiceClient) CategoryStats(ctx context.Context, in *CategoryStat
 	return out, nil
 }
 
+func (c *adminServiceClient) UserStats(ctx context.Context, in *UserStatsRequest, opts ...grpc.CallOption) (*UserStatsResponse, error) {
+	out := new(UserStatsResponse)
+	err := c.cc.Invoke(ctx, AdminService_UserStats_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServiceServer is the server API for AdminService service.
 // All implementations must embed UnimplementedAdminServiceServer
 // for forward compatibility
@@ -243,6 +254,7 @@ type AdminServiceServer interface {
 	AdminDashboard(context.Context, *AdminDashboardRequest) (*AdminDashboardResponse, error)
 	PostStats(context.Context, *PostStatsRequest) (*PostStatsResponse, error)
 	CategoryStats(context.Context, *CategoryStatsRequest) (*CategoryStatsResponse, error)
+	UserStats(context.Context, *UserStatsRequest) (*UserStatsResponse, error)
 	mustEmbedUnimplementedAdminServiceServer()
 }
 
@@ -300,6 +312,9 @@ func (UnimplementedAdminServiceServer) PostStats(context.Context, *PostStatsRequ
 }
 func (UnimplementedAdminServiceServer) CategoryStats(context.Context, *CategoryStatsRequest) (*CategoryStatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CategoryStats not implemented")
+}
+func (UnimplementedAdminServiceServer) UserStats(context.Context, *UserStatsRequest) (*UserStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserStats not implemented")
 }
 func (UnimplementedAdminServiceServer) mustEmbedUnimplementedAdminServiceServer() {}
 
@@ -620,6 +635,24 @@ func _AdminService_CategoryStats_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AdminService_UserStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServiceServer).UserStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AdminService_UserStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServiceServer).UserStats(ctx, req.(*UserStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AdminService_ServiceDesc is the grpc.ServiceDesc for AdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -694,6 +727,10 @@ var AdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CategoryStats",
 			Handler:    _AdminService_CategoryStats_Handler,
+		},
+		{
+			MethodName: "UserStats",
+			Handler:    _AdminService_UserStats_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

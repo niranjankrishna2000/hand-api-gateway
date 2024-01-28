@@ -2,56 +2,67 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// Admin Post Stats godoc
+type PostStatsBody struct {
+	Limit int `json:"limit" validate:"min=1,max=99,number"`
+	Page  int `json:"page" validate:"min=1,max=99,number"`
+}
+
+// Post Stats godoc
 //
-//	@Summary		Admin can see Post toplist
+//	@Summary		Top Posts
 //	@Description	Admin can see Post toplist
 //	@Tags			Admin Dashboard
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit	query		string	false	"limit"
-//	@Param			page	query		string	false	"Page number"
-//	@Success		200		{object}	pb.PostStatsResponse
+//	@Param			PostStatsBody	body		PostStatsBody	true	"Page details"
+//	@Success		200				{object}	pb.PostStatsResponse
+//	@Failure		400				{object}	pb.PostStatsResponse
+//	@Failure		502				{object}	pb.PostStatsResponse
 //	@Router			/admin/dashboard/posts  [get]
 func PostStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
+	postStatsBody := PostStatsBody{}
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("page format invalid"))
+	if err := ctx.BindJSON(&postStatsBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.PostStatsResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Error with request",
+			Posts: nil,
+		})
 		return
 	}
-
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil || limit < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("limit format invalid"))
+	validator := validator.New()
+	if err := validator.Struct(postStatsBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.PostStatsResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Invalid data" + err.Error(),
+			Posts: nil,
+		})
 		return
 	}
-	log.Println("Collected data : ", page, limit)
-	log.Println("Fetching Data...")
-
-	res, err := c.PostStats(context.Background(), &pb.PostStatsRequest{Limit: int32(limit),Page: int32(page)})
+	res, err := c.PostStats(context.Background(), &pb.PostStatsRequest{
+		Limit: int32(postStatsBody.Limit), 
+		Page: int32(postStatsBody.Limit),
+	})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.PostStatsResponse{
+			Status:     http.StatusBadGateway,
+			Response:   "Error in internal server",
+			Posts: nil,
+		})
 		return
 	}
 	log.Println("Recieved data : ", res)

@@ -2,58 +2,69 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type CategoryStatsBody struct {
+	Limit int `json:"limit" validate:"min=1,max=99,number"`
+	Page  int `json:"page" validate:"min=1,max=99,number"`
+}
 
 // Admin Category Stats godoc
 //
-//	@Summary		Admin can see Category toplist
-//	@Description	Admin can see Category toplist
+//	@Summary		Top Categories
+//	@Description	Admin can see top Categories
 //	@Tags			Admin Dashboard
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit	query		string	false	"limit"
-//	@Param			page	query		string	false	"Page number"
-//	@Success		200		{object}	pb.CategoryStatsResponse
+//	@Param			CategoryStatsBody	body		CategoryStatsBody	true	"Page Details"
+//	@Success		200					{object}	pb.CategoryStatsResponse
+//	@Failure		200					{object}	pb.CategoryStatsResponse
+//	@Failure		200					{object}	pb.CategoryStatsResponse
 //	@Router			/admin/dashboard/category  [get]
 func CategoryStats(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+	log.Println("Initiating CategoryStats...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("page format invalid"))
+	categoryStatsBody := CategoryStatsBody{}
+
+	if err := ctx.BindJSON(&categoryStatsBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.CategoryStatsResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Error with request",
+			Categories: nil,
+		})
 		return
 	}
-
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil || limit < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("limit format invalid"))
+	validator := validator.New()
+	if err := validator.Struct(categoryStatsBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.CategoryStatsResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Invalid data" + err.Error(),
+			Categories: nil,
+		})
 		return
 	}
-	log.Println("Collected data : ", page, limit)
-	log.Println("Fetching Data...")
+	res, err := c.CategoryStats(context.Background(), &pb.CategoryStatsRequest{
+		Page: int32(categoryStatsBody.Page), 
+		Limit: int32(categoryStatsBody.Limit)})
 
-	res, err := c.CategoryStats(context.Background(), &pb.CategoryStatsRequest{Page: int32(page),Limit: int32(limit)})
-
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
-		return
-	}
+		if err != nil {
+			log.Println("Error with internal server :", err)
+			ctx.JSON(http.StatusBadGateway, pb.CategoryStatsResponse{
+				Status:   http.StatusBadGateway,
+				Response: "Error in internal server",
+				Categories:     nil,
+			})
+			return
+		}
 	log.Println("Recieved data : ", res)
 
 	ctx.JSON(http.StatusOK, &res)

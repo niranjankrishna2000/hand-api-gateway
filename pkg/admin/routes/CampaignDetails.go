@@ -12,7 +12,7 @@ import (
 )
 
 type CampaignDetailsBody struct {
-	PostId int `json:"postId" validate:"required,max=999,number"`
+	PostId int `json:"postId" validate:"required,min=1,max=999,number"`
 }
 
 // Admin get Campaign Details godoc

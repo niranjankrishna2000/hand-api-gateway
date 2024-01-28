@@ -4,43 +4,66 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"strconv"
 
 	"hand/pkg/admin/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// Admin get Post detail godoc
+type PostDetailsBody struct {
+	PostId int `json:"postId" validate:"required,min=1,max=999,number"`
+}
+
+// Post detail godoc
 //
-//	@Summary		Admin can get post detail
-//	@Description	Admin can get post detail
+//	@Summary		Post detail
+//	@Description	Admin can get post details
 //	@Tags			Admin Feeds
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			id	query		string	true	"post id Data"
-//	@Success		200	{object}	pb.PostDetailsResponse
+//	@Param			PostDetailsBody	body		PostDetailsBody	true	"Post Id"
+//	@Success		200				{object}	pb.PostDetailsResponse
+//	@Failure		400				{object}	pb.PostDetailsResponse
+//	@Failure		502				{object}	pb.PostDetailsResponse
 //	@Router			/admin/post/details  [get]
 func PostDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	postIDstr := ctx.Query("id")
-	postID, err := strconv.Atoi(postIDstr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	postDetailsBody := PostDetailsBody{}
+
+	if err := ctx.BindJSON(&postDetailsBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.PostDetailsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
+		})
 		return
 	}
-	log.Println("Data collected: ",postID)
-	log.Println("Fetching Data...")
-
-	res, err := c.PostDetails(context.Background(), &pb.PostDetailsRequest{PostID: int32(postID)})
-
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+	validator := validator.New()
+	if err := validator.Struct(postDetailsBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.PostDetailsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid Post ID",
+			Post:     nil,
+		})
 		return
 	}
-	log.Println("Data recieved: ",res)
+	res, err := c.PostDetails(context.Background(), &pb.PostDetailsRequest{PostID: int32(postDetailsBody.PostId)})
+
+	if err != nil {
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.PostDetailsResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
+		return
+	}
+	log.Println("Data recieved: ", res)
 
 	ctx.JSON(http.StatusOK, &res)
 }

@@ -103,7 +103,7 @@ definitions:
       status:
         type: integer
       user:
-        $ref: '#/definitions/pb.User'
+        $ref: '#/definitions/pkg_auth_pb.User'
     type: object
   pb.ClearHistoryResponse:
     properties:
@@ -226,7 +226,7 @@ definitions:
       status:
         type: integer
       user:
-        $ref: '#/definitions/pb.User'
+        $ref: '#/definitions/pkg_auth_pb.User'
     type: object
   pb.LikePostResponse:
     properties:
@@ -246,7 +246,7 @@ definitions:
       token:
         type: string
       user:
-        $ref: '#/definitions/pb.User'
+        $ref: '#/definitions/pkg_auth_pb.User'
     type: object
   pb.LoginWithOtpResponse:
     properties:
@@ -395,7 +395,7 @@ definitions:
       status:
         type: integer
       user:
-        $ref: '#/definitions/pb.User'
+        $ref: '#/definitions/pkg_auth_pb.User'
     type: object
   pb.Stats:
     properties:
@@ -409,19 +409,6 @@ definitions:
         type: integer
       users:
         type: integer
-    type: object
-  pb.User:
-    properties:
-      email:
-        type: string
-      id:
-        type: integer
-      name:
-        type: string
-      phone:
-        type: string
-      status:
-        type: string
     type: object
   pb.UserFeedsResponse:
     properties:
@@ -442,7 +429,7 @@ definitions:
         type: integer
       user:
         items:
-          $ref: '#/definitions/pb.User'
+          $ref: '#/definitions/pkg_auth_pb.User'
         type: array
     type: object
   pb.UserPostDetailsResponse:
@@ -453,6 +440,17 @@ definitions:
         type: string
       status:
         type: integer
+    type: object
+  pb.UserStatsResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      users:
+        items:
+          $ref: '#/definitions/pkg_admin_pb.User'
+        type: array
     type: object
   pkg_admin_pb.Post:
     properties:
@@ -474,6 +472,32 @@ definitions:
         type: string
       userid:
         type: integer
+    type: object
+  pkg_admin_pb.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
+    type: object
+  pkg_auth_pb.User:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
     type: object
   pkg_user_pb.Post:
     properties:
@@ -515,6 +539,7 @@ definitions:
     properties:
       postId:
         maximum: 999
+        minimum: 1
         type: integer
     required:
     - postId
@@ -523,6 +548,7 @@ definitions:
     properties:
       postId:
         maximum: 999
+        minimum: 1
         type: integer
     required:
     - postId
@@ -531,9 +557,11 @@ definitions:
     properties:
       limit:
         maximum: 99
+        minimum: 1
         type: integer
       page:
         maximum: 99
+        minimum: 1
         type: integer
       searchkey:
         type: string
@@ -542,9 +570,11 @@ definitions:
     properties:
       limit:
         maximum: 99
+        minimum: 1
         type: integer
       page:
         maximum: 99
+        minimum: 1
         type: integer
       searchkey:
         type: string
@@ -553,15 +583,38 @@ definitions:
     properties:
       categoryId:
         maximum: 50
+        minimum: 1
         type: integer
       limit:
         maximum: 99
+        minimum: 1
         type: integer
       page:
         maximum: 99
+        minimum: 1
         type: integer
     required:
     - categoryId
+    type: object
+  routes.CategoryStatsBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
+    type: object
+  routes.ChangeUserPermissionBody:
+    properties:
+      userId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - userId
     type: object
   routes.CommentPostRequestBody:
     properties:
@@ -586,6 +639,33 @@ definitions:
         type: string
       text:
         type: string
+    type: object
+  routes.DeleteCategoryBody:
+    properties:
+      categoryId:
+        maximum: 99
+        minimum: 1
+        type: integer
+    required:
+    - categoryId
+    type: object
+  routes.DeletePostBody:
+    properties:
+      postId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - postId
+    type: object
+  routes.DeleteReportBody:
+    properties:
+      postId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - postId
     type: object
   routes.DonateRequestBody:
     properties:
@@ -613,6 +693,19 @@ definitions:
       text:
         type: string
     type: object
+  routes.FeedsBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
+      searchkey:
+        type: string
+    type: object
   routes.LoginRequestBody:
     properties:
       email:
@@ -631,6 +724,15 @@ definitions:
     required:
     - phone
     type: object
+  routes.NewCategoryBody:
+    properties:
+      category:
+        maxLength: 20
+        minLength: 2
+        type: string
+    required:
+    - category
+    type: object
   routes.OtpValidateRequestBody:
     properties:
       confirm:
@@ -648,6 +750,35 @@ definitions:
     - password
     - phone
     type: object
+  routes.PostDetailsBody:
+    properties:
+      postId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - postId
+    type: object
+  routes.PostStatsBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
+    type: object
+  routes.RejectCampaignBody:
+    properties:
+      postId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - postId
+    type: object
   routes.ReportCommentRequestBody:
     properties:
       commentId:
@@ -655,11 +786,33 @@ definitions:
       text:
         type: string
     type: object
+  routes.ReportDetailsBody:
+    properties:
+      postId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - postId
+    type: object
   routes.ReportPostRequestBody:
     properties:
       postId:
         type: integer
       text:
+        type: string
+    type: object
+  routes.ReportedListBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
+      searchkey:
         type: string
     type: object
   routes.SignUpRequestBody:
@@ -673,6 +826,7 @@ definitions:
         minLength: 3
         type: string
       password:
+        maxLength: 20
         minLength: 6
         type: string
       phone:
@@ -682,6 +836,39 @@ definitions:
     - email
     - password
     - phone
+    type: object
+  routes.UserDetailsBody:
+    properties:
+      userId:
+        maximum: 999
+        minimum: 1
+        type: integer
+    required:
+    - userId
+    type: object
+  routes.UserListBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
+      searchkey:
+        type: string
+    type: object
+  routes.UserStatsBody:
+    properties:
+      limit:
+        maximum: 99
+        minimum: 1
+        type: integer
+      page:
+        maximum: 99
+        minimum: 1
+        type: integer
     type: object
 info:
   contact: {}
@@ -694,7 +881,7 @@ paths:
       parameters:
       - description: 'Post ID '
         in: body
-        name: approveCampaignBody
+        name: ApproveCampaignBody
         required: true
         schema:
           $ref: '#/definitions/routes.ApproveCampaignBody'
@@ -756,11 +943,12 @@ paths:
       - application/json
       description: Admin can Reject Campaign
       parameters:
-      - description: 'user id '
-        in: query
-        name: id
+      - description: 'Post ID '
+        in: body
+        name: RejectCampaignBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.RejectCampaignBody'
       produces:
       - application/json
       responses:
@@ -768,9 +956,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.RejectCampaignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.RejectCampaignResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.RejectCampaignResponse'
       security:
       - api_key: []
-      summary: Admin can Reject Campaign
+      summary: Reject Campaign
       tags:
       - Admin Campaign
   /admin/campaigns/reported:
@@ -780,17 +976,11 @@ paths:
       description: Admin can see reported posts
       parameters:
       - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+        in: body
+        name: ReportedListBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.ReportedListBody'
       produces:
       - application/json
       responses:
@@ -798,9 +988,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ReportedListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ReportedListResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ReportedListResponse'
       security:
       - api_key: []
-      summary: Admin can see reported posts
+      summary: Reported posts
       tags:
       - Admin Reported
   /admin/campaigns/reported/delete:
@@ -810,10 +1008,11 @@ paths:
       description: Admin can Delete reported post
       parameters:
       - description: 'Post ID '
-        in: query
-        name: postId
+        in: body
+        name: DeleteReportBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.DeleteReportBody'
       produces:
       - application/json
       responses:
@@ -821,22 +1020,31 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.DeleteReportResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteReportResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteReportResponse'
       security:
       - api_key: []
-      summary: Admin can Delete reported post
+      summary: Delete reported post
       tags:
       - Admin Reported
   /admin/campaigns/reported/details:
     get:
       consumes:
       - application/json
-      description: Admin can see details reported post
+      description: Admin can see details of reported post
       parameters:
       - description: 'Post ID '
-        in: query
-        name: postId
+        in: body
+        name: ReportDetailsBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.ReportDetailsBody'
       produces:
       - application/json
       responses:
@@ -844,9 +1052,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ReportDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ReportDetailsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ReportDetailsResponse'
       security:
       - api_key: []
-      summary: Admin can see details reported post
+      summary: Details of reported post
       tags:
       - Admin Reported
   /admin/campaigns/requestlist:
@@ -952,10 +1168,11 @@ paths:
       description: Admin can Delete Category
       parameters:
       - description: 'Category ID '
-        in: query
-        name: categoryId
+        in: body
+        name: DeleteCategoryBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.DeleteCategoryBody'
       produces:
       - application/json
       responses:
@@ -963,9 +1180,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.DeleteCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteCategoryResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteCategoryResponse'
       security:
       - api_key: []
-      summary: Admin can Delete Category
+      summary: Delete Category
       tags:
       - Admin Categories
   /admin/categories/new:
@@ -974,11 +1199,12 @@ paths:
       - application/json
       description: Admin can create New Category
       parameters:
-      - description: category name
-        in: query
-        name: category
+      - description: Category Name
+        in: body
+        name: NewCategoryBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.NewCategoryBody'
       produces:
       - application/json
       responses:
@@ -986,9 +1212,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.NewCategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.NewCategoryResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.NewCategoryResponse'
       security:
       - api_key: []
-      summary: Admin can create New Category
+      summary: Create Category
       tags:
       - Admin Categories
   /admin/dashboard:
@@ -1018,40 +1252,44 @@ paths:
       - application/json
       description: Admin can see User toplist
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
+      - description: Page details
+        in: body
+        name: UserStatsBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.UserStatsBody'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.CategoryStatsResponse'
+            $ref: '#/definitions/pb.UserStatsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.UserStatsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.UserStatsResponse'
       security:
       - api_key: []
-      summary: Admin can see User toplist
+      summary: Top Users
       tags:
       - Admin Dashboard
   /admin/dashboard/category:
     get:
       consumes:
       - application/json
-      description: Admin can see Category toplist
+      description: Admin can see top Categories
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
+      - description: Page Details
+        in: body
+        name: CategoryStatsBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CategoryStatsBody'
       produces:
       - application/json
       responses:
@@ -1061,7 +1299,7 @@ paths:
             $ref: '#/definitions/pb.CategoryStatsResponse'
       security:
       - api_key: []
-      summary: Admin can see Category toplist
+      summary: Top Categories
       tags:
       - Admin Dashboard
   /admin/dashboard/posts:
@@ -1070,14 +1308,12 @@ paths:
       - application/json
       description: Admin can see Post toplist
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
+      - description: Page details
+        in: body
+        name: PostStatsBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.PostStatsBody'
       produces:
       - application/json
       responses:
@@ -1085,9 +1321,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.PostStatsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.PostStatsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.PostStatsResponse'
       security:
       - api_key: []
-      summary: Admin can see Post toplist
+      summary: Top Posts
       tags:
       - Admin Dashboard
   /admin/feeds:
@@ -1096,18 +1340,12 @@ paths:
       - application/json
       description: Admin can see feeds
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+      - description: 'Page Details and Searchkey '
+        in: body
+        name: FeedsBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.FeedsBody'
       produces:
       - application/json
       responses:
@@ -1115,22 +1353,31 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.FeedsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.FeedsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.FeedsResponse'
       security:
       - api_key: []
-      summary: Admin can see feeds
+      summary: Feeds
       tags:
       - Admin Feeds
   /admin/post/delete:
     delete:
       consumes:
       - application/json
-      description: Admin can delete post
+      description: Admin can delete post here
       parameters:
-      - description: id
-        in: query
-        name: id
+      - description: 'Post ID '
+        in: body
+        name: DeletePostBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.DeletePostBody'
       produces:
       - application/json
       responses:
@@ -1138,22 +1385,31 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.DeletePostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeletePostResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeletePostResponse'
       security:
       - api_key: []
-      summary: Admin can delete post
+      summary: Delete post
       tags:
       - Admin Feeds
   /admin/post/details:
     get:
       consumes:
       - application/json
-      description: Admin can get post detail
+      description: Admin can get post details
       parameters:
-      - description: post id Data
-        in: query
-        name: id
+      - description: Post Id
+        in: body
+        name: PostDetailsBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.PostDetailsBody'
       produces:
       - application/json
       responses:
@@ -1161,9 +1417,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.PostDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.PostDetailsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.PostDetailsResponse'
       security:
       - api_key: []
-      summary: Admin can get post detail
+      summary: Post detail
       tags:
       - Admin Feeds
   /admin/users/changepermission:
@@ -1172,11 +1436,12 @@ paths:
       - application/json
       description: Admin can Change User Permission
       parameters:
-      - description: 'user id '
-        in: query
-        name: id
+      - description: 'User ID '
+        in: body
+        name: ChangeUserPermissionBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.ChangeUserPermissionBody'
       produces:
       - application/json
       responses:
@@ -1184,9 +1449,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ChangeUserPermissionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ChangeUserPermissionResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ChangeUserPermissionResponse'
       security:
       - api_key: []
-      summary: Admin can Change User Permission
+      summary: Change User Permission
       tags:
       - Admin Users
   /admin/users/details:
@@ -1195,11 +1468,12 @@ paths:
       - application/json
       description: Admin can get user details
       parameters:
-      - description: 'user id '
-        in: query
-        name: id
+      - description: 'UserID '
+        in: body
+        name: UserDetailsBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.UserDetailsBody'
       produces:
       - application/json
       responses:
@@ -1207,9 +1481,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.GetUserDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.GetUserDetailsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetUserDetailsResponse'
       security:
       - api_key: []
-      summary: Admin can get user detail
+      summary: User detail
       tags:
       - Admin Users
   /admin/users/list:
@@ -1218,18 +1500,12 @@ paths:
       - application/json
       description: Admin can see User List
       parameters:
-      - description: page
-        in: query
-        name: page
-        type: string
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+      - description: Page Details and Searchkey
+        in: body
+        name: UserListBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.UserListBody'
       produces:
       - application/json
       responses:
@@ -1237,9 +1513,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.UserListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.UserListResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.UserListResponse'
       security:
       - api_key: []
-      summary: Admin can see User List
+      summary: User List
       tags:
       - Admin Users
   /adminlogin:
@@ -1360,6 +1644,14 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.SignUpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.SignUpResponse'
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.SignUpResponse'
       summary: signup

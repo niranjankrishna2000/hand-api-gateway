@@ -2,59 +2,69 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type ReportedListBody struct {
+	Limit     int    `json:"limit" validate:"min=1,max=99,number"`
+	Page      int    `json:"page" validate:"min=1,max=99,number"`
+	Searchkey string `json:"searchkey"`
+}
 
 // Admin Reported List godoc
 //
-//	@Summary		Admin can see reported posts
+//	@Summary		Reported posts
 //	@Description	Admin can see reported posts
 //	@Tags			Admin Reported
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
-//	@Param			searchkey	query		string	false	"searchkey"
-//	@Success		200			{object}	pb.ReportedListResponse
+//	@Param			ReportedListBody	body		ReportedListBody	true	"limit"
+//	@Success		200					{object}	pb.ReportedListResponse
+//	@Failure		400					{object}	pb.ReportedListResponse
+//	@Failure		502					{object}	pb.ReportedListResponse
 //	@Router			/admin/campaigns/reported  [get]
 func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("page format invalid"))
+	reportedListBody := ReportedListBody{}
+
+	if err := ctx.BindJSON(&reportedListBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.ReportedListResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
+		})
 		return
 	}
-
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil || limit < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("limit format invalid"))
+	validator := validator.New()
+	if err := validator.Struct(reportedListBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.ReportedListResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Post:     nil,
+		})
 		return
 	}
-
-	searchkey := ctx.Query("searchkey")
-	log.Println("Collected data : ", page, limit, searchkey)
-	log.Println("Fetching Data...")
-
-	res, err := c.ReportedList(context.Background(), &pb.ReportedListRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey})
+	res, err := c.ReportedList(context.Background(), &pb.ReportedListRequest{
+		Page: int32(reportedListBody.Page),
+		Limit: int32(reportedListBody.Limit), 
+		Searchkey: reportedListBody.Searchkey})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.ReportedListResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
 		return
 	}
 	log.Println("Recieved data : ", res)

@@ -2,39 +2,64 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// Admin New Category godoc
-//
-// @Summary  Admin can create New Category
-// @Description Admin can create New Category
-// @Tags   Admin Categories
-// @Security		api_key
-// @Accept   json
-// @Produce  json
-// @Param   category query  string true "category name"
-// @Success  200   {object} pb.NewCategoryResponse
-// @Router   /admin/categories/new       [post]
-func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+type NewCategoryBody struct {
+	Category string `json:"category" validate:"required,min=2,max=20,alpha"`
+}
 
-	category := ctx.Query("category")
-	if category == "" {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("invalid Format"))
+// New Category godoc
+//
+//	@Summary		Create Category
+//	@Description	Admin can create New Category
+//	@Tags			Admin Categories
+//	@Security		api_key
+//	@Accept			json
+//	@Produce		json
+//	@Param			NewCategoryBody	body		NewCategoryBody	true	"Category Name"
+//	@Success		200				{object}	pb.NewCategoryResponse
+//	@Failure		400				{object}	pb.NewCategoryResponse
+//	@Failure		502				{object}	pb.NewCategoryResponse
+//	@Router			/admin/categories/new       [post]
+func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {
+	log.Println("Initiating NewCategory...")
+
+	NewCategoryBody := NewCategoryBody{}
+
+	if err := ctx.BindJSON(&NewCategoryBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.NewCategoryResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Category:    nil,
+		})
 		return
 	}
-	log.Println("Collected Data: ", category)
-	
-	res, err := c.NewCategory(context.Background(), &pb.NewCategoryRequest{Category: category})
+	validator := validator.New()
+	if err := validator.Struct(NewCategoryBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.NewCategoryResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Category:    nil,
+		})
+		return
+	}
+	res, err := c.NewCategory(context.Background(), &pb.NewCategoryRequest{Category: NewCategoryBody.Category})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.NewCategoryResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Category:    nil,
+		})
 		return
 	}
 	log.Println("Recieved Data: ", res)

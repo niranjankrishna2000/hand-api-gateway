@@ -5,42 +5,58 @@ import (
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// Admin Delete reported post godoc
+type DeleteReportBody struct {
+	PostId int `json:"postId" validate:"required,min=1,max=999,number"`
+}
+
+// Delete reported post godoc
 //
-//	@Summary		Admin can Delete reported post
+//	@Summary		Delete reported post
 //	@Description	Admin can Delete reported post
 //	@Tags			Admin Reported
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			postId	query		string	true	"Post ID "
-//	@Success		200		{object}	pb.DeleteReportResponse
+//	@Param			DeleteReportBody	body		DeleteReportBody	true	"Post ID "
+//	@Success		200					{object}	pb.DeleteReportResponse
+//	@Failure		400					{object}	pb.DeleteReportResponse
+//	@Failure		502					{object}	pb.DeleteReportResponse
 //	@Router			/admin/campaigns/reported/delete  [delete]
 func DeleteReport(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+	log.Println("Initiating DeleteReport...")
 
-	postIDstr := ctx.Query("postid")
-	postID, err := strconv.Atoi(postIDstr)
-	if err != nil || postID < 0 {
-		ctx.JSON(http.StatusBadRequest, &gin.H{
-			"Status":   http.StatusBadRequest,
-			"Response": "Id format invalid" + err.Error(),
-			"Id":       postID,
+	deleteReportBody := DeleteReportBody{}
+
+	if err := ctx.BindJSON(&deleteReportBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.DeleteReportResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
 		})
 		return
 	}
-
-	log.Println("Collected data : ", postID)
-
-	res, err := c.DeleteReport(context.Background(), &pb.DeleteReportRequest{Postid: int32(postID)})
+	validator := validator.New()
+	if err := validator.Struct(deleteReportBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.DeleteReportResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid Post ID",
+		})
+		return
+	}
+	res, err := c.DeleteReport(context.Background(), &pb.DeleteReportRequest{Postid: int32(deleteReportBody.PostId)})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.DeleteReportResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+		})
 		return
 	}
 	log.Println("Recieved data : ", res)

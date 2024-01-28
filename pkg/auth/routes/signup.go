@@ -15,7 +15,7 @@ type SignUpRequestBody struct {
 	Name            string `json:"name" validate:"alpha,min=3,max=20"`
 	Email           string `json:"email" validate:"required,email"`
 	Phone           string `json:"phone" validate:"required,len=10,number"`
-	Password        string `json:"password" validate:"required,min=6,alphanum"`
+	Password        string `json:"password" validate:"required,min=6,max=20,alphanum"`
 	ConfirmPassword string `json:"confirmpassword" validate:"required,eqfield=Password"`
 }
 
@@ -28,24 +28,28 @@ type SignUpRequestBody struct {
 //	@Produce		json
 //	@Param			body	body		SignUpRequestBody	true	"User Data"
 //	@Success		200		{object}	pb.SignUpResponse
+//	@Failure		400		{object}	pb.SignUpResponse
+//	@Success		502		{object}	pb.SignUpResponse
 //	@Router			/signup [post]
 func SignUp(ctx *gin.Context, c pb.AuthServiceClient) {
 	signupBody := SignUpRequestBody{}
 
 	if err := ctx.BindJSON(&signupBody); err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+		ctx.JSON(http.StatusBadRequest, pb.SignUpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with request",
+			User: nil,
 		})
 		return
 	}
 	validator := validator.New()
 	if err := validator.Struct(signupBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+		ctx.JSON(http.StatusBadRequest,pb.SignUpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Invalid data"+err.Error(),
+			User: nil,
 		})
 		return
 	}
@@ -59,9 +63,10 @@ func SignUp(ctx *gin.Context, c pb.AuthServiceClient) {
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Error with internal server",
+		ctx.JSON(http.StatusBadGateway, pb.SignUpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with internal server",
+			User: nil,
 		})
 		return
 	}

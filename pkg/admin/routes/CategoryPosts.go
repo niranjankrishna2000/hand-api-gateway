@@ -11,9 +11,9 @@ import (
 )
 
 type CategoryPostsBody struct {
-	Limit      int `json:"limit" validate:"max=99,number"`
-	Page       int `json:"page" validate:"max=99,number"`
-	CategoryID int `json:"categoryId" validate:"required,max=50,number"`
+	Limit      int `json:"limit" validate:"min=1,max=99,number"`
+	Page       int `json:"page" validate:"min=1,max=99,number"`
+	CategoryID int `json:"categoryId" validate:"required,min=1,max=50,number"`
 }
 
 // Admin Category Posts godoc
@@ -30,7 +30,7 @@ type CategoryPostsBody struct {
 //	@Failure		502					{object}	pb.CategoryPostsResponse
 //	@Router			/admin/categories/categorylist/posts  [get]
 func CategoryPosts(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+	log.Println("Initiating CategoryPosts...")
 
 	categoryPostsBody := CategoryPostsBody{}
 

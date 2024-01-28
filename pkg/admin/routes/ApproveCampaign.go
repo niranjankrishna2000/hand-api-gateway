@@ -12,7 +12,7 @@ import (
 )
 
 type ApproveCampaignBody struct {
-	PostId int `json:"postId" validate:"required,max=999,number"`
+	PostId int `json:"postId" validate:"required,min=1,max=999,number"`
 }
 
 // Admin Approve Campaign godoc
@@ -23,7 +23,7 @@ type ApproveCampaignBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			approveCampaignBody	body		ApproveCampaignBody	true	"Post ID "
+//	@Param			ApproveCampaignBody	body		ApproveCampaignBody	true	"Post ID "
 //	@Success		200					{object}	pb.ApproveCampaignResponse
 //	@Failure		400					{object}	pb.ApproveCampaignResponse
 //	@Failure		502					{object}	pb.ApproveCampaignResponse

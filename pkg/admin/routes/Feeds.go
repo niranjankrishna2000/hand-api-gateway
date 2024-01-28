@@ -4,60 +4,69 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"strconv"
 
 	"hand/pkg/admin/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type FeedsBody struct {
+	Limit     int    `json:"limit" validate:"min=1,max=99,number"`
+	Page      int    `json:"page" validate:"min=1,max=99,number"`
+	Searchkey string `json:"searchkey"`
+}
 
 // Admin feeds godoc
 //
-//	@Summary		Admin can see feeds
+//	@Summary		Feeds
 //	@Description	Admin can see feeds
 //	@Tags			Admin Feeds
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
-//	@Param			searchkey	query		string	false	"searchkey"
+//	@Param			FeedsBody	body		FeedsBody	true	"Page Details and Searchkey "
 //	@Success		200			{object}	pb.FeedsResponse
+//	@Failure		400			{object}	pb.FeedsResponse
+//	@Failure		502			{object}	pb.FeedsResponse
 //	@Router			/admin/feeds  [get]
 func Feeds(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+	log.Println("Initiating Feeds...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	feedsBody := FeedsBody{}
+
+	if err := ctx.BindJSON(&feedsBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.FeedsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Posts:     nil,
+		})
 		return
 	}
-	
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	validator := validator.New()
+	if err := validator.Struct(feedsBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.FeedsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Posts:     nil,
+		})
 		return
 	}
-	
-	searchkey := ctx.Query("searchkey")
-	log.Println("Collected data : ", page, limit, searchkey)
-
-	id, ok := ctx.Get("userId")
-	log.Println("User ID:", id, ok)
-	log.Println("Fetching Data...")
-
-	res, err := c.Feeds(context.Background(), &pb.FeedsRequest{Page: int32(page), Limit: int32(limit),Searchkey: searchkey})
+	res, err := c.Feeds(context.Background(), &pb.FeedsRequest{
+		Page: int32(feedsBody.Page), 
+		Limit: int32(feedsBody.Limit), 
+		Searchkey: feedsBody.Searchkey,
+	})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.FeedsResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Posts:     nil,
+		})
 		return
 	}
 

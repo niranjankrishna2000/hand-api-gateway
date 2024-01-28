@@ -4,57 +4,65 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"strconv"
 
 	"hand/pkg/admin/pb"
 	user "hand/pkg/auth/pb"
 
-
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// Admin User List godoc
+type UserListBody struct {
+	Limit     int    `json:"limit" validate:"min=1,max=99,number"`
+	Page      int    `json:"page" validate:"min=1,max=99,number"`
+	Searchkey string `json:"searchkey"`
+}
+
+// User List godoc
 //
-//	@Summary		Admin can see User List
+//	@Summary		User List
 //	@Description	Admin can see User List
 //	@Tags			Admin Users
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			page		query		string	false	"page"
-//	@Param			limit		query		string	false	"limit"
-//	@Param			searchkey	query		string	false	"searchkey"
-//	@Success		200			{object}	pb.UserListResponse
+//	@Param			UserListBody	body		UserListBody	true	"Page Details and Searchkey"
+//	@Success		200				{object}	pb.UserListResponse
+//	@Failure		400				{object}	pb.UserListResponse
+//	@Failure		502				{object}	pb.UserListResponse
 //	@Router			/admin/users/list  [get]
 func UserList(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	userListBody := UserListBody{}
+
+	if err := ctx.BindJSON(&userListBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.UserStatsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Users:    nil,
+		})
 		return
 	}
-	
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	validator := validator.New()
+	if err := validator.Struct(userListBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.UserStatsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Users:    nil,
+		})
 		return
 	}
-	
-	searchkey := ctx.Query("searchkey")
-	log.Println("Collected data : ", page, limit, searchkey)
-	log.Println("Fetching Data...")
-	res, err := usvc.UserList(context.Background(), &user.UserListRequest{Page: int32(page),Limit: int32(limit),Searchkey: searchkey})
+	res, err := usvc.UserList(context.Background(), &user.UserListRequest{Page: int32(userListBody.Page), Limit: int32(userListBody.Limit), Searchkey: userListBody.Searchkey})
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.UserStatsResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Users:    nil,
+		})
 		return
 	}
 

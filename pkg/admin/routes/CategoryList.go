@@ -11,8 +11,8 @@ import (
 )
 
 type CategoryListBody struct {
-	Limit     int    `json:"limit" validate:"max=99,number"`
-	Page      int    `json:"page" validate:"max=99,number"`
+	Limit     int    `json:"limit" validate:"min=1,max=99,number"`
+	Page      int    `json:"page" validate:"min=1,max=99,number"`
 	Searchkey string `json:"searchkey"`
 }
 

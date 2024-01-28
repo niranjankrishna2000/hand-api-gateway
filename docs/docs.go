@@ -36,7 +36,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Post ID ",
-                        "name": "approveCampaignBody",
+                        "name": "ApproveCampaignBody",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -134,19 +134,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Campaign"
                 ],
-                "summary": "Admin can Reject Campaign",
+                "summary": "Reject Campaign",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "user id ",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "Post ID ",
+                        "name": "RejectCampaignBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.RejectCampaignBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.RejectCampaignResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.RejectCampaignResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.RejectCampaignResponse"
                         }
@@ -171,30 +185,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Reported"
                 ],
-                "summary": "Admin can see reported posts",
+                "summary": "Reported posts",
                 "parameters": [
                     {
-                        "type": "string",
                         "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "name": "ReportedListBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ReportedListBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportedListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportedListResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportedListResponse"
                         }
@@ -219,19 +236,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Reported"
                 ],
-                "summary": "Admin can Delete reported post",
+                "summary": "Delete reported post",
                 "parameters": [
                     {
-                        "type": "string",
                         "description": "Post ID ",
-                        "name": "postId",
-                        "in": "query",
-                        "required": true
+                        "name": "DeleteReportBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.DeleteReportBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteReportResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteReportResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.DeleteReportResponse"
                         }
@@ -246,7 +277,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can see details reported post",
+                "description": "Admin can see details of reported post",
                 "consumes": [
                     "application/json"
                 ],
@@ -256,19 +287,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Reported"
                 ],
-                "summary": "Admin can see details reported post",
+                "summary": "Details of reported post",
                 "parameters": [
                     {
-                        "type": "string",
                         "description": "Post ID ",
-                        "name": "postId",
-                        "in": "query",
-                        "required": true
+                        "name": "ReportDetailsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ReportDetailsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportDetailsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportDetailsResponse"
                         }
@@ -446,19 +491,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Categories"
                 ],
-                "summary": "Admin can Delete Category",
+                "summary": "Delete Category",
                 "parameters": [
                     {
-                        "type": "string",
                         "description": "Category ID ",
-                        "name": "categoryId",
-                        "in": "query",
-                        "required": true
+                        "name": "DeleteCategoryBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.DeleteCategoryBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteCategoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteCategoryResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.DeleteCategoryResponse"
                         }
@@ -483,19 +542,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Categories"
                 ],
-                "summary": "Admin can create New Category",
+                "summary": "Create Category",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "category name",
-                        "name": "category",
-                        "in": "query",
-                        "required": true
+                        "description": "Category Name",
+                        "name": "NewCategoryBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.NewCategoryBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NewCategoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NewCategoryResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.NewCategoryResponse"
                         }
@@ -554,26 +627,35 @@ const docTemplate = `{
                 "tags": [
                     "Admin Dashboard"
                 ],
-                "summary": "Admin can see User toplist",
+                "summary": "Top Users",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
+                        "description": "Page details",
+                        "name": "UserStatsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.UserStatsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.CategoryStatsResponse"
+                            "$ref": "#/definitions/pb.UserStatsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserStatsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserStatsResponse"
                         }
                     }
                 }
@@ -586,7 +668,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can see Category toplist",
+                "description": "Admin can see top Categories",
                 "consumes": [
                     "application/json"
                 ],
@@ -596,19 +678,16 @@ const docTemplate = `{
                 "tags": [
                     "Admin Dashboard"
                 ],
-                "summary": "Admin can see Category toplist",
+                "summary": "Top Categories",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
+                        "description": "Page Details",
+                        "name": "CategoryStatsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CategoryStatsBody"
+                        }
                     }
                 ],
                 "responses": {
@@ -638,24 +717,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Dashboard"
                 ],
-                "summary": "Admin can see Post toplist",
+                "summary": "Top Posts",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
+                        "description": "Page details",
+                        "name": "PostStatsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.PostStatsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostStatsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostStatsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.PostStatsResponse"
                         }
@@ -680,30 +768,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Feeds"
                 ],
-                "summary": "Admin can see feeds",
+                "summary": "Feeds",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "description": "Page Details and Searchkey ",
+                        "name": "FeedsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.FeedsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.FeedsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.FeedsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.FeedsResponse"
                         }
@@ -718,7 +809,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can delete post",
+                "description": "Admin can delete post here",
                 "consumes": [
                     "application/json"
                 ],
@@ -728,19 +819,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Feeds"
                 ],
-                "summary": "Admin can delete post",
+                "summary": "Delete post",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "id",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "Post ID ",
+                        "name": "DeletePostBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.DeletePostBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeletePostResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeletePostResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.DeletePostResponse"
                         }
@@ -755,7 +860,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can get post detail",
+                "description": "Admin can get post details",
                 "consumes": [
                     "application/json"
                 ],
@@ -765,19 +870,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Feeds"
                 ],
-                "summary": "Admin can get post detail",
+                "summary": "Post detail",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "post id Data",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "Post Id",
+                        "name": "PostDetailsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.PostDetailsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.PostDetailsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.PostDetailsResponse"
                         }
@@ -802,19 +921,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Users"
                 ],
-                "summary": "Admin can Change User Permission",
+                "summary": "Change User Permission",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "user id ",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "User ID ",
+                        "name": "ChangeUserPermissionBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.ChangeUserPermissionBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ChangeUserPermissionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ChangeUserPermissionResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.ChangeUserPermissionResponse"
                         }
@@ -839,19 +972,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Users"
                 ],
-                "summary": "Admin can get user detail",
+                "summary": "User detail",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "user id ",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "UserID ",
+                        "name": "UserDetailsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.UserDetailsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUserDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUserDetailsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.GetUserDetailsResponse"
                         }
@@ -876,30 +1023,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Users"
                 ],
-                "summary": "Admin can see User List",
+                "summary": "User List",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "page",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "description": "Page Details and Searchkey",
+                        "name": "UserListBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.UserListBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserListResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.UserListResponse"
                         }
@@ -1090,6 +1240,18 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.SignUpResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.SignUpResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.SignUpResponse"
                         }
@@ -2009,7 +2171,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "user": {
-                    "$ref": "#/definitions/pb.User"
+                    "$ref": "#/definitions/pkg_auth_pb.User"
                 }
             }
         },
@@ -2200,7 +2362,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "user": {
-                    "$ref": "#/definitions/pb.User"
+                    "$ref": "#/definitions/pkg_auth_pb.User"
                 }
             }
         },
@@ -2231,7 +2393,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "#/definitions/pb.User"
+                    "$ref": "#/definitions/pkg_auth_pb.User"
                 }
             }
         },
@@ -2462,7 +2624,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "user": {
-                    "$ref": "#/definitions/pb.User"
+                    "$ref": "#/definitions/pkg_auth_pb.User"
                 }
             }
         },
@@ -2483,26 +2645,6 @@ const docTemplate = `{
                 },
                 "users": {
                     "type": "integer"
-                }
-            }
-        },
-        "pb.User": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
                 }
             }
         },
@@ -2535,7 +2677,7 @@ const docTemplate = `{
                 "user": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pb.User"
+                        "$ref": "#/definitions/pkg_auth_pb.User"
                     }
                 }
             }
@@ -2551,6 +2693,23 @@ const docTemplate = `{
                 },
                 "status": {
                     "type": "integer"
+                }
+            }
+        },
+        "pb.UserStatsResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_admin_pb.User"
+                    }
                 }
             }
         },
@@ -2583,6 +2742,46 @@ const docTemplate = `{
                 },
                 "userid": {
                     "type": "integer"
+                }
+            }
+        },
+        "pkg_admin_pb.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg_auth_pb.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -2648,7 +2847,8 @@ const docTemplate = `{
             "properties": {
                 "postId": {
                     "type": "integer",
-                    "maximum": 999
+                    "maximum": 999,
+                    "minimum": 1
                 }
             }
         },
@@ -2660,7 +2860,8 @@ const docTemplate = `{
             "properties": {
                 "postId": {
                     "type": "integer",
-                    "maximum": 999
+                    "maximum": 999,
+                    "minimum": 1
                 }
             }
         },
@@ -2669,11 +2870,13 @@ const docTemplate = `{
             "properties": {
                 "limit": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
                 },
                 "page": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
                 },
                 "searchkey": {
                     "type": "string"
@@ -2685,11 +2888,13 @@ const docTemplate = `{
             "properties": {
                 "limit": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
                 },
                 "page": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
                 },
                 "searchkey": {
                     "type": "string"
@@ -2704,15 +2909,46 @@ const docTemplate = `{
             "properties": {
                 "categoryId": {
                     "type": "integer",
-                    "maximum": 50
+                    "maximum": 50,
+                    "minimum": 1
                 },
                 "limit": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
                 },
                 "page": {
                     "type": "integer",
-                    "maximum": 99
+                    "maximum": 99,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.CategoryStatsBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.ChangeUserPermissionBody": {
+            "type": "object",
+            "required": [
+                "userId"
+            ],
+            "properties": {
+                "userId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 }
             }
         },
@@ -2750,6 +2986,45 @@ const docTemplate = `{
                 },
                 "text": {
                     "type": "string"
+                }
+            }
+        },
+        "routes.DeleteCategoryBody": {
+            "type": "object",
+            "required": [
+                "categoryId"
+            ],
+            "properties": {
+                "categoryId": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.DeletePostBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.DeleteReportBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 }
             }
         },
@@ -2793,6 +3068,24 @@ const docTemplate = `{
                 }
             }
         },
+        "routes.FeedsBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "searchkey": {
+                    "type": "string"
+                }
+            }
+        },
         "routes.LoginRequestBody": {
             "type": "object",
             "required": [
@@ -2820,6 +3113,19 @@ const docTemplate = `{
                 }
             }
         },
+        "routes.NewCategoryBody": {
+            "type": "object",
+            "required": [
+                "category"
+            ],
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 2
+                }
+            }
+        },
         "routes.OtpValidateRequestBody": {
             "type": "object",
             "required": [
@@ -2844,6 +3150,47 @@ const docTemplate = `{
                 }
             }
         },
+        "routes.PostDetailsBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.PostStatsBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.RejectCampaignBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                }
+            }
+        },
         "routes.ReportCommentRequestBody": {
             "type": "object",
             "properties": {
@@ -2855,6 +3202,19 @@ const docTemplate = `{
                 }
             }
         },
+        "routes.ReportDetailsBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                }
+            }
+        },
         "routes.ReportPostRequestBody": {
             "type": "object",
             "properties": {
@@ -2862,6 +3222,24 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.ReportedListBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "searchkey": {
                     "type": "string"
                 }
             }
@@ -2888,10 +3266,57 @@ const docTemplate = `{
                 },
                 "password": {
                     "type": "string",
+                    "maxLength": 20,
                     "minLength": 6
                 },
                 "phone": {
                     "type": "string"
+                }
+            }
+        },
+        "routes.UserDetailsBody": {
+            "type": "object",
+            "required": [
+                "userId"
+            ],
+            "properties": {
+                "userId": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                }
+            }
+        },
+        "routes.UserListBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "searchkey": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.UserStatsBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99,
+                    "minimum": 1
                 }
             }
         }
