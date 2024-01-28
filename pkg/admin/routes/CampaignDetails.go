@@ -2,43 +2,66 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"log"
 	"net/http"
-	"strconv"
 
 	"hand/pkg/admin/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type CampaignDetailsBody struct {
+	PostId int `json:"postId" validate:"required,max=999,number"`
+}
 
 // Admin get Campaign Details godoc
 //
-//	@Summary		Admin can get Campaign Details
-//	@Description	Admin can get Campaign Details
+//	@Summary		Campaign Details
+//	@Description	Admin can see Campaign Details
 //	@Tags			Admin Campaign
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			id	query		string	true	"post id"
-//	@Success		200	{object}	pb.CampaignDetailsResponse
+//	@Param			CampaignDetailsBody	body		CampaignDetailsBody	true	"Post ID "
+//	@Success		200					{object}	pb.CampaignDetailsResponse
+//	@Failure		400					{object}	pb.CampaignDetailsResponse
+//	@Failure		502					{object}	pb.CampaignDetailsResponse
 //	@Router			/admin/campaigns/details  [get]
 func CampaignDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	IDstr := ctx.Query("id")
-	ID, err := strconv.Atoi(IDstr)
-	if err != nil || ID < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("post Id format invalid"))
+	campaignDetailsBody := CampaignDetailsBody{}
+
+	if err := ctx.BindJSON(&campaignDetailsBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.CampaignDetailsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
+		})
 		return
 	}
-	log.Println("Collected Data: ", ID)
-	log.Println("Fetching Data...")
-
-	res, err := c.CampaignDetails(context.Background(), &pb.CampaignDetailsRequest{Id: int32(ID)})
+	validator := validator.New()
+	if err := validator.Struct(campaignDetailsBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.CampaignDetailsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid Post ID",
+			Post:     nil,
+		})
+		return
+	}
+	
+	res, err := c.CampaignDetails(context.Background(), &pb.CampaignDetailsRequest{Id: int32(campaignDetailsBody.PostId)})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.CampaignDetailsResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
 		return
 	}
 	log.Println("Recieved Data: ", res)

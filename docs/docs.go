@@ -22,7 +22,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can Approve Campaign",
+                "description": "Admin can Approve Campaign after verifying it",
                 "consumes": [
                     "application/json"
                 ],
@@ -32,7 +32,7 @@ const docTemplate = `{
                 "tags": [
                     "Admin Campaign"
                 ],
-                "summary": "Admin can Approv Campaign",
+                "summary": "Approve Campaigns",
                 "parameters": [
                     {
                         "description": "Post ID ",
@@ -50,6 +50,18 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/pb.ApproveCampaignResponse"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ApproveCampaignResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ApproveCampaignResponse"
+                        }
                     }
                 }
             }
@@ -61,7 +73,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "Admin can get Campaign Details",
+                "description": "Admin can see Campaign Details",
                 "consumes": [
                     "application/json"
                 ],
@@ -71,19 +83,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Campaign"
                 ],
-                "summary": "Admin can get Campaign Details",
+                "summary": "Campaign Details",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "post id",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
+                        "description": "Post ID ",
+                        "name": "CampaignDetailsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CampaignDetailsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignDetailsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.CampaignDetailsResponse"
                         }
@@ -267,30 +293,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Campaign"
                 ],
-                "summary": "Admin can see campaign request",
+                "summary": "Campaign Requests",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "description": "Page Details and Searchkey ",
+                        "name": "CampaignRequestListBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CampaignRequestListBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignRequestListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CampaignRequestListResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.CampaignRequestListResponse"
                         }
@@ -315,30 +344,33 @@ const docTemplate = `{
                 "tags": [
                     "Admin Categories"
                 ],
-                "summary": "Admin can see Categories",
+                "summary": "Categories",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "description": "Page Details and Searchkey ",
+                        "name": "CategoryListBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CategoryListBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryListResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.CategoryListResponse"
                         }
@@ -366,27 +398,30 @@ const docTemplate = `{
                 "summary": "Admin can see Category posts",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "searchkey",
-                        "name": "searchkey",
-                        "in": "query"
+                        "description": "Page Details and Category ID ",
+                        "name": "CategoryPostsBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.CategoryPostsBody"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryPostsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CategoryPostsResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.CategoryPostsResponse"
                         }
@@ -485,10 +520,16 @@ const docTemplate = `{
                 "tags": [
                     "Admin Dashboard"
                 ],
-                "summary": "Admin can see website statistics",
+                "summary": "Admin Dashboard",
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AdminDashboardResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.AdminDashboardResponse"
                         }
@@ -2608,6 +2649,70 @@ const docTemplate = `{
                 "postId": {
                     "type": "integer",
                     "maximum": 999
+                }
+            }
+        },
+        "routes.CampaignDetailsBody": {
+            "type": "object",
+            "required": [
+                "postId"
+            ],
+            "properties": {
+                "postId": {
+                    "type": "integer",
+                    "maximum": 999
+                }
+            }
+        },
+        "routes.CampaignRequestListBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99
+                },
+                "searchkey": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.CategoryListBody": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99
+                },
+                "searchkey": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.CategoryPostsBody": {
+            "type": "object",
+            "required": [
+                "categoryId"
+            ],
+            "properties": {
+                "categoryId": {
+                    "type": "integer",
+                    "maximum": 50
+                },
+                "limit": {
+                    "type": "integer",
+                    "maximum": 99
+                },
+                "page": {
+                    "type": "integer",
+                    "maximum": 99
                 }
             }
         },

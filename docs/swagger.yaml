@@ -519,6 +519,50 @@ definitions:
     required:
     - postId
     type: object
+  routes.CampaignDetailsBody:
+    properties:
+      postId:
+        maximum: 999
+        type: integer
+    required:
+    - postId
+    type: object
+  routes.CampaignRequestListBody:
+    properties:
+      limit:
+        maximum: 99
+        type: integer
+      page:
+        maximum: 99
+        type: integer
+      searchkey:
+        type: string
+    type: object
+  routes.CategoryListBody:
+    properties:
+      limit:
+        maximum: 99
+        type: integer
+      page:
+        maximum: 99
+        type: integer
+      searchkey:
+        type: string
+    type: object
+  routes.CategoryPostsBody:
+    properties:
+      categoryId:
+        maximum: 50
+        type: integer
+      limit:
+        maximum: 99
+        type: integer
+      page:
+        maximum: 99
+        type: integer
+    required:
+    - categoryId
+    type: object
   routes.CommentPostRequestBody:
     properties:
       postid:
@@ -646,7 +690,7 @@ paths:
     patch:
       consumes:
       - application/json
-      description: Admin can Approve Campaign
+      description: Admin can Approve Campaign after verifying it
       parameters:
       - description: 'Post ID '
         in: body
@@ -661,22 +705,31 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ApproveCampaignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ApproveCampaignResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ApproveCampaignResponse'
       security:
       - api_key: []
-      summary: Admin can Approv Campaign
+      summary: Approve Campaigns
       tags:
       - Admin Campaign
   /admin/campaigns/details:
     get:
       consumes:
       - application/json
-      description: Admin can get Campaign Details
+      description: Admin can see Campaign Details
       parameters:
-      - description: post id
-        in: query
-        name: id
+      - description: 'Post ID '
+        in: body
+        name: CampaignDetailsBody
         required: true
-        type: string
+        schema:
+          $ref: '#/definitions/routes.CampaignDetailsBody'
       produces:
       - application/json
       responses:
@@ -684,9 +737,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CampaignDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CampaignDetailsResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.CampaignDetailsResponse'
       security:
       - api_key: []
-      summary: Admin can get Campaign Details
+      summary: Campaign Details
       tags:
       - Admin Campaign
   /admin/campaigns/reject:
@@ -794,18 +855,12 @@ paths:
       - application/json
       description: Admin can see campaogn requests
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+      - description: 'Page Details and Searchkey '
+        in: body
+        name: CampaignRequestListBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CampaignRequestListBody'
       produces:
       - application/json
       responses:
@@ -813,9 +868,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CampaignRequestListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CampaignRequestListResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.CampaignRequestListResponse'
       security:
       - api_key: []
-      summary: Admin can see campaign request
+      summary: Campaign Requests
       tags:
       - Admin Campaign
   /admin/categories/categorylist:
@@ -824,18 +887,12 @@ paths:
       - application/json
       description: Admin can see Categories
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+      - description: 'Page Details and Searchkey '
+        in: body
+        name: CategoryListBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CategoryListBody'
       produces:
       - application/json
       responses:
@@ -843,9 +900,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CategoryListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CategoryListResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.CategoryListResponse'
       security:
       - api_key: []
-      summary: Admin can see Categories
+      summary: Categories
       tags:
       - Admin Categories
   /admin/categories/categorylist/posts:
@@ -854,23 +919,25 @@ paths:
       - application/json
       description: Admin can see Category posts
       parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: string
-      - description: Page number
-        in: query
-        name: page
-        type: string
-      - description: searchkey
-        in: query
-        name: searchkey
-        type: string
+      - description: 'Page Details and Category ID '
+        in: body
+        name: CategoryPostsBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.CategoryPostsBody'
       produces:
       - application/json
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.CategoryPostsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CategoryPostsResponse'
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.CategoryPostsResponse'
       security:
@@ -936,9 +1003,13 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.AdminDashboardResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.AdminDashboardResponse'
       security:
       - api_key: []
-      summary: Admin can see website statistics
+      summary: Admin Dashboard
       tags:
       - Admin Dashboard
   /admin/dashboard/User:

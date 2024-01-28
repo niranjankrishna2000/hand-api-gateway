@@ -4,57 +4,69 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"strconv"
 
 	"hand/pkg/admin/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type CampaignRequestListBody struct {
+	Limit     int    `json:"limit" validate:"max=99,number"`
+	Page      int    `json:"page" validate:"max=99,number"`
+	Searchkey string `json:"searchkey"`
+}
 
 // Admin campaign list godoc
 //
-//	@Summary		Admin can see campaign request
+//	@Summary		Campaign Requests
 //	@Description	Admin can see campaogn requests
 //	@Tags			Admin Campaign
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
-//	@Param			searchkey	query		string	false	"searchkey"
-//	@Success		200			{object}	pb.CampaignRequestListResponse
+//	@Param			CampaignRequestListBody	body		CampaignRequestListBody	true	"Page Details and Searchkey "
+//	@Success		200						{object}	pb.CampaignRequestListResponse
+//	@Failure		400						{object}	pb.CampaignRequestListResponse
+//	@Success		502						{object}	pb.CampaignRequestListResponse
 //	@Router			/admin/campaigns/requestlist  [get]
 func CampaignRequestList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	campaignRequestListBody := CampaignRequestListBody{}
+
+	if err := ctx.BindJSON(&campaignRequestListBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.CampaignRequestListResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
+		})
 		return
 	}
-	
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+	validator := validator.New()
+	if err := validator.Struct(campaignRequestListBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.CampaignRequestListResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data"+err.Error(),
+			Post:     nil,
+		})
 		return
 	}
-	
-	searchkey := ctx.Query("searchkey")
-	log.Println("Collected data : ", page, limit, searchkey)
-	log.Println("Fetching Data...")
-
-	res, err := c.CampaignRequestList(context.Background(), &pb.CampaignRequestListRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey})
+	res, err := c.CampaignRequestList(context.Background(), &pb.CampaignRequestListRequest{
+		Page:      int32(campaignRequestListBody.Page),
+		Limit:     int32(campaignRequestListBody.Limit),
+		Searchkey: campaignRequestListBody.Searchkey,
+	})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.CampaignRequestListResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
 		return
 	}
 	log.Println("Recieved data : ", res)

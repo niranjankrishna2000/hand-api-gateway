@@ -2,62 +2,72 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
+
+type CategoryListBody struct {
+	Limit     int    `json:"limit" validate:"max=99,number"`
+	Page      int    `json:"page" validate:"max=99,number"`
+	Searchkey string `json:"searchkey"`
+}
 
 // Admin Category List godoc
 //
-//	@Summary		Admin can see Categories
+//	@Summary		Categories
 //	@Description	Admin can see Categories
 //	@Tags			Admin Categories
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
-//	@Param			searchkey	query		string	false	"searchkey"
-//	@Success		200			{object}	pb.CategoryListResponse
+//	@Param			CategoryListBody	body		CategoryListBody	true	"Page Details and Searchkey "
+//	@Success		200					{object}	pb.CategoryListResponse
+//	@Failure		400					{object}	pb.CategoryListResponse
+//	@Failure		502					{object}	pb.CategoryListResponse
 //	@Router			/admin/categories/categorylist  [get]
 func CategoryList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")
 
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("page format invalid"))
+	categoryListBody := CategoryListBody{}
+
+	if err := ctx.BindJSON(&categoryListBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.CategoryListResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Error with request",
+			Categories: nil,
+		})
 		return
 	}
-
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
-	if err != nil || limit < 0 {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("limit format invalid"))
+	validator := validator.New()
+	if err := validator.Struct(categoryListBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.CategoryListResponse{
+			Status:     http.StatusBadRequest,
+			Response:   "Invalid data" + err.Error(),
+			Categories: nil,
+		})
 		return
 	}
+	res, err := c.CategoryList(context.Background(), &pb.CategoryListRequest{
+		Page:      int32(categoryListBody.Page),
+		Limit:     int32(categoryListBody.Limit),
+		Searchkey: categoryListBody.Searchkey})
 
-	searchkey := ctx.Query("searchkey")
-	log.Println("Collected data : ", page, limit, searchkey)
-	log.Println("Fetching Data...")
-
-	res, err := c.CategoryList(context.Background(), &pb.CategoryListRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey})
-
-	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
-		return
-	}
-	log.Println("Recieved data : ", res)
-
+		if err != nil {
+			log.Println("Error with internal server :", err)
+			ctx.JSON(http.StatusBadGateway, pb.CategoryListResponse{
+				Status:   http.StatusBadGateway,
+				Response: "Error in internal server",
+				Categories:     nil,
+			})
+			return
+		}
+		log.Println("Recieved data : ", res)
+	
 	ctx.JSON(http.StatusOK, &res)
 }

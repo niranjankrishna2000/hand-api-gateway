@@ -17,14 +17,16 @@ type ApproveCampaignBody struct {
 
 // Admin Approve Campaign godoc
 //
-//	@Summary		Admin can Approv Campaign
-//	@Description	Admin can Approve Campaign
+//	@Summary		Approve Campaigns
+//	@Description	Admin can Approve Campaign after verifying it
 //	@Tags			Admin Campaign
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
 //	@Param			approveCampaignBody	body		ApproveCampaignBody	true	"Post ID "
 //	@Success		200					{object}	pb.ApproveCampaignResponse
+//	@Failure		400					{object}	pb.ApproveCampaignResponse
+//	@Failure		502					{object}	pb.ApproveCampaignResponse
 //	@Router			/admin/campaigns/approve  [patch]
 func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating ApproveCampaign...")
@@ -33,18 +35,20 @@ func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 
 	if err := ctx.BindJSON(&approveCampaignBody); err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+		ctx.JSON(http.StatusBadRequest, pb.ApproveCampaignResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
 		})
 		return
 	}
 	validator := validator.New()
 	if err := validator.Struct(approveCampaignBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+		ctx.JSON(http.StatusBadRequest,pb.ApproveCampaignResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid Post ID",
+			Post:     nil,
 		})
 		return
 	}
@@ -52,12 +56,12 @@ func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 	res, err := c.ApproveCampaign(context.Background(), &pb.ApproveCampaignRequest{
 		Id: int32(approveCampaignBody.PostId),
 	})
-
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Error with internal server",
+		ctx.JSON(http.StatusBadGateway, pb.ApproveCampaignResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
 		})
 		return
 	}
