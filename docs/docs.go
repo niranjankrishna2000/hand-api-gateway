@@ -1807,13 +1807,6 @@ const docTemplate = `{
             }
         }
     },
-    "securityDefinitions": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
     "definitions": {
         "pb.AdminDashboardResponse": {
             "type": "object",
@@ -2797,16 +2790,23 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
+	Version:          "1.0",
+	Host:             "www.handcrowdfunding.online",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
+	Title:            "Hand Crowdfunding API",
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

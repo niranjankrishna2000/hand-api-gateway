@@ -1,3 +1,4 @@
 /cert.pem
 /key.pem
 /pkg/config/envs/dev.env
+/docs/*.txt

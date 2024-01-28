@@ -33,6 +33,9 @@ import (
 //	@in							header
 //	@name						Authorization
 
+//	@contact.name	Contact Developer
+//	@contact.email	niranjankrishna.thundathil@gmail.com
+
 //	@host		www.handcrowdfunding.online 
 //	@BasePath	/
 
