@@ -32,22 +32,11 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Feeds")
 	page, err := strconv.Atoi(ctx.Query("page"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, pb.UserFeedsResponse{
-			Status:    http.StatusBadRequest,
-			Response:  "Error with page",
-			Posts: nil,
-		})
-		return
+		page=1
 	}
 	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.UserFeedsResponse{
-			Status:    http.StatusBadRequest,
-			Response:  "Error with limit",
-			Posts: nil,
-		})
-		return
+		limit=10
 	}
 	searchkey := ctx.Query("searchkey")
 	pageBody := PageBody{Page: page, Limit: limit, Searchkey: searchkey}
