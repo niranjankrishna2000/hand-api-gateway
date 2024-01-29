@@ -12,7 +12,7 @@ import (
 )
 
 type ReportPostRequestBody struct {
-	Text   string `json:"text" validator:"required,max=20,alphanum,ascii"`
+	Text   string `json:"text" validator:"required,max=20,ascii"`
 	PostId int    `json:"postId" validator:"required,min=1,max=999,number"`
 }
 

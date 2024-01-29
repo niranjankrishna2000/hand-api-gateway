@@ -18,7 +18,7 @@ type CreatePostRequestBody struct {
 	AccountNo string `json:"accno" validate:"max=17,min=9,alphanum"`
 	Address   string `json:"address" validate:"required,max=50,ascii"`
 	Image     string `json:"image"`
-	Date      string `json:"date" validate:"required,datetime"`
+	Date      string `json:"date" validate:"required"`
 }
 
 // create Post godoc

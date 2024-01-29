@@ -13,11 +13,11 @@ import (
 
 type EditPostRequestBody struct {
 	PostId    int    `json:"postid" validate:"required,max=999,min=1,number"`
-	Text      string `json:"text" validate:"required,max=50,alphanum,ascii"` //test
-	Place     string `json:"place" validate:"required,max=10,alphanum,ascii"`
+	Text      string `json:"text" validate:"required,max=50,ascii"` //test
+	Place     string `json:"place" validate:"required,max=10,ascii"`
 	Amount    int    `json:"amount" validate:"min=100,number"`
 	AccountNo string `json:"accno" validate:"max=17,min=9,alphanum"`
-	Address   string `json:"address" validate:"required,max=50,alphanum,ascii"`
+	Address   string `json:"address" validate:"required,max=50,ascii"`
 	Image     string `json:"image"`
 	Date      string `json:"date" validate:"required"`
 }

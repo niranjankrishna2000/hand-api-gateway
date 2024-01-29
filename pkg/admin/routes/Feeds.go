@@ -14,7 +14,7 @@ import (
 type FeedsBody struct {
 	Limit     int    `json:"limit" validate:"min=0,max=50,number"`
 	Page      int    `json:"page" validate:"min=0,max=99,number"`
-	Searchkey string `json:"searchkey" validate:"max=10,alphanum,ascii"`
+	Searchkey string `json:"searchkey" validate:"max=10,ascii"`
 }
 
 // Admin feeds godoc

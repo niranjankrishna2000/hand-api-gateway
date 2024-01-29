@@ -14,7 +14,7 @@ import (
 )
 
 type InvoiceIdBody struct {
-	InvoiceId string `json:"invoiceId" validate:"required,alphanum,ascii"` //test
+	InvoiceId string `json:"invoiceId" validate:"required,ascii"` //test
 }
 
 // Download Invoice godoc

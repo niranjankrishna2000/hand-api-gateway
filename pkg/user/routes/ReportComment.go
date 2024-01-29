@@ -11,7 +11,7 @@ import (
 )
 
 type ReportCommentRequestBody struct {
-	Text      string `json:"text" validate:"required,max=20,alphanum,ascii"`
+	Text      string `json:"text" validate:"required,max=20,ascii"`
 	CommentId int    `json:"commentId" validate:"required,min=1,max=999,number"`
 }
 
