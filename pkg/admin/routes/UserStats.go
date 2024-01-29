@@ -12,8 +12,8 @@ import (
 
 // edit
 type UserStatsBody struct {
-	Limit int `json:"limit" validate:"min=1,max=99,number"`
-	Page  int `json:"page" validate:"min=1,max=99,number"`
+	Limit int `json:"limit" validate:"min=0,max=99,number"`
+	Page  int `json:"page" validate:"min=0,max=99,number"`
 }
 
 // User Stats godoc
@@ -32,7 +32,7 @@ type UserStatsBody struct {
 //	@Router			/admin/dashboard/User  [get]
 func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating UserStats...")
-
+	//query
 	userStatsBody := UserStatsBody{}
 
 	if err := ctx.BindJSON(&userStatsBody); err != nil {

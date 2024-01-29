@@ -37,22 +37,11 @@ func DonationHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Donation history")
 	page, err := strconv.Atoi(ctx.Query("page"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, pb.DonationHistoryResponse{
-			Status:    http.StatusBadRequest,
-			Response:  "Error with page",
-			Donations: nil,
-		})
-		return
+		page=1
 	}
 	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.DonationHistoryResponse{
-			Status:    http.StatusBadRequest,
-			Response:  "Error with limit",
-			Donations: nil,
-		})
-		return
+		limit=10
 	}
 	searchkey := ctx.Query("searchkey")
 	pageBody := PageBody{Page: page, Limit: limit, Searchkey: searchkey}
