@@ -63,8 +63,8 @@ func (c *AuthMiddlewareConfig) AuthRequired(ctx *gin.Context) {
 func (c *AuthMiddlewareConfig) AdminAuthRequired(ctx *gin.Context) {
 	//token, _ := ctx.Cookie("Authorization")
 	authorization := ctx.Request.Header.Get("Authorization")
-	log.Println("Authorization checking...")
-	log.Println("Authorization", authorization)
+	log.Println("Admin Authorization checking...")
+	log.Println("Token", authorization)
 	if authorization == "" {
 		log.Println("No token found")
 		ctx.AbortWithStatus(http.StatusUnauthorized)
@@ -77,7 +77,7 @@ func (c *AuthMiddlewareConfig) AdminAuthRequired(ctx *gin.Context) {
 		return
 	}
 
-	res, err := c.svc.Client.Validate(context.Background(), &pb.ValidateRequest{
+	res, err := c.svc.Client.AdminValidate(context.Background(), &pb.ValidateRequest{
 		Token: token[1],
 	})
 
@@ -87,9 +87,9 @@ func (c *AuthMiddlewareConfig) AdminAuthRequired(ctx *gin.Context) {
 		return
 	}
 
-	ctx.Set("userId", res.UserId)
-	id, ok := ctx.Get("userId")
-	log.Println("User ID:", id, ok)
+	// ctx.Set("adminId", res.UserId)
+	//id, ok := ctx.Get("userId")
+	//log.Println("User ID:", id, ok)
 
 	ctx.Next()
 }
