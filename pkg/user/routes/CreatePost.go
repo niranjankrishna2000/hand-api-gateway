@@ -12,13 +12,13 @@ import (
 )
 
 type CreatePostRequestBody struct {
-	Text      string `json:"text" validate:"required,max=50,alphanumunicode"` //test
-	Place     string `json:"place" validate:"required,max=10,alphanumunicode"`
+	Text      string `json:"text" validate:"required,max=50,ascii"` //test
+	Place     string `json:"place" validate:"required,max=10,ascii"`
 	Amount    int    `json:"amount" validate:"min=100,number"`
 	AccountNo string `json:"accno" validate:"max=17,min=9,alphanum"`
-	Address   string `json:"address" validate:"required,max=50,alphanumunicode"`
-	Image     string `json:"image" validate:"image"` //test
-	Date      string `json:"date" validate:"required"`
+	Address   string `json:"address" validate:"required,max=50,ascii"`
+	Image     string `json:"image"`
+	Date      string `json:"date" validate:"required,datetime"`
 }
 
 // create Post godoc
