@@ -26,7 +26,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	post.GET("/details", svc.PostDetails)
 	post.PATCH("/edit",svc.EditPost)
 	post.POST("/details/report",svc.ReportPost)
-	post.PATCH("/like",svc.LikePost)
+	post.POST("/like",svc.LikePost)
 	post.POST("/comment",svc.CommentPost)
 	post.POST("/comment/report",svc.ReportComment)
 	post.DELETE("/comment/delete",svc.DeleteComment)
