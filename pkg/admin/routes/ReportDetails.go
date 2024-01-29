@@ -5,6 +5,7 @@ import (
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
@@ -22,26 +23,26 @@ type ReportDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			ReportDetailsBody	body		ReportDetailsBody	true	"Post ID "
-//	@Success		200					{object}	pb.ReportDetailsResponse
-//	@Failure		403					{string}	string	"You have not logged in"
-//	@Failure		400					{object}	pb.ReportDetailsResponse
-//	@Failure		502					{object}	pb.ReportDetailsResponse
+//	@Param			postid	query		string	true	"Post ID "
+//	@Success		200		{object}	pb.ReportDetailsResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		400		{object}	pb.ReportDetailsResponse
+//	@Failure		502		{object}	pb.ReportDetailsResponse
 //	@Router			/admin/campaigns/reported/details  [get]
 func ReportDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating ReportDetails...")
-
-	reportDetailsBody := ReportDetailsBody{}
-
-	if err := ctx.BindJSON(&reportDetailsBody); err != nil {
+	postId, err := strconv.Atoi(ctx.Query("postid"))
+	if err != nil {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, pb.PostDetailsResponse{
 			Status:   http.StatusBadRequest,
-			Response: "Error with request",
+			Response: "Error with post Id",
 			Post:     nil,
 		})
 		return
 	}
+	reportDetailsBody := ReportDetailsBody{PostId: postId}
+
 	validator := validator.New()
 	if err := validator.Struct(reportDetailsBody); err != nil {
 		log.Println("Error:", err)

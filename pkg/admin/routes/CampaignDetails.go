@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strconv"
 
 	"hand/pkg/admin/pb"
 
@@ -23,26 +24,27 @@ type CampaignDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			CampaignDetailsBody	body		CampaignDetailsBody	true	"Post ID "
-//	@Success		200					{object}	pb.CampaignDetailsResponse
-//	@Failure		400					{object}	pb.CampaignDetailsResponse
-//	@Failure		502					{object}	pb.CampaignDetailsResponse
-//	@Failure		403					{string}	string	"You have not logged in"
+//	@Param			postid	query		string	true	"Post ID "
+//	@Success		200		{object}	pb.CampaignDetailsResponse
+//	@Failure		400		{object}	pb.CampaignDetailsResponse
+//	@Failure		502		{object}	pb.CampaignDetailsResponse
+//	@Failure		403		{string}	string	"You have not logged in"
 //	@Router			/admin/campaigns/details  [get]
 func CampaignDetails(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
+	log.Println("Initiating CampaignDetails...")
 
-	campaignDetailsBody := CampaignDetailsBody{}
-
-	if err := ctx.BindJSON(&campaignDetailsBody); err != nil {
+	postId, err := strconv.Atoi(ctx.Query("postid"))
+	if err != nil {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, pb.CampaignDetailsResponse{
 			Status:   http.StatusBadRequest,
-			Response: "Error with request",
+			Response: "Error with post Id",
 			Post:     nil,
 		})
 		return
 	}
+	campaignDetailsBody := CampaignDetailsBody{PostId: postId}
+
 	validator := validator.New()
 	if err := validator.Struct(campaignDetailsBody); err != nil {
 		log.Println("Error:", err)
@@ -53,7 +55,7 @@ func CampaignDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 		})
 		return
 	}
-	
+
 	res, err := c.CampaignDetails(context.Background(), &pb.CampaignDetailsRequest{Id: int32(campaignDetailsBody.PostId)})
 
 	if err != nil {

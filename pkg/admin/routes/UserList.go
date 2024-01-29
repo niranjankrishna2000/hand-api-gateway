@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strconv"
 
 	"hand/pkg/admin/pb"
 	user "hand/pkg/auth/pb"
@@ -26,26 +27,27 @@ type UserListBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			UserListBody	body		UserListBody	true	"Page Details and Searchkey"
-//	@Success		200				{object}	pb.UserListResponse
-//	@Failure		403				{string}	string	"You have not logged in"
-//	@Failure		400				{object}	pb.UserListResponse
-//	@Failure		502				{object}	pb.UserListResponse
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.UserListResponse
+//	@Failure		403			{string}	string	"You have not logged in"
+//	@Failure		400			{object}	pb.UserListResponse
+//	@Failure		502			{object}	pb.UserListResponse
 //	@Router			/admin/users/list  [get]
 func UserList(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {
-	log.Println("Initiating AdminDashboard...")
-
-	userListBody := UserListBody{}
-
-	if err := ctx.BindJSON(&userListBody); err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.UserStatsResponse{
-			Status:   http.StatusBadRequest,
-			Response: "Error with request",
-			Users:    nil,
-		})
-		return
+	log.Println("Initiating UserList...")
+	page, err := strconv.Atoi(ctx.Query("page"))
+	if err != nil {
+		page = 1
 	}
+	limit, err := strconv.Atoi(ctx.Query("limit"))
+	if err != nil {
+		limit = 10
+	}
+	searchkey := ctx.Query("searchkey")
+	userListBody := UserListBody{Page: page,Limit: limit,Searchkey: searchkey}
+
 	validator := validator.New()
 	if err := validator.Struct(userListBody); err != nil {
 		log.Println("Error:", err)

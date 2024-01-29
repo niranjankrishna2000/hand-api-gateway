@@ -5,6 +5,7 @@ import (
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
@@ -24,26 +25,27 @@ type ReportedListBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			ReportedListBody	body		ReportedListBody	true	"limit"
-//	@Success		200					{object}	pb.ReportedListResponse
-//	@Failure		400					{object}	pb.ReportedListResponse
-//	@Failure		403					{string}	string	"You have not logged in"
-//	@Failure		502					{object}	pb.ReportedListResponse
+//	@Param			limit		query		string	false	"limit"
+//	@Param			page		query		string	false	"Page number"
+//	@Param			searchkey	query		string	false	"searchkey"
+//	@Success		200			{object}	pb.ReportedListResponse
+//	@Failure		400			{object}	pb.ReportedListResponse
+//	@Failure		403			{string}	string	"You have not logged in"
+//	@Failure		502			{object}	pb.ReportedListResponse
 //	@Router			/admin/campaigns/reported  [get]
 func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
-
-	reportedListBody := ReportedListBody{}
-
-	if err := ctx.BindJSON(&reportedListBody); err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.ReportedListResponse{
-			Status:   http.StatusBadRequest,
-			Response: "Error with request",
-			Post:     nil,
-		})
-		return
+	log.Println("Initiating ReportedList...")
+	page, err := strconv.Atoi(ctx.Query("page"))
+	if err != nil {
+		page = 1
 	}
+	limit, err := strconv.Atoi(ctx.Query("limit"))
+	if err != nil {
+		limit = 10
+	}
+	searchkey := ctx.Query("searchkey")
+	reportedListBody := ReportedListBody{Page: page,Limit: limit,Searchkey: searchkey}
+
 	validator := validator.New()
 	if err := validator.Struct(reportedListBody); err != nil {
 		log.Println("Error:", err)
@@ -55,8 +57,8 @@ func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {
 		return
 	}
 	res, err := c.ReportedList(context.Background(), &pb.ReportedListRequest{
-		Page: int32(reportedListBody.Page),
-		Limit: int32(reportedListBody.Limit), 
+		Page:      int32(reportedListBody.Page),
+		Limit:     int32(reportedListBody.Limit),
 		Searchkey: reportedListBody.Searchkey})
 
 	if err != nil {

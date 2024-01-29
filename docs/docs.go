@@ -92,13 +92,11 @@ const docTemplate = `{
                 "summary": "Campaign Details",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "Post ID ",
-                        "name": "CampaignDetailsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.CampaignDetailsBody"
-                        }
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -206,13 +204,22 @@ const docTemplate = `{
                 "summary": "Reported posts",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "limit",
-                        "name": "ReportedListBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.ReportedListBody"
-                        }
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -320,13 +327,11 @@ const docTemplate = `{
                 "summary": "Details of reported post",
                 "parameters": [
                     {
+                        "type": "string",
                         "description": "Post ID ",
-                        "name": "ReportDetailsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.ReportDetailsBody"
-                        }
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -377,13 +382,22 @@ const docTemplate = `{
                 "summary": "Campaign Requests",
                 "parameters": [
                     {
-                        "description": "Page Details and Searchkey ",
-                        "name": "CampaignRequestListBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.CampaignRequestListBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -434,13 +448,22 @@ const docTemplate = `{
                 "summary": "Categories",
                 "parameters": [
                     {
-                        "description": "Page Details and Searchkey ",
-                        "name": "CategoryListBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.CategoryListBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -491,13 +514,23 @@ const docTemplate = `{
                 "summary": "Admin can see Category posts",
                 "parameters": [
                     {
-                        "description": "Page Details and Category ID ",
-                        "name": "CategoryPostsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.CategoryPostsBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Category Id",
+                        "name": "categoryId",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -702,13 +735,16 @@ const docTemplate = `{
                 "summary": "Top Users",
                 "parameters": [
                     {
-                        "description": "Page details",
-                        "name": "UserStatsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.UserStatsBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -759,13 +795,16 @@ const docTemplate = `{
                 "summary": "Top Categories",
                 "parameters": [
                     {
-                        "description": "Page Details",
-                        "name": "CategoryStatsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.CategoryStatsBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -804,13 +843,16 @@ const docTemplate = `{
                 "summary": "Top Posts",
                 "parameters": [
                     {
-                        "description": "Page details",
-                        "name": "PostStatsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.PostStatsBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -861,13 +903,22 @@ const docTemplate = `{
                 "summary": "Feeds",
                 "parameters": [
                     {
-                        "description": "Page Details and Searchkey ",
-                        "name": "FeedsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.FeedsBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -975,13 +1026,11 @@ const docTemplate = `{
                 "summary": "Post detail",
                 "parameters": [
                     {
-                        "description": "Post Id",
-                        "name": "PostDetailsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.PostDetailsBody"
-                        }
+                        "type": "string",
+                        "description": "Post ID ",
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -1089,13 +1138,11 @@ const docTemplate = `{
                 "summary": "User detail",
                 "parameters": [
                     {
-                        "description": "UserID ",
-                        "name": "UserDetailsBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.UserDetailsBody"
-                        }
+                        "type": "string",
+                        "description": "User ID ",
+                        "name": "userid",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -1146,13 +1193,22 @@ const docTemplate = `{
                 "summary": "User List",
                 "parameters": [
                     {
-                        "description": "Page Details and Searchkey",
-                        "name": "UserListBody",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/routes.UserListBody"
-                        }
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -1302,6 +1358,18 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.LoginResponse"
                         }
@@ -3364,93 +3432,6 @@ const docTemplate = `{
                 }
             }
         },
-        "routes.CampaignDetailsBody": {
-            "type": "object",
-            "required": [
-                "postId"
-            ],
-            "properties": {
-                "postId": {
-                    "type": "integer",
-                    "maximum": 999,
-                    "minimum": 1
-                }
-            }
-        },
-        "routes.CampaignRequestListBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "searchkey": {
-                    "type": "string"
-                }
-            }
-        },
-        "routes.CategoryListBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "searchkey": {
-                    "type": "string"
-                }
-            }
-        },
-        "routes.CategoryPostsBody": {
-            "type": "object",
-            "required": [
-                "categoryId"
-            ],
-            "properties": {
-                "categoryId": {
-                    "type": "integer",
-                    "maximum": 50,
-                    "minimum": 1
-                },
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                }
-            }
-        },
-        "routes.CategoryStatsBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                }
-            }
-        },
         "routes.ChangeUserPermissionBody": {
             "type": "object",
             "required": [
@@ -3508,7 +3489,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "image": {
-                    "description": "test",
                     "type": "string"
                 },
                 "place": {
@@ -3605,7 +3585,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "image": {
-                    "description": "test",
                     "type": "string"
                 },
                 "place": {
@@ -3621,25 +3600,6 @@ const docTemplate = `{
                     "description": "test",
                     "type": "string",
                     "maxLength": 50
-                }
-            }
-        },
-        "routes.FeedsBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 50,
-                    "minimum": 0
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 0
-                },
-                "searchkey": {
-                    "type": "string",
-                    "maxLength": 10
                 }
             }
         },
@@ -3707,34 +3667,6 @@ const docTemplate = `{
                 }
             }
         },
-        "routes.PostDetailsBody": {
-            "type": "object",
-            "required": [
-                "postId"
-            ],
-            "properties": {
-                "postId": {
-                    "type": "integer",
-                    "maximum": 999,
-                    "minimum": 1
-                }
-            }
-        },
-        "routes.PostStatsBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                }
-            }
-        },
         "routes.RejectCampaignBody": {
             "type": "object",
             "required": [
@@ -3766,19 +3698,6 @@ const docTemplate = `{
                 }
             }
         },
-        "routes.ReportDetailsBody": {
-            "type": "object",
-            "required": [
-                "postId"
-            ],
-            "properties": {
-                "postId": {
-                    "type": "integer",
-                    "maximum": 999,
-                    "minimum": 1
-                }
-            }
-        },
         "routes.ReportPostRequestBody": {
             "type": "object",
             "properties": {
@@ -3786,24 +3705,6 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "text": {
-                    "type": "string"
-                }
-            }
-        },
-        "routes.ReportedListBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "searchkey": {
                     "type": "string"
                 }
             }
@@ -3837,52 +3738,6 @@ const docTemplate = `{
                 },
                 "phone": {
                     "type": "string"
-                }
-            }
-        },
-        "routes.UserDetailsBody": {
-            "type": "object",
-            "required": [
-                "userId"
-            ],
-            "properties": {
-                "userId": {
-                    "type": "integer",
-                    "maximum": 999,
-                    "minimum": 1
-                }
-            }
-        },
-        "routes.UserListBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "searchkey": {
-                    "type": "string"
-                }
-            }
-        },
-        "routes.UserStatsBody": {
-            "type": "object",
-            "properties": {
-                "limit": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
-                },
-                "page": {
-                    "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
                 }
             }
         }

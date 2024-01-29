@@ -11,7 +11,7 @@ import (
 )
 
 type NewCategoryBody struct {
-	Category string `json:"category" validate:"required,min=2,max=20,alphanum"`
+	Category string `json:"category" validate:"required,min=2,max=20,ascii"`
 }
 
 // New Category godoc

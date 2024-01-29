@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strconv"
 
 	"hand/pkg/admin/pb"
 
@@ -23,16 +24,25 @@ type PostDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			PostDetailsBody	body		PostDetailsBody	true	"Post Id"
-//	@Success		200				{object}	pb.PostDetailsResponse
-//	@Failure		400				{object}	pb.PostDetailsResponse
-//	@Failure		403				{string}	string	"You have not logged in"
-//	@Failure		502				{object}	pb.PostDetailsResponse
+//	@Param			postid	query		string	true	"Post ID "
+//	@Success		200		{object}	pb.PostDetailsResponse
+//	@Failure		400		{object}	pb.PostDetailsResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.PostDetailsResponse
 //	@Router			/admin/post/details  [get]
 func PostDetails(ctx *gin.Context, c pb.AdminServiceClient) {
-	log.Println("Initiating AdminDashboard...")
-
-	postDetailsBody := PostDetailsBody{}
+	log.Println("Initiating PostDetails...")
+	postId, err := strconv.Atoi(ctx.Query("postid"))
+	if err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.PostDetailsResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with post Id",
+			Post:     nil,
+		})
+		return
+	}
+	postDetailsBody := PostDetailsBody{PostId: postId}
 
 	if err := ctx.BindJSON(&postDetailsBody); err != nil {
 		log.Println("Error while fetching data :", err)

@@ -569,69 +569,6 @@ definitions:
     required:
     - postId
     type: object
-  routes.CampaignDetailsBody:
-    properties:
-      postId:
-        maximum: 999
-        minimum: 1
-        type: integer
-    required:
-    - postId
-    type: object
-  routes.CampaignRequestListBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-      searchkey:
-        type: string
-    type: object
-  routes.CategoryListBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-      searchkey:
-        type: string
-    type: object
-  routes.CategoryPostsBody:
-    properties:
-      categoryId:
-        maximum: 50
-        minimum: 1
-        type: integer
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-    required:
-    - categoryId
-    type: object
-  routes.CategoryStatsBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-    type: object
   routes.ChangeUserPermissionBody:
     properties:
       userId:
@@ -669,7 +606,6 @@ definitions:
       date:
         type: string
       image:
-        description: test
         type: string
       place:
         maxLength: 10
@@ -738,7 +674,6 @@ definitions:
       date:
         type: string
       image:
-        description: test
         type: string
       place:
         maxLength: 10
@@ -757,20 +692,6 @@ definitions:
     - place
     - postid
     - text
-    type: object
-  routes.FeedsBody:
-    properties:
-      limit:
-        maximum: 50
-        minimum: 0
-        type: integer
-      page:
-        maximum: 99
-        minimum: 0
-        type: integer
-      searchkey:
-        maxLength: 10
-        type: string
     type: object
   routes.LoginRequestBody:
     properties:
@@ -816,26 +737,6 @@ definitions:
     - password
     - phone
     type: object
-  routes.PostDetailsBody:
-    properties:
-      postId:
-        maximum: 999
-        minimum: 1
-        type: integer
-    required:
-    - postId
-    type: object
-  routes.PostStatsBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-    type: object
   routes.RejectCampaignBody:
     properties:
       postId:
@@ -858,33 +759,11 @@ definitions:
     - commentId
     - text
     type: object
-  routes.ReportDetailsBody:
-    properties:
-      postId:
-        maximum: 999
-        minimum: 1
-        type: integer
-    required:
-    - postId
-    type: object
   routes.ReportPostRequestBody:
     properties:
       postId:
         type: integer
       text:
-        type: string
-    type: object
-  routes.ReportedListBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-      searchkey:
         type: string
     type: object
   routes.SignUpRequestBody:
@@ -910,39 +789,6 @@ definitions:
     - name
     - password
     - phone
-    type: object
-  routes.UserDetailsBody:
-    properties:
-      userId:
-        maximum: 999
-        minimum: 1
-        type: integer
-    required:
-    - userId
-    type: object
-  routes.UserListBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
-      searchkey:
-        type: string
-    type: object
-  routes.UserStatsBody:
-    properties:
-      limit:
-        maximum: 99
-        minimum: 1
-        type: integer
-      page:
-        maximum: 99
-        minimum: 1
-        type: integer
     type: object
 info:
   contact: {}
@@ -990,11 +836,10 @@ paths:
       description: Admin can see Campaign Details
       parameters:
       - description: 'Post ID '
-        in: body
-        name: CampaignDetailsBody
+        in: query
+        name: postid
         required: true
-        schema:
-          $ref: '#/definitions/routes.CampaignDetailsBody'
+        type: string
       produces:
       - application/json
       responses:
@@ -1062,11 +907,17 @@ paths:
       description: Admin can see reported posts
       parameters:
       - description: limit
-        in: body
-        name: ReportedListBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.ReportedListBody'
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
       produces:
       - application/json
       responses:
@@ -1134,11 +985,10 @@ paths:
       description: Admin can see details of reported post
       parameters:
       - description: 'Post ID '
-        in: body
-        name: ReportDetailsBody
+        in: query
+        name: postid
         required: true
-        schema:
-          $ref: '#/definitions/routes.ReportDetailsBody'
+        type: string
       produces:
       - application/json
       responses:
@@ -1169,12 +1019,18 @@ paths:
       - application/json
       description: Admin can see campaogn requests
       parameters:
-      - description: 'Page Details and Searchkey '
-        in: body
-        name: CampaignRequestListBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.CampaignRequestListBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
       produces:
       - application/json
       responses:
@@ -1205,12 +1061,18 @@ paths:
       - application/json
       description: Admin can see Categories
       parameters:
-      - description: 'Page Details and Searchkey '
-        in: body
-        name: CategoryListBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.CategoryListBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
       produces:
       - application/json
       responses:
@@ -1241,12 +1103,19 @@ paths:
       - application/json
       description: Admin can see Category posts
       parameters:
-      - description: 'Page Details and Category ID '
-        in: body
-        name: CategoryPostsBody
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: Category Id
+        in: query
+        name: categoryId
         required: true
-        schema:
-          $ref: '#/definitions/routes.CategoryPostsBody'
+        type: string
       produces:
       - application/json
       responses:
@@ -1374,12 +1243,14 @@ paths:
       - application/json
       description: Admin can see User toplist
       parameters:
-      - description: Page details
-        in: body
-        name: UserStatsBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.UserStatsBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
       produces:
       - application/json
       responses:
@@ -1410,12 +1281,14 @@ paths:
       - application/json
       description: Admin can see top Categories
       parameters:
-      - description: Page Details
-        in: body
-        name: CategoryStatsBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.CategoryStatsBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
       produces:
       - application/json
       responses:
@@ -1438,12 +1311,14 @@ paths:
       - application/json
       description: Admin can see Post toplist
       parameters:
-      - description: Page details
-        in: body
-        name: PostStatsBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.PostStatsBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
       produces:
       - application/json
       responses:
@@ -1474,12 +1349,18 @@ paths:
       - application/json
       description: Admin can see feeds
       parameters:
-      - description: 'Page Details and Searchkey '
-        in: body
-        name: FeedsBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.FeedsBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
       produces:
       - application/json
       responses:
@@ -1546,12 +1427,11 @@ paths:
       - application/json
       description: Admin can get post details
       parameters:
-      - description: Post Id
-        in: body
-        name: PostDetailsBody
+      - description: 'Post ID '
+        in: query
+        name: postid
         required: true
-        schema:
-          $ref: '#/definitions/routes.PostDetailsBody'
+        type: string
       produces:
       - application/json
       responses:
@@ -1618,12 +1498,11 @@ paths:
       - application/json
       description: Admin can get user details
       parameters:
-      - description: 'UserID '
-        in: body
-        name: UserDetailsBody
+      - description: 'User ID '
+        in: query
+        name: userid
         required: true
-        schema:
-          $ref: '#/definitions/routes.UserDetailsBody'
+        type: string
       produces:
       - application/json
       responses:
@@ -1654,12 +1533,18 @@ paths:
       - application/json
       description: Admin can see User List
       parameters:
-      - description: Page Details and Searchkey
-        in: body
-        name: UserListBody
-        required: true
-        schema:
-          $ref: '#/definitions/routes.UserListBody'
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
       produces:
       - application/json
       responses:
@@ -1761,6 +1646,14 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.LoginResponse'
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.LoginResponse'
       summary: User Login

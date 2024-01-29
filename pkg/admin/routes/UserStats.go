@@ -5,6 +5,7 @@ import (
 	"hand/pkg/admin/pb"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
@@ -12,8 +13,8 @@ import (
 
 // edit
 type UserStatsBody struct {
-	Limit int `json:"limit" validate:"min=0,max=99,number"`
-	Page  int `json:"page" validate:"min=0,max=99,number"`
+	Limit int `json:"limit" validate:"min=1,max=50,number"`
+	Page  int `json:"page" validate:"min=1,max=99,number"`
 }
 
 // User Stats godoc
@@ -24,33 +25,32 @@ type UserStatsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			UserStatsBody	body		UserStatsBody	true	"Page details"
-//	@Success		200				{object}	pb.UserStatsResponse
-//	@Failure		400				{object}	pb.UserStatsResponse
-//	@Failure		403				{string}	string	"You have not logged in"
-//	@Failure		502				{object}	pb.UserStatsResponse
+//	@Param			limit	query		string	false	"limit"
+//	@Param			page	query		string	false	"Page number"
+//	@Success		200		{object}	pb.UserStatsResponse
+//	@Failure		400		{object}	pb.UserStatsResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.UserStatsResponse
 //	@Router			/admin/dashboard/User  [get]
 func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating UserStats...")
-	//query
-	userStatsBody := UserStatsBody{}
-
-	if err := ctx.BindJSON(&userStatsBody); err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.UserStatsResponse{
-			Status:     http.StatusBadRequest,
-			Response:   "Error with request",
-			Users: nil,
-		})
-		return
+	page, err := strconv.Atoi(ctx.Query("page"))
+	if err != nil {
+		page = 1
 	}
+	limit, err := strconv.Atoi(ctx.Query("limit"))
+	if err != nil {
+		limit = 10
+	}
+	userStatsBody := UserStatsBody{Page: page, Limit: limit}
+
 	validator := validator.New()
 	if err := validator.Struct(userStatsBody); err != nil {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, pb.UserStatsResponse{
-			Status:     http.StatusBadRequest,
-			Response:   "Invalid data" + err.Error(),
-			Users: nil,
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Users:    nil,
 		})
 		return
 	}
@@ -59,9 +59,9 @@ func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	if err != nil {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.UserStatsResponse{
-			Status:     http.StatusBadGateway,
-			Response:   "Error in internal server",
-			Users: nil,
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Users:    nil,
 		})
 		return
 	}
