@@ -60,7 +60,7 @@ func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.LoginResponse{
 			Status: http.StatusBadRequest,
-			Error: res.Error,
+			Error: "Error with internal server",
 			User: nil,
 		})
 		return
