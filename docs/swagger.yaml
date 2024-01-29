@@ -54,18 +54,11 @@ definitions:
       status:
         type: integer
     type: object
-  pb.Category:
-    properties:
-      category:
-        type: string
-      categoryid:
-        type: integer
-    type: object
   pb.CategoryListResponse:
     properties:
       categories:
         items:
-          $ref: '#/definitions/pb.Category'
+          $ref: '#/definitions/pkg_admin_pb.Category'
         type: array
       response:
         type: string
@@ -75,7 +68,7 @@ definitions:
   pb.CategoryPostsResponse:
     properties:
       category:
-        $ref: '#/definitions/pb.Category'
+        $ref: '#/definitions/pkg_admin_pb.Category'
       posts:
         items:
           $ref: '#/definitions/pkg_admin_pb.Post'
@@ -89,7 +82,7 @@ definitions:
     properties:
       categories:
         items:
-          $ref: '#/definitions/pb.Category'
+          $ref: '#/definitions/pkg_admin_pb.Category'
         type: array
       response:
         type: string
@@ -291,7 +284,7 @@ definitions:
   pb.NewCategoryResponse:
     properties:
       category:
-        $ref: '#/definitions/pb.Category'
+        $ref: '#/definitions/pkg_admin_pb.Category'
       response:
         type: string
       status:
@@ -477,6 +470,13 @@ definitions:
           $ref: '#/definitions/pkg_admin_pb.User'
         type: array
     type: object
+  pkg_admin_pb.Category:
+    properties:
+      category:
+        type: string
+      categoryid:
+        type: integer
+    type: object
   pkg_admin_pb.Post:
     properties:
       amount:
@@ -531,6 +531,8 @@ definitions:
       address:
         type: string
       amount:
+        type: integer
+      categoryid:
         type: integer
       collected:
         type: integer
@@ -603,6 +605,10 @@ definitions:
       amount:
         minimum: 100
         type: integer
+      categoryId:
+        maximum: 10
+        minimum: 1
+        type: integer
       date:
         type: string
       image:
@@ -616,6 +622,7 @@ definitions:
         type: string
     required:
     - address
+    - categoryId
     - date
     - place
     - text
@@ -2334,6 +2341,30 @@ paths:
       tags:
       - User Post
   /user/post/new:
+    get:
+      consumes:
+      - application/json
+      description: Choose A category
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.NotificationDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.NotificationDetailsResponse'
+      security:
+      - api_key: []
+      summary: Create Post
+      tags:
+      - User Post
     post:
       consumes:
       - application/json

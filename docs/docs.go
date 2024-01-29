@@ -2439,6 +2439,44 @@ const docTemplate = `{
             }
         },
         "/user/post/new": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Choose A category",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Create Post",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "security": [
                     {
@@ -2637,24 +2675,13 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.Category": {
-            "type": "object",
-            "properties": {
-                "category": {
-                    "type": "string"
-                },
-                "categoryid": {
-                    "type": "integer"
-                }
-            }
-        },
         "pb.CategoryListResponse": {
             "type": "object",
             "properties": {
                 "categories": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pb.Category"
+                        "$ref": "#/definitions/pkg_admin_pb.Category"
                     }
                 },
                 "response": {
@@ -2669,7 +2696,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "category": {
-                    "$ref": "#/definitions/pb.Category"
+                    "$ref": "#/definitions/pkg_admin_pb.Category"
                 },
                 "posts": {
                     "type": "array",
@@ -2691,7 +2718,7 @@ const docTemplate = `{
                 "categories": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/pb.Category"
+                        "$ref": "#/definitions/pkg_admin_pb.Category"
                     }
                 },
                 "response": {
@@ -3004,7 +3031,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "category": {
-                    "$ref": "#/definitions/pb.Category"
+                    "$ref": "#/definitions/pkg_admin_pb.Category"
                 },
                 "response": {
                     "type": "string"
@@ -3293,6 +3320,17 @@ const docTemplate = `{
                 }
             }
         },
+        "pkg_admin_pb.Category": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "categoryid": {
+                    "type": "integer"
+                }
+            }
+        },
         "pkg_admin_pb.Post": {
             "type": "object",
             "properties": {
@@ -3375,6 +3413,9 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "amount": {
+                    "type": "integer"
+                },
+                "categoryid": {
                     "type": "integer"
                 },
                 "collected": {
@@ -3467,6 +3508,7 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "address",
+                "categoryId",
                 "date",
                 "place",
                 "text"
@@ -3484,6 +3526,11 @@ const docTemplate = `{
                 "amount": {
                     "type": "integer",
                     "minimum": 100
+                },
+                "categoryId": {
+                    "type": "integer",
+                    "maximum": 10,
+                    "minimum": 1
                 },
                 "date": {
                     "type": "string"
@@ -3741,7 +3788,7 @@ const docTemplate = `{
                 }
             }
         }
-    },
+    }    },
     "securityDefinitions": {
         "api_key": {
             "type": "apiKey",

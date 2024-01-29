@@ -102,9 +102,9 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Success		200				{object}	pb.NotificationDetailsResponse
-//	@Failure		403				{string}	string	"You have not logged in"
-//	@Failure		502				{object}	pb.NotificationDetailsResponse
+//	@Success		200	{object}	pb.NotificationDetailsResponse
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.NotificationDetailsResponse
 //	@Router			/user/post/new  [get]
 func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.GetCreatePost(context.Background(), &pb.GetCreatePostRequest{})
