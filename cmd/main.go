@@ -39,7 +39,7 @@ import (
 //	@host		www.handcrowdfunding.online 
 //	@BasePath	/
 
-//	@schemes	http 
+//	@schemes	http,https 
 func main() {
 
 	docs.SwaggerInfo.Title = "Hand CrowdFunding API"
@@ -47,7 +47,7 @@ func main() {
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "handcrowdfunding.online"
 	docs.SwaggerInfo.BasePath = ""
-	docs.SwaggerInfo.Schemes = []string{"http"}
+	docs.SwaggerInfo.Schemes = []string{"http","https"}
 
 	c, err := config.LoadConfig()
 
