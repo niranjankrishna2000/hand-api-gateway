@@ -48,8 +48,8 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, pb.UserFeedsResponse{
 			Status:   http.StatusBadRequest,
-			Response: "Invalid data" + err.Error(),
-			Posts:    nil,
+			Response: "Invalid data :" + err.Error(),
+			Posts:    []*pb.Post{},
 		})
 		return
 	}
@@ -59,8 +59,8 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.UserFeedsResponse{
 			Status:   http.StatusBadGateway,
-			Response: "Error in internal server",
-			Posts:    nil,
+			Response: err.Error(),
+			Posts:    []*pb.Post{},
 		})
 		return
 	}

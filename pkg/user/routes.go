@@ -22,6 +22,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	post := routes.Group("/post")
 	post.POST("/new", svc.CreatePost)
+	post.GET("/new", svc.GetCreatePost)
 	post.POST("/upload-image", svc.UploadImage)
 	post.GET("/details", svc.PostDetails)
 	post.PATCH("/edit",svc.EditPost)
@@ -61,7 +62,9 @@ func (svc *ServiceClient) UploadImage(ctx *gin.Context) {
 func (svc *ServiceClient) CreatePost(ctx *gin.Context) {
 	routes.CreatePost(ctx, svc.Client)
 }
-
+func (svc *ServiceClient) GetCreatePost(ctx *gin.Context) {
+	routes.GetCreatePost(ctx, svc.Client)
+}
 func (svc *ServiceClient) PostDetails(ctx *gin.Context) {
 	routes.UserPostDetails(ctx, svc.Client)
 }

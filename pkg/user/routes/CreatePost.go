@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"time"
 
 	"hand/pkg/user/pb"
 
@@ -12,13 +13,14 @@ import (
 )
 
 type CreatePostRequestBody struct {
-	Text      string `json:"text" validate:"required,max=50,ascii"` //test
-	Place     string `json:"place" validate:"required,max=10,ascii"`
-	Amount    int    `json:"amount" validate:"min=100,number"`
-	AccountNo string `json:"accno" validate:"max=17,min=9,alphanum"`
-	Address   string `json:"address" validate:"required,max=50,ascii"`
-	Image     string `json:"image"`
-	Date      string `json:"date" validate:"required"`
+	Text       string `json:"text" validate:"required,max=50,ascii"` //test
+	Place      string `json:"place" validate:"required,max=10,ascii"`
+	Amount     int    `json:"amount" validate:"min=100,number"`
+	AccountNo  string `json:"accno" validate:"max=17,min=9,alphanum"`
+	Address    string `json:"address" validate:"required,max=50,ascii"`
+	Image      string `json:"image"`
+	Date       string `json:"date" validate:"required"`
+	CategoryId int    `json:"categoryId" validate:"required,min=1,max=10,number"`
 }
 
 // create Post godoc
@@ -43,7 +45,16 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.CreatePostResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Couldnt fetch data from client",
-			Post:     nil,
+			Post:     &pb.Post{},
+		})
+		return
+	}
+	_, err := time.Parse("2006-01-02 15:04:05", body.Date)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, pb.CreatePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error Parsing time string",
+			Post:     &pb.Post{},
 		})
 		return
 	}
@@ -53,7 +64,7 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.CreatePostResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
-			Post:    nil,
+			Post:     &pb.Post{},
 		})
 		return
 	}
@@ -74,11 +85,38 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.CreatePostResponse{
 			Status:   http.StatusBadGateway,
-			Response: "Error in internal server",
+			Response: "Error in internal server : " + err.Error(),
 			Post:     nil,
 		})
 		return
 	}
 
 	ctx.JSON(http.StatusCreated, &res)
+}
+
+// create Post godoc
+//
+//	@Summary		Create Post
+//	@Description	Choose A category
+//	@Tags			User Post
+//	@Security		api_key
+//	@Accept			json
+//	@Produce		json
+//	@Success		200				{object}	pb.NotificationDetailsResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.NotificationDetailsResponse
+//	@Router			/user/post/new  [get]
+func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
+	res, err := c.GetCreatePost(context.Background(), &pb.GetCreatePostRequest{})
+	if err != nil {
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.GetCreatePostResponse{
+			Status:     http.StatusBadGateway,
+			Response:   "Error in internal server: " + err.Error(),
+			Categories: []*pb.Category{},
+		})
+		return
+	}
+	log.Println("Recieved Data: ", res)
+	ctx.JSON(http.StatusOK, &res)
 }
