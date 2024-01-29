@@ -25,6 +25,8 @@ type LoginRequestBody struct {
 //	@Produce		json
 //	@Param			b	body		LoginRequestBody	true	"User Login Data"
 //	@Success		200	{object}	pb.LoginResponse
+//	@Failure		400	{object}	pb.LoginResponse
+//	@Failure		502	{object}	pb.LoginResponse
 //	@Router			/login [post]
 func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 	LoginRequestBody := LoginRequestBody{}
