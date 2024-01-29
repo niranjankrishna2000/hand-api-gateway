@@ -8,7 +8,7 @@ import (
 	"hand/pkg/user/pb"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 )
 
 type CreatePostRequestBody struct {
