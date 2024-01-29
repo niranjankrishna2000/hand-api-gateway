@@ -29,38 +29,40 @@ type OtpValidateRequestBody struct {
 //	@Success		200	{object}	pb.LoginResponse
 //	@Router			/otp-validate [patch]
 func OtpValidate(ctx *gin.Context, c pb.AuthServiceClient) {
-	otpBody := OtpValidateRequestBody{}
+	OtpValidateRequestBody := OtpValidateRequestBody{}
 
-	if err := ctx.BindJSON(&otpBody); err != nil {
+	if err := ctx.BindJSON(&OtpValidateRequestBody); err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+		ctx.JSON(http.StatusBadRequest, pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with request",
+			User: nil,
 		})
 		return
 	}
-
 	validator := validator.New()
-	if err := validator.Struct(otpBody); err != nil {
+	if err := validator.Struct(OtpValidateRequestBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+		ctx.JSON(http.StatusBadRequest,pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Invalid data"+err.Error(),
+			User: nil,
 		})
 		return
 	}
 	res, err := c.OtpValidate(context.Background(), &pb.OtpValidationRequest{
-		Phone:    otpBody.Phone,
-		Otp:      otpBody.Otp,
-		Password: otpBody.Password,
-		Confirm:  otpBody.Confirm,
+		Phone:    OtpValidateRequestBody.Phone,
+		Otp:      OtpValidateRequestBody.Otp,
+		Password: OtpValidateRequestBody.Password,
+		Confirm:  OtpValidateRequestBody.Confirm,
 	})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Error with internal server",
+		ctx.JSON(http.StatusBadGateway, pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with internal server",
+			User: nil,
 		})
 		return
 	}

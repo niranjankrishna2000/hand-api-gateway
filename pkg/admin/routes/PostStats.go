@@ -26,6 +26,7 @@ type PostStatsBody struct {
 //	@Param			PostStatsBody	body		PostStatsBody	true	"Page details"
 //	@Success		200				{object}	pb.PostStatsResponse
 //	@Failure		400				{object}	pb.PostStatsResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.PostStatsResponse
 //	@Router			/admin/dashboard/posts  [get]
 func PostStats(ctx *gin.Context, c pb.AdminServiceClient) {

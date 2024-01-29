@@ -27,6 +27,7 @@ type ApproveCampaignBody struct {
 //	@Success		200					{object}	pb.ApproveCampaignResponse
 //	@Failure		400					{object}	pb.ApproveCampaignResponse
 //	@Failure		502					{object}	pb.ApproveCampaignResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Router			/admin/campaigns/approve  [patch]
 func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating ApproveCampaign...")

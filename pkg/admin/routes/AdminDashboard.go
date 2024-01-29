@@ -18,9 +18,8 @@ import (
 //	@Accept			json
 //	@Produce		json
 //	@Success		200	{object}	pb.AdminDashboardResponse
-//
 //	@Failure		502	{object}	pb.AdminDashboardResponse
-//
+//	@Failure		403	{string}	string	"You have not logged in"
 //	@Router			/admin/dashboard  [get]
 func AdminDashboard(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")

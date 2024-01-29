@@ -24,6 +24,7 @@ type ReportDetailsBody struct {
 //	@Produce		json
 //	@Param			ReportDetailsBody	body		ReportDetailsBody	true	"Post ID "
 //	@Success		200					{object}	pb.ReportDetailsResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Failure		400					{object}	pb.ReportDetailsResponse
 //	@Failure		502					{object}	pb.ReportDetailsResponse
 //	@Router			/admin/campaigns/reported/details  [get]

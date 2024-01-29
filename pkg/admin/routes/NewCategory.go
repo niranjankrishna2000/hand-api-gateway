@@ -11,7 +11,7 @@ import (
 )
 
 type NewCategoryBody struct {
-	Category string `json:"category" validate:"required,min=2,max=20,alpha"`
+	Category string `json:"category" validate:"required,min=2,max=20,alphanum"`
 }
 
 // New Category godoc
@@ -25,6 +25,7 @@ type NewCategoryBody struct {
 //	@Param			NewCategoryBody	body		NewCategoryBody	true	"Category Name"
 //	@Success		200				{object}	pb.NewCategoryResponse
 //	@Failure		400				{object}	pb.NewCategoryResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.NewCategoryResponse
 //	@Router			/admin/categories/new       [post]
 func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {

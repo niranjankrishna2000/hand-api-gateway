@@ -2,18 +2,24 @@ package routes
 
 import (
 	"context"
-	"errors"
 	"hand/pkg/user/pb"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// User Donation History godoc
+type PageBody struct {
+	Limit     int    `json:"limit" validate:"min=0,max=50,number"`
+	Page      int    `json:"page" validate:"min=0,max=99,number"`
+	Searchkey string `json:"searchkey" validate:"max=10,alphanum,ascii"`
+}
+
+// Donation History godoc
 //
-//	@Summary		User can see Donation History
+//	@Summary		Donation History
 //	@Description	User can see Donation History
 //	@Tags			User Donations
 //	@Accept			json
@@ -23,32 +29,46 @@ import (
 //	@Param			page		query		string	false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
 //	@Success		200			{object}	pb.DonationHistoryResponse
+//	@Failure		400			{object}	pb.DonationHistoryResponse
+//	@Failure		403			{string}	string	"You have not logged in"
+//	@Failure		502			{object}	pb.DonationHistoryResponse
 //	@Router			/user/post/donate/history  [get]
 func DonationHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Donation history")
-	pageStr := ctx.Query("page")
-	if pageStr == "" {
-		pageStr = "1"
-	}
-	page, err := strconv.Atoi(pageStr)
+	page, err := strconv.Atoi(ctx.Query("page"))
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("invalid Page format"))
+		ctx.JSON(http.StatusBadRequest, pb.DonationHistoryResponse{
+			Status:    http.StatusBadRequest,
+			Response:  "Error with page",
+			Donations: nil,
+		})
 		return
 	}
-
-	limitStr := ctx.Query("limit")
-	if limitStr == "" {
-		limitStr = "10"
-	}
-	limit, err := strconv.Atoi(limitStr)
+	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("invalid limit format"))
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.DonationHistoryResponse{
+			Status:    http.StatusBadRequest,
+			Response:  "Error with limit",
+			Donations: nil,
+		})
 		return
 	}
-
 	searchkey := ctx.Query("searchkey")
+	pageBody := PageBody{Page: page, Limit: limit, Searchkey: searchkey}
+
 	userId := ctx.GetInt64("userId")
 	log.Println("Collected data : ", page, limit, searchkey, userId)
+	validator := validator.New()
+	if err := validator.Struct(pageBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.DonationHistoryResponse{
+			Status:    http.StatusBadRequest,
+			Response:  "Invalid data" + err.Error(),
+			Donations: nil,
+		})
+		return
+	}
 	res, err := c.DonationHistory(context.Background(), &pb.DonationHistoryRequest{
 		Page:      int32(page),
 		Limit:     int32(limit),
@@ -57,7 +77,12 @@ func DonationHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.DonationHistoryResponse{
+			Status:    http.StatusBadGateway,
+			Response:  "Error in internal server",
+			Donations: nil,
+		})
 		return
 	}
 	log.Println("Recieved data : ", res)

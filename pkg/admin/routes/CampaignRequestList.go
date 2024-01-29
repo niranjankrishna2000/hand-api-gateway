@@ -28,7 +28,8 @@ type CampaignRequestListBody struct {
 //	@Param			CampaignRequestListBody	body		CampaignRequestListBody	true	"Page Details and Searchkey "
 //	@Success		200						{object}	pb.CampaignRequestListResponse
 //	@Failure		400						{object}	pb.CampaignRequestListResponse
-//	@Success		502						{object}	pb.CampaignRequestListResponse
+//	@Failure		403						{string}	string "You have not logged in"
+//	@Failure		502						{object}	pb.CampaignRequestListResponse
 //	@Router			/admin/campaigns/requestlist  [get]
 func CampaignRequestList(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")

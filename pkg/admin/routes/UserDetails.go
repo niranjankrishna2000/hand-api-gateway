@@ -27,6 +27,7 @@ type UserDetailsBody struct {
 //	@Param			UserDetailsBody	body		UserDetailsBody	true	"UserID "
 //	@Success		200				{object}	pb.GetUserDetailsResponse
 //	@Failure		400				{object}	pb.GetUserDetailsResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.GetUserDetailsResponse
 //	@Router			/admin/users/details  [get]
 func UserDetails(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {

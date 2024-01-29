@@ -26,6 +26,7 @@ type RejectCampaignBody struct {
 //	@Param			RejectCampaignBody	body		RejectCampaignBody	true	"Post ID "
 //	@Success		200					{object}	pb.RejectCampaignResponse
 //	@Failure		400					{object}	pb.RejectCampaignResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Failure		502					{object}	pb.RejectCampaignResponse
 //	@Router			/admin/campaigns/reject  [patch]
 func RejectCampaign(ctx *gin.Context, c pb.AdminServiceClient) {

@@ -19,7 +19,6 @@ service UserService {
   rpc ReportComment(ReportCommentRequest) returns (ReportCommentResponse) {}
   rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse) {}
   rpc DonationHistory(DonationHistoryRequest) returns (DonationHistoryResponse) {}
-  rpc ClearHistory(ClearHistoryRequest) returns (ClearHistoryResponse) {}
   rpc Notifications(NotificationRequest) returns (NotificationResponse) {}
   rpc NotificationDetail(NotificationDetailsRequest) returns (NotificationDetailsResponse) {}
   rpc DeleteNotification(DeleteNotificationRequest) returns (DeleteNotificationResponse) {}
@@ -236,14 +235,6 @@ message Donation {
   string paymentid=5; 
 }
 
-message ClearHistoryRequest {
-  int32 userid = 1;
-}
-
-message ClearHistoryResponse {
-  int64 status = 1;
-  string response = 2;
-}
 
 message Notification {
   int32 id =1;

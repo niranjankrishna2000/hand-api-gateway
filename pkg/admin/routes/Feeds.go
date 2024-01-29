@@ -12,9 +12,9 @@ import (
 )
 
 type FeedsBody struct {
-	Limit     int    `json:"limit" validate:"min=1,max=99,number"`
-	Page      int    `json:"page" validate:"min=1,max=99,number"`
-	Searchkey string `json:"searchkey"`
+	Limit     int    `json:"limit" validate:"min=0,max=50,number"`
+	Page      int    `json:"page" validate:"min=0,max=99,number"`
+	Searchkey string `json:"searchkey" validate:"max=10,alphanum,ascii"`
 }
 
 // Admin feeds godoc
@@ -28,6 +28,7 @@ type FeedsBody struct {
 //	@Param			FeedsBody	body		FeedsBody	true	"Page Details and Searchkey "
 //	@Success		200			{object}	pb.FeedsResponse
 //	@Failure		400			{object}	pb.FeedsResponse
+//	@Failure		403			{string}	string	"You have not logged in"
 //	@Failure		502			{object}	pb.FeedsResponse
 //	@Router			/admin/feeds  [get]
 func Feeds(ctx *gin.Context, c pb.AdminServiceClient) {

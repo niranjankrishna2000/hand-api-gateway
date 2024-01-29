@@ -27,6 +27,7 @@ type UserStatsBody struct {
 //	@Param			UserStatsBody	body		UserStatsBody	true	"Page details"
 //	@Success		200				{object}	pb.UserStatsResponse
 //	@Failure		400				{object}	pb.UserStatsResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.UserStatsResponse
 //	@Router			/admin/dashboard/User  [get]
 func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {

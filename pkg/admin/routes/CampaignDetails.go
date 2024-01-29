@@ -27,6 +27,7 @@ type CampaignDetailsBody struct {
 //	@Success		200					{object}	pb.CampaignDetailsResponse
 //	@Failure		400					{object}	pb.CampaignDetailsResponse
 //	@Failure		502					{object}	pb.CampaignDetailsResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Router			/admin/campaigns/details  [get]
 func CampaignDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating AdminDashboard...")

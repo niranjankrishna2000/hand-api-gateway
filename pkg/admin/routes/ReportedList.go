@@ -27,6 +27,7 @@ type ReportedListBody struct {
 //	@Param			ReportedListBody	body		ReportedListBody	true	"limit"
 //	@Success		200					{object}	pb.ReportedListResponse
 //	@Failure		400					{object}	pb.ReportedListResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Failure		502					{object}	pb.ReportedListResponse
 //	@Router			/admin/campaigns/reported  [get]
 func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {

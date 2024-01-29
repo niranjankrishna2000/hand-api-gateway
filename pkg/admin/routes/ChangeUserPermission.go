@@ -27,6 +27,7 @@ type ChangeUserPermissionBody struct {
 //	@Param			ChangeUserPermissionBody	body		ChangeUserPermissionBody	true	"User ID "
 //	@Success		200							{object}	pb.ChangeUserPermissionResponse
 //	@Failure		400							{object}	pb.ChangeUserPermissionResponse
+//	@Failure		403							{string}	string	"You have not logged in"
 //	@Failure		502							{object}	pb.ChangeUserPermissionResponse
 //	@Router			/admin/users/changepermission  [patch]
 func ChangeUserPermission(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceClient) {

@@ -37,7 +37,6 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	donate.POST("/generate-invoice", svc.GenerateInvoice)
 	donate.GET("/download-invoice", svc.DownloadInvoice)
 	donate.GET("/history",svc.DonationHistory)
-	donate.DELETE("/history/clear",svc.ClearHistory)
 
 	profile:=routes.Group("/profile")
 	profile.GET("/details",svc.ProfileDetails)
@@ -104,9 +103,7 @@ func (svc *ServiceClient) DeleteComment(ctx *gin.Context) {
 func (svc *ServiceClient) DonationHistory(ctx *gin.Context) {
 	routes.DonationHistory(ctx, svc.Client)
 }
-func (svc *ServiceClient) ClearHistory(ctx *gin.Context) {
-	routes.ClearHistory(ctx, svc.Client)
-}
+
 
 //edit
 func (svc *ServiceClient) ProfileDetails(ctx *gin.Context) {

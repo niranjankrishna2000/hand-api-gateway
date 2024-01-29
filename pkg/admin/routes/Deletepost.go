@@ -26,6 +26,7 @@ type DeletePostBody struct {
 //	@Param			DeletePostBody	body		DeletePostBody	true	"Post ID "
 //	@Success		200				{object}	pb.DeletePostResponse
 //	@Failure		400				{object}	pb.DeletePostResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.DeletePostResponse
 //	@Router			/admin/post/delete  [delete]
 func DeletePost(ctx *gin.Context, c pb.AdminServiceClient) {

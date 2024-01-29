@@ -22,41 +22,44 @@ type LoginWithOtpRequestBody struct {
 //	@Tags			User Auth
 //	@Accept			json
 //	@Produce		json
-//	@Param			b	body		LoginWithOtpRequestBody	true	"User Login Data"
-//	@Success		200	{object}	pb.LoginWithOtpResponse
+//	@Param			LoginWithOtpRequestBody	body		LoginWithOtpRequestBody	true	"User Login Data"
+//	@Success		200						{object}	pb.LoginWithOtpResponse
+//	@Failure		400						{object}	pb.LoginWithOtpResponse
+//	@Failure		502						{object}	pb.LoginWithOtpResponse
 //	@Router			/forgot-password [post]
 func LoginWithOtp(ctx *gin.Context, c pb.AuthServiceClient) {
-	b := LoginWithOtpRequestBody{}
+	LoginWithOtpRequestBody := LoginWithOtpRequestBody{}
 
-	if err := ctx.ShouldBindJSON(&b); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+	if err := ctx.BindJSON(&LoginWithOtpRequestBody); err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.LoginWithOtpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with request",
 		})
 		return
 	}
-
 	validator := validator.New()
-	if err := validator.Struct(b); err != nil {
-		log.Println("Error while validating :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+	if err := validator.Struct(LoginWithOtpRequestBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest,pb.LoginWithOtpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Invalid data"+err.Error(),
 		})
 		return
 	}
 
 	res, err := c.LoginWithOtp(context.Background(), &pb.LoginWithOtpRequest{
-		Phone: b.Phone,
+		Phone: LoginWithOtpRequestBody.Phone,
 	})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadGateway,
-			"error":  "Error with internal server",
+		ctx.JSON(http.StatusBadGateway, pb.LoginWithOtpResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with internal server",
 		})
-		return	}
+		return
+	}
 
 	ctx.JSON(http.StatusOK, &res)
 }

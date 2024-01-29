@@ -8,21 +8,22 @@ import (
 	"hand/pkg/user/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
 type CreatePostRequestBody struct {
-	Text      string `json:"text"`
-	Place     string `json:"place"`
-	Amount    int    `json:"amount"`
-	AccountNo string `json:"accno"`
-	Address   string `json:"address"`
-	Image     string `json:"image"`
-	Date      string `json:"date"`
+	Text      string `json:"text" validate:"required,max=50,alphanum,ascii"` //test
+	Place     string `json:"place" validate:"required,max=10,alphanum,ascii"`
+	Amount    int    `json:"amount" validate:"min=100,number"`
+	AccountNo string `json:"accno" validate:"max=17,min=9,alphanum"`
+	Address   string `json:"address" validate:"required,max=50,alphanum,ascii"`
+	Image     string `json:"image" validate:"image"` //test
+	Date      string `json:"date" validate:"required,datetime"`
 }
 
-// User create Post godoc
+// create Post godoc
 //
-//	@Summary		User can create new post
+//	@Summary		Create Post
 //	@Description	User can create new post
 //	@Tags			User Post
 //	@Security		api_key
@@ -30,20 +31,30 @@ type CreatePostRequestBody struct {
 //	@Produce		json
 //	@Param			body	body		CreatePostRequestBody	true	"Create post Data"
 //	@Success		200		{object}	pb.CreatePostResponse
+//	@Failure		400		{object}	pb.CreatePostResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.CreatePostResponse
 //	@Router			/user/post/new  [post]
 func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Create post started...")
 	body := CreatePostRequestBody{}
 
 	if err := ctx.BindJSON(&body); err != nil {
-		ctx.AbortWithError(http.StatusBadRequest, err)
+		ctx.JSON(http.StatusBadGateway, pb.CreatePostResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Couldnt fetch data from client",
+			Post:     nil,
+		})
 		return
 	}
-	if body.Amount < 0 {
-		//ctx.AbortWithError(http.StatusBadRequest, errors.New("add a postitive amount"))
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"Status":   http.StatusBadRequest,
-			"Response": "add a positive number"})
+	validator := validator.New()
+	if err := validator.Struct(body); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.CreatePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Post:    nil,
+		})
 		return
 	}
 	userId := ctx.GetInt64("userId")
@@ -60,7 +71,12 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	})
 
 	if err != nil {
-		ctx.AbortWithError(http.StatusBadGateway, err)
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.CreatePostResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
 		return
 	}
 

@@ -26,6 +26,7 @@ type DeleteCategoryBody struct {
 //	@Success		200					{object}	pb.DeleteCategoryResponse
 //	@Failure		400					{object}	pb.DeleteCategoryResponse
 //	@Failure		502					{object}	pb.DeleteCategoryResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Router			/admin/categories/delete  [delete]
 func DeleteCategory(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating DeleteCategory...")

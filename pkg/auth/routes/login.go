@@ -27,36 +27,39 @@ type LoginRequestBody struct {
 //	@Success		200	{object}	pb.LoginResponse
 //	@Router			/login [post]
 func Login(ctx *gin.Context, c pb.AuthServiceClient) {
-	loginBody := LoginRequestBody{}
+	LoginRequestBody := LoginRequestBody{}
 
-	if err := ctx.BindJSON(&loginBody); err != nil {
+	if err := ctx.BindJSON(&LoginRequestBody); err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+		ctx.JSON(http.StatusBadRequest, pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with request",
+			User: nil,
 		})
 		return
 	}
 	validator := validator.New()
-	if err := validator.Struct(loginBody); err != nil {
-		log.Println("Error while validating :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+	if err := validator.Struct(LoginRequestBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest,pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Invalid data"+err.Error(),
+			User: nil,
 		})
 		return
 	}
 
 	res, err := c.Login(context.Background(), &pb.LoginRequest{
-		Email:    loginBody.Email,
-		Password: loginBody.Password,
+		Email:    LoginRequestBody.Email,
+		Password: LoginRequestBody.Password,
 	})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Error with internal server",
+		ctx.JSON(http.StatusBadGateway, pb.LoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with internal server",
+			User: nil,
 		})
 		return
 	}

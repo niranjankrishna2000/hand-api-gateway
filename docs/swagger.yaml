@@ -105,7 +105,7 @@ definitions:
       user:
         $ref: '#/definitions/pkg_auth_pb.User'
     type: object
-  pb.ClearHistoryResponse:
+  pb.ClearNotificationResponse:
     properties:
       response:
         type: string
@@ -144,6 +144,22 @@ definitions:
         type: integer
     type: object
   pb.DeleteCategoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DeleteCommentResponse:
+    properties:
+      Post:
+        $ref: '#/definitions/pb.PostDetails'
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.DeleteNotificationResponse:
     properties:
       response:
         type: string
@@ -292,6 +308,15 @@ definitions:
       time:
         type: string
       userid:
+        type: integer
+    type: object
+  pb.NotificationDetailsResponse:
+    properties:
+      notification:
+        $ref: '#/definitions/pb.Notification'
+      response:
+        type: string
+      status:
         type: integer
     type: object
   pb.NotificationResponse:
@@ -619,26 +644,45 @@ definitions:
   routes.CommentPostRequestBody:
     properties:
       postid:
+        maximum: 999
+        minimum: 1
         type: integer
       text:
+        description: test
         type: string
+    required:
+    - postid
+    - text
     type: object
   routes.CreatePostRequestBody:
     properties:
       accno:
+        maxLength: 17
+        minLength: 9
         type: string
       address:
+        maxLength: 50
         type: string
       amount:
+        minimum: 100
         type: integer
       date:
         type: string
       image:
+        description: test
         type: string
       place:
+        maxLength: 10
         type: string
       text:
+        description: test
+        maxLength: 50
         type: string
+    required:
+    - address
+    - date
+    - place
+    - text
     type: object
   routes.DeleteCategoryBody:
     properties:
@@ -670,40 +714,62 @@ definitions:
   routes.DonateRequestBody:
     properties:
       amount:
+        minimum: 100
         type: integer
       postID:
+        maximum: 999
+        minimum: 1
         type: integer
+    required:
+    - postID
     type: object
   routes.EditPostRequestBody:
     properties:
       accno:
+        maxLength: 17
+        minLength: 9
         type: string
       address:
+        maxLength: 50
         type: string
       amount:
+        minimum: 100
         type: integer
       date:
         type: string
       image:
+        description: test
         type: string
       place:
+        maxLength: 10
         type: string
       postid:
+        maximum: 999
+        minimum: 1
         type: integer
       text:
+        description: test
+        maxLength: 50
         type: string
+    required:
+    - address
+    - date
+    - place
+    - postid
+    - text
     type: object
   routes.FeedsBody:
     properties:
       limit:
-        maximum: 99
-        minimum: 1
+        maximum: 50
+        minimum: 0
         type: integer
       page:
         maximum: 99
-        minimum: 1
+        minimum: 0
         type: integer
       searchkey:
+        maxLength: 10
         type: string
     type: object
   routes.LoginRequestBody:
@@ -782,9 +848,15 @@ definitions:
   routes.ReportCommentRequestBody:
     properties:
       commentId:
+        maximum: 999
+        minimum: 1
         type: integer
       text:
+        maxLength: 20
         type: string
+    required:
+    - commentId
+    - text
     type: object
   routes.ReportDetailsBody:
     properties:
@@ -822,6 +894,7 @@ definitions:
       email:
         type: string
       name:
+        description: check what is alphaunicode
         maxLength: 20
         minLength: 3
         type: string
@@ -834,6 +907,7 @@ definitions:
     required:
     - confirmpassword
     - email
+    - name
     - password
     - phone
     type: object
@@ -896,6 +970,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.ApproveCampaignResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -928,6 +1006,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.CampaignDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -960,6 +1042,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.RejectCampaignResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -992,6 +1078,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.ReportedListResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1024,6 +1114,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.DeleteReportResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1056,6 +1150,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.ReportDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1088,6 +1186,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.CampaignRequestListResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1120,6 +1222,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.CategoryListResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1152,6 +1258,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.CategoryPostsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1184,6 +1294,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.DeleteCategoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1216,6 +1330,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.NewCategoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1237,6 +1355,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.AdminDashboardResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1269,6 +1391,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.UserStatsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1297,6 +1423,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CategoryStatsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
       security:
       - api_key: []
       summary: Top Categories
@@ -1325,6 +1455,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.PostStatsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1357,6 +1491,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.FeedsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1389,6 +1527,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.DeletePostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1421,6 +1563,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.PostDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1453,6 +1599,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.ChangeUserPermissionResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1485,6 +1635,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.GetUserDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1517,6 +1671,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/pb.UserListResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
         "502":
           description: Bad Gateway
           schema:
@@ -1534,7 +1692,7 @@ paths:
       parameters:
       - description: Admin Login Data
         in: body
-        name: b
+        name: AdminLoginRequestBody
         required: true
         schema:
           $ref: '#/definitions/routes.AdminLoginRequestBody'
@@ -1543,6 +1701,14 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.AdminLoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.AdminLoginResponse'
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.AdminLoginResponse'
       summary: Admin Login
@@ -1556,7 +1722,7 @@ paths:
       parameters:
       - description: User Login Data
         in: body
-        name: b
+        name: LoginWithOtpRequestBody
         required: true
         schema:
           $ref: '#/definitions/routes.LoginWithOtpRequestBody'
@@ -1565,6 +1731,14 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.LoginWithOtpResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.LoginWithOtpResponse'
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.LoginWithOtpResponse'
       summary: User Login with otp
@@ -1682,9 +1856,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.UserFeedsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.UserFeedsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.UserFeedsResponse'
       security:
       - api_key: []
-      summary: User can see feeds
+      summary: Feeds
       tags:
       - User Post
   /user/notifications:
@@ -1708,26 +1894,50 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.NotificationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.NotificationResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.NotificationResponse'
       security:
       - api_key: []
-      summary: User can see Notifications
+      summary: Notifications
       tags:
       - User Notifications
   /user/notifications/clear:
     delete:
       consumes:
       - application/json
-      description: User can Clear Notification
+      description: User can Clear Notifications
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.ClearHistoryResponse'
+            $ref: '#/definitions/pb.ClearNotificationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ClearNotificationResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ClearNotificationResponse'
       security:
       - api_key: []
-      summary: User can Clear Notification
+      summary: Clear Notification
       tags:
       - User Notifications
   /user/notifications/delete:
@@ -1746,10 +1956,22 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.CommentPostResponse'
+            $ref: '#/definitions/pb.DeleteNotificationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteNotificationResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteNotificationResponse'
       security:
       - api_key: []
-      summary: User can Delete Notification
+      summary: Delete Notification
       tags:
       - User Notifications
   /user/notifications/details:
@@ -1768,10 +1990,22 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.CommentPostResponse'
+            $ref: '#/definitions/pb.NotificationDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.NotificationDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.NotificationDetailsResponse'
       security:
       - api_key: []
-      summary: User can see Notification Details
+      summary: Notification Details
       tags:
       - User Notifications
   /user/post/comment:
@@ -1793,16 +2027,28 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CommentPostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.CommentPostResponse'
       security:
       - api_key: []
-      summary: User can Comment new post
+      summary: Comment
       tags:
       - User Post
   /user/post/comment/delete:
     delete:
       consumes:
       - application/json
-      description: User can Report post
+      description: User can Delete post
       parameters:
       - description: Comment ID
         in: query
@@ -1815,10 +2061,22 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.CommentPostResponse'
+            $ref: '#/definitions/pb.DeleteCommentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteCommentResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteCommentResponse'
       security:
       - api_key: []
-      summary: User can report a post
+      summary: Delete a comment
       tags:
       - User Post
   /user/post/comment/report:
@@ -1840,9 +2098,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ReportCommentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ReportCommentResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ReportCommentResponse'
       security:
       - api_key: []
-      summary: User can report a Comment
+      summary: Report Comment
       tags:
       - User Post
   /user/post/details:
@@ -1851,7 +2121,7 @@ paths:
       - application/json
       description: User can get post detail
       parameters:
-      - description: post id Data
+      - description: Post ID
         in: query
         name: id
         required: true
@@ -1863,9 +2133,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.UserPostDetailsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.UserPostDetailsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.UserPostDetailsResponse'
       security:
       - api_key: []
-      summary: User can get post detail
+      summary: Post detail
       tags:
       - User Post
   /user/post/details/report:
@@ -1887,9 +2169,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.ReportPostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.ReportPostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ReportPostResponse'
       security:
       - api_key: []
-      summary: User can report a post
+      summary: Report post
       tags:
       - User Post
   /user/post/donate/:
@@ -1898,7 +2192,7 @@ paths:
       - application/json
       description: User can donate for campaigns
       parameters:
-      - description: Donate Data
+      - description: Donation Data
         in: body
         name: body
         required: true
@@ -1911,9 +2205,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.DonateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DonateResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DonateResponse'
       security:
       - api_key: []
-      summary: User can donate for campaign
+      summary: Donate
       tags:
       - User Donations
   /user/post/donate/download-invoice:
@@ -1932,9 +2238,21 @@ paths:
           description: OK
           schema:
             type: file
+        "400":
+          description: 'Couldn''t fetch data from client '
+          schema:
+            type: string
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Error in internal server
+          schema:
+            type: string
       security:
       - api_key: []
-      summary: Download Invoice PDF
+      summary: Download Invoice
       tags:
       - User Invoice
   /user/post/donate/generate-invoice:
@@ -1949,8 +2267,26 @@ paths:
       produces:
       - application/octet-stream
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Successfully Generated
+          schema:
+            type: string
+        "400":
+          description: Invalid Post ID
+          schema:
+            type: string
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "500":
+          description: Internal server error
+          schema:
+            type: string
+        "502":
+          description: Error in internal server
+          schema:
+            type: string
       security:
       - api_key: []
       summary: generate Invoice PDF
@@ -1981,26 +2317,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.DonationHistoryResponse'
-      security:
-      - api_key: []
-      summary: User can see Donation History
-      tags:
-      - User Donations
-  /user/post/donate/history/clear:
-    delete:
-      consumes:
-      - application/json
-      description: User can Clear History
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
+        "400":
+          description: Bad Request
           schema:
-            $ref: '#/definitions/pb.ClearHistoryResponse'
+            $ref: '#/definitions/pb.DonationHistoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DonationHistoryResponse'
       security:
       - api_key: []
-      summary: User can Clear History
+      summary: Donation History
       tags:
       - User Donations
   /user/post/donate/razorpay:
@@ -2021,9 +2352,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.MakePaymentRazorPayResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.MakePaymentRazorPayResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.MakePaymentRazorPayResponse'
       security:
       - api_key: []
-      summary: User can pay for donation
+      summary: Donate
       tags:
       - User Donations
   /user/post/edit:
@@ -2045,9 +2388,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.EditPostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.EditPostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.EditPostResponse'
       security:
       - api_key: []
-      summary: User can edit post
+      summary: Edit post
       tags:
       - User Post
   /user/post/like:
@@ -2056,7 +2411,7 @@ paths:
       - application/json
       description: User can Like post
       parameters:
-      - description: PostID
+      - description: Post ID
         in: query
         name: postid
         required: true
@@ -2066,6 +2421,18 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/pb.LikePostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.LikePostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
           schema:
             $ref: '#/definitions/pb.LikePostResponse'
       security:
@@ -2092,9 +2459,21 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/pb.CreatePostResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.CreatePostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.CreatePostResponse'
       security:
       - api_key: []
-      summary: User can create new post
+      summary: Create Post
       tags:
       - User Post
   /user/post/upload-image:
@@ -2115,9 +2494,21 @@ paths:
           description: OK
           schema:
             type: string
+        "400":
+          description: failed to upload image
+          schema:
+            type: string
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Error in internal server
+          schema:
+            type: string
       security:
       - api_key: []
-      summary: User can upload image
+      summary: Upload image
       tags:
       - User Post
 swagger: "2.0"

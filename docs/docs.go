@@ -57,6 +57,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.ApproveCampaignResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -106,6 +112,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.CampaignDetailsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -159,6 +171,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.RejectCampaignResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -208,6 +226,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportedListResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -261,6 +285,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.DeleteReportResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -310,6 +340,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportDetailsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -363,6 +399,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.CampaignRequestListResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -412,6 +454,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.CategoryListResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -465,6 +513,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.CategoryPostsResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -514,6 +568,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.DeleteCategoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -567,6 +627,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.NewCategoryResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -599,6 +665,12 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/pb.AdminDashboardResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -652,6 +724,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.UserStatsResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -695,6 +773,12 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/pb.CategoryStatsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -740,6 +824,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.PostStatsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -793,6 +883,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.FeedsResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -842,6 +938,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.DeletePostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -895,6 +997,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.PostDetailsResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -944,6 +1052,12 @@ const docTemplate = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/pb.ChangeUserPermissionResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
                         }
                     },
                     "502": {
@@ -997,6 +1111,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.GetUserDetailsResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -1048,6 +1168,12 @@ const docTemplate = `{
                             "$ref": "#/definitions/pb.UserListResponse"
                         }
                     },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
@@ -1073,7 +1199,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Admin Login Data",
-                        "name": "b",
+                        "name": "AdminLoginRequestBody",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1084,6 +1210,18 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AdminLoginResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AdminLoginResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.AdminLoginResponse"
                         }
@@ -1107,7 +1245,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "User Login Data",
-                        "name": "b",
+                        "name": "LoginWithOtpRequestBody",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -1118,6 +1256,18 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginWithOtpResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LoginWithOtpResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.LoginWithOtpResponse"
                         }
@@ -1276,7 +1426,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can see feeds",
+                "summary": "Feeds",
                 "parameters": [
                     {
                         "type": "string",
@@ -1303,6 +1453,24 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/pb.UserFeedsResponse"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserFeedsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserFeedsResponse"
+                        }
                     }
                 }
             }
@@ -1324,7 +1492,7 @@ const docTemplate = `{
                 "tags": [
                     "User Notifications"
                 ],
-                "summary": "User can see Notifications",
+                "summary": "Notifications",
                 "parameters": [
                     {
                         "type": "string",
@@ -1345,6 +1513,24 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/pb.NotificationResponse"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationResponse"
+                        }
                     }
                 }
             }
@@ -1356,7 +1542,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can Clear Notification",
+                "description": "User can Clear Notifications",
                 "consumes": [
                     "application/json"
                 ],
@@ -1366,12 +1552,30 @@ const docTemplate = `{
                 "tags": [
                     "User Notifications"
                 ],
-                "summary": "User can Clear Notification",
+                "summary": "Clear Notification",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.ClearHistoryResponse"
+                            "$ref": "#/definitions/pb.ClearNotificationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ClearNotificationResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ClearNotificationResponse"
                         }
                     }
                 }
@@ -1394,7 +1598,7 @@ const docTemplate = `{
                 "tags": [
                     "User Notifications"
                 ],
-                "summary": "User can Delete Notification",
+                "summary": "Delete Notification",
                 "parameters": [
                     {
                         "type": "string",
@@ -1407,7 +1611,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.CommentPostResponse"
+                            "$ref": "#/definitions/pb.DeleteNotificationResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteNotificationResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteNotificationResponse"
                         }
                     }
                 }
@@ -1430,7 +1652,7 @@ const docTemplate = `{
                 "tags": [
                     "User Notifications"
                 ],
-                "summary": "User can see Notification Details",
+                "summary": "Notification Details",
                 "parameters": [
                     {
                         "type": "string",
@@ -1443,7 +1665,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.CommentPostResponse"
+                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
                         }
                     }
                 }
@@ -1466,7 +1706,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can Comment new post",
+                "summary": "Comment",
                 "parameters": [
                     {
                         "description": "Comment post Data",
@@ -1484,6 +1724,24 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/pb.CommentPostResponse"
                         }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CommentPostResponse"
+                        }
                     }
                 }
             }
@@ -1495,7 +1753,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can Report post",
+                "description": "User can Delete post",
                 "consumes": [
                     "application/json"
                 ],
@@ -1505,7 +1763,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can report a post",
+                "summary": "Delete a comment",
                 "parameters": [
                     {
                         "type": "string",
@@ -1519,7 +1777,25 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.CommentPostResponse"
+                            "$ref": "#/definitions/pb.DeleteCommentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteCommentResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteCommentResponse"
                         }
                     }
                 }
@@ -1542,7 +1818,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can report a Comment",
+                "summary": "Report Comment",
                 "parameters": [
                     {
                         "description": "Report Comment Data",
@@ -1557,6 +1833,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportCommentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportCommentResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportCommentResponse"
                         }
@@ -1581,11 +1875,11 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can get post detail",
+                "summary": "Post detail",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "post id Data",
+                        "description": "Post ID",
                         "name": "id",
                         "in": "query",
                         "required": true
@@ -1594,6 +1888,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserPostDetailsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserPostDetailsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.UserPostDetailsResponse"
                         }
@@ -1618,7 +1930,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can report a post",
+                "summary": "Report post",
                 "parameters": [
                     {
                         "description": "Report Post Data",
@@ -1633,6 +1945,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportPostResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ReportPostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.ReportPostResponse"
                         }
@@ -1657,10 +1987,10 @@ const docTemplate = `{
                 "tags": [
                     "User Donations"
                 ],
-                "summary": "User can donate for campaign",
+                "summary": "Donate",
                 "parameters": [
                     {
-                        "description": "Donate Data",
+                        "description": "Donation Data",
                         "name": "body",
                         "in": "body",
                         "required": true,
@@ -1672,6 +2002,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DonateResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DonateResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.DonateResponse"
                         }
@@ -1693,7 +2041,7 @@ const docTemplate = `{
                 "tags": [
                     "User Invoice"
                 ],
-                "summary": "Download Invoice PDF",
+                "summary": "Download Invoice",
                 "parameters": [
                     {
                         "type": "string",
@@ -1708,6 +2056,24 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "type": "file"
+                        }
+                    },
+                    "400": {
+                        "description": "Couldn't fetch data from client ",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Error in internal server",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 }
@@ -1738,8 +2104,35 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK"
+                    "201": {
+                        "description": "Successfully Generated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Post ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Error in internal server",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 }
             }
@@ -1761,7 +2154,7 @@ const docTemplate = `{
                 "tags": [
                     "User Donations"
                 ],
-                "summary": "User can see Donation History",
+                "summary": "Donation History",
                 "parameters": [
                     {
                         "type": "string",
@@ -1788,33 +2181,23 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/pb.DonationHistoryResponse"
                         }
-                    }
-                }
-            }
-        },
-        "/user/post/donate/history/clear": {
-            "delete": {
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "User can Clear History",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Donations"
-                ],
-                "summary": "User can Clear History",
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                    },
+                    "400": {
+                        "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/pb.ClearHistoryResponse"
+                            "$ref": "#/definitions/pb.DonationHistoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DonationHistoryResponse"
                         }
                     }
                 }
@@ -1837,7 +2220,7 @@ const docTemplate = `{
                 "tags": [
                     "User Donations"
                 ],
-                "summary": "User can pay for donation",
+                "summary": "Donate",
                 "parameters": [
                     {
                         "type": "string",
@@ -1850,6 +2233,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.MakePaymentRazorPayResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.MakePaymentRazorPayResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.MakePaymentRazorPayResponse"
                         }
@@ -1874,7 +2275,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can edit post",
+                "summary": "Edit post",
                 "parameters": [
                     {
                         "description": "Edit post Data",
@@ -1889,6 +2290,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditPostResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditPostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.EditPostResponse"
                         }
@@ -1917,7 +2336,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "PostID",
+                        "description": "Post ID",
                         "name": "postid",
                         "in": "query",
                         "required": true
@@ -1926,6 +2345,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LikePostResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.LikePostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.LikePostResponse"
                         }
@@ -1950,7 +2387,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can create new post",
+                "summary": "Create Post",
                 "parameters": [
                     {
                         "description": "Create post Data",
@@ -1965,6 +2402,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CreatePostResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.CreatePostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.CreatePostResponse"
                         }
@@ -1989,7 +2444,7 @@ const docTemplate = `{
                 "tags": [
                     "User Post"
                 ],
-                "summary": "User can upload image",
+                "summary": "Upload image",
                 "parameters": [
                     {
                         "type": "file",
@@ -2002,6 +2457,24 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "failed to upload image",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Error in internal server",
                         "schema": {
                             "type": "string"
                         }
@@ -2175,7 +2648,7 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.ClearHistoryResponse": {
+        "pb.ClearNotificationResponse": {
             "type": "object",
             "properties": {
                 "response": {
@@ -2235,6 +2708,31 @@ const docTemplate = `{
             }
         },
         "pb.DeleteCategoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DeleteCommentResponse": {
+            "type": "object",
+            "properties": {
+                "Post": {
+                    "$ref": "#/definitions/pb.PostDetails"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.DeleteNotificationResponse": {
             "type": "object",
             "properties": {
                 "response": {
@@ -2464,6 +2962,20 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "userid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.NotificationDetailsResponse": {
+            "type": "object",
+            "properties": {
+                "notification": {
+                    "$ref": "#/definitions/pb.Notification"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
                     "type": "integer"
                 }
             }
@@ -2954,38 +3466,59 @@ const docTemplate = `{
         },
         "routes.CommentPostRequestBody": {
             "type": "object",
+            "required": [
+                "postid",
+                "text"
+            ],
             "properties": {
                 "postid": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 },
                 "text": {
+                    "description": "test",
                     "type": "string"
                 }
             }
         },
         "routes.CreatePostRequestBody": {
             "type": "object",
+            "required": [
+                "address",
+                "date",
+                "place",
+                "text"
+            ],
             "properties": {
                 "accno": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 17,
+                    "minLength": 9
                 },
                 "address": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 50
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 100
                 },
                 "date": {
                     "type": "string"
                 },
                 "image": {
+                    "description": "test",
                     "type": "string"
                 },
                 "place": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 10
                 },
                 "text": {
-                    "type": "string"
+                    "description": "test",
+                    "type": "string",
+                    "maxLength": 50
                 }
             }
         },
@@ -3030,41 +3563,64 @@ const docTemplate = `{
         },
         "routes.DonateRequestBody": {
             "type": "object",
+            "required": [
+                "postID"
+            ],
             "properties": {
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 100
                 },
                 "postID": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 }
             }
         },
         "routes.EditPostRequestBody": {
             "type": "object",
+            "required": [
+                "address",
+                "date",
+                "place",
+                "postid",
+                "text"
+            ],
             "properties": {
                 "accno": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 17,
+                    "minLength": 9
                 },
                 "address": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 50
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 100
                 },
                 "date": {
                     "type": "string"
                 },
                 "image": {
+                    "description": "test",
                     "type": "string"
                 },
                 "place": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 10
                 },
                 "postid": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 },
                 "text": {
-                    "type": "string"
+                    "description": "test",
+                    "type": "string",
+                    "maxLength": 50
                 }
             }
         },
@@ -3073,16 +3629,17 @@ const docTemplate = `{
             "properties": {
                 "limit": {
                     "type": "integer",
-                    "maximum": 99,
-                    "minimum": 1
+                    "maximum": 50,
+                    "minimum": 0
                 },
                 "page": {
                     "type": "integer",
                     "maximum": 99,
-                    "minimum": 1
+                    "minimum": 0
                 },
                 "searchkey": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 10
                 }
             }
         },
@@ -3193,12 +3750,19 @@ const docTemplate = `{
         },
         "routes.ReportCommentRequestBody": {
             "type": "object",
+            "required": [
+                "commentId",
+                "text"
+            ],
             "properties": {
                 "commentId": {
-                    "type": "integer"
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
                 },
                 "text": {
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 20
                 }
             }
         },
@@ -3249,6 +3813,7 @@ const docTemplate = `{
             "required": [
                 "confirmpassword",
                 "email",
+                "name",
                 "password",
                 "phone"
             ],
@@ -3260,6 +3825,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "name": {
+                    "description": "check what is alphaunicode",
                     "type": "string",
                     "maxLength": 20,
                     "minLength": 3

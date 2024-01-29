@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -11,23 +10,38 @@ import (
 	"hand/pkg/user/pb"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator"
 )
 
-// User Donate Payment godoc
+type InvoiceIdBody struct {
+	InvoiceId string `json:"invoiceId" validate:"required,alphanum,ascii"` //test
+}
+
+// Download Invoice godoc
 //
-//	@Summary		Download Invoice PDF
+//	@Summary		Download Invoice
 //	@Description	Download the invoice PDF file
 //	@Tags			User Invoice
 //	@Security		api_key
 //	@Param			invoiceID	query	string	true	"invoice id"
 //	@Produce		octet-stream
-//	@Success		200	{file}	application/pdf
+//	@Success		200	{file}		application/pdf
+//	@Failure		400	{string}	string	"Couldn't fetch data from client "
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{string}	string	"Error in internal server"
 //	@Router			/user/post/donate/download-invoice  [get]
 func DownloadInvoice(ctx *gin.Context, c pb.UserServiceClient) {
-	// Set the appropriate headers for the file download
+
 	invoiceID := strings.ToLower(ctx.Query("invoiceID"))
 	if invoiceID == "" {
-		ctx.AbortWithError(http.StatusBadRequest, errors.New("provide valid Id"))
+		ctx.JSON(http.StatusInternalServerError, "invalid invoice id")
+		return
+	}
+	invoiceBody := InvoiceIdBody{InvoiceId: invoiceID}
+	validator := validator.New()
+	if err := validator.Struct(invoiceBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, "Invalid data"+err.Error())
 		return
 	}
 	headerfilename := fmt.Sprintf("attachment; filename=%s.pdf", invoiceID)
@@ -50,8 +64,16 @@ func DownloadInvoice(ctx *gin.Context, c pb.UserServiceClient) {
 	filename := fmt.Sprintf("src/invoice/%s.pdf", invoiceID)
 	pdfData, err := os.ReadFile(filename)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to read PDF file"})
+		ctx.JSON(http.StatusInternalServerError, "Failed to read PDF file")
 		return
 	}
+	// if err != nil {
+	// 	log.Println("Error with internal server :", err)
+	// 	ctx.JSON(http.StatusBadGateway, pb.ClearNotificationResponse{
+	// 		Status:   http.StatusBadGateway,
+	// 		Response: "Error in internal server",
+	// 	})
+	// 	return
+	// }
 	ctx.Data(http.StatusOK, "application/pdf", pdfData)
 }

@@ -27,6 +27,7 @@ type CategoryListBody struct {
 //	@Param			CategoryListBody	body		CategoryListBody	true	"Page Details and Searchkey "
 //	@Success		200					{object}	pb.CategoryListResponse
 //	@Failure		400					{object}	pb.CategoryListResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Failure		502					{object}	pb.CategoryListResponse
 //	@Router			/admin/categories/categorylist  [get]
 func CategoryList(ctx *gin.Context, c pb.AdminServiceClient) {

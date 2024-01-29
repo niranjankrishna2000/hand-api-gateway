@@ -28,6 +28,7 @@ type UserListBody struct {
 //	@Produce		json
 //	@Param			UserListBody	body		UserListBody	true	"Page Details and Searchkey"
 //	@Success		200				{object}	pb.UserListResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		400				{object}	pb.UserListResponse
 //	@Failure		502				{object}	pb.UserListResponse
 //	@Router			/admin/users/list  [get]

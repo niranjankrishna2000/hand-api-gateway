@@ -11,9 +11,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// User Upload image godoc
+// Upload image godoc
 //
-//	@Summary		User can upload image
+//	@Summary		Upload image
 //	@Description	User can upload image
 //	@Tags			User Post
 //	@Accept			multipart/form-data
@@ -21,6 +21,9 @@ import (
 //	@Security		api_key
 //	@Param			image	formData	file	true	"image"
 //	@Success		200		{string}	fileLink
+//	@Failure		400		{string}	string "failed to upload image"
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{string}	string "Error in internal server"
 //	@Router			/user/post/upload-image [post]
 func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Upload image started")
@@ -29,21 +32,18 @@ func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 	fileLink := ""
 	image, err := ctx.FormFile("image")
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"message": "failed to load image file",
-			"error":   err.Error(),
-		})
+		ctx.JSON(http.StatusBadRequest, "Invalid data" + err.Error())
 		return
 	}
+
 	log.Println("Image header", image.Filename, image.Header)
 
 	log.Println("Image Found")
 	filename := fmt.Sprintf("user-00%d-%s.jpg", userId, time.Now().Format("20060102-150405"))
-	if err := ctx.SaveUploadedFile(image, "src/assets/"+filename); err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"message": "failed to save image file",
-			"error":   err.Error(),
-		})
+	err = ctx.SaveUploadedFile(image, "src/assets/"+filename)
+	if err != nil {
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, "Error in internal server")
 		return
 	}
 

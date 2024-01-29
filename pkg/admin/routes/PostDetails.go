@@ -26,6 +26,7 @@ type PostDetailsBody struct {
 //	@Param			PostDetailsBody	body		PostDetailsBody	true	"Post Id"
 //	@Success		200				{object}	pb.PostDetailsResponse
 //	@Failure		400				{object}	pb.PostDetailsResponse
+//	@Failure		403				{string}	string	"You have not logged in"
 //	@Failure		502				{object}	pb.PostDetailsResponse
 //	@Router			/admin/post/details  [get]
 func PostDetails(ctx *gin.Context, c pb.AdminServiceClient) {

@@ -27,6 +27,7 @@ type CategoryStatsBody struct {
 //	@Success		200					{object}	pb.CategoryStatsResponse
 //	@Failure		200					{object}	pb.CategoryStatsResponse
 //	@Failure		200					{object}	pb.CategoryStatsResponse
+//	@Failure		403					{string}	string	"You have not logged in"
 //	@Router			/admin/dashboard/category  [get]
 func CategoryStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating CategoryStats...")

@@ -23,39 +23,44 @@ type AdminLoginRequestBody struct {
 //	@Tags			Admin Auth
 //	@Accept			json
 //	@Produce		json
-//	@Param			b	body		AdminLoginRequestBody	true	"Admin Login Data"
-//	@Success		200	{object}	pb.AdminLoginResponse
+//	@Param			AdminLoginRequestBody	body		AdminLoginRequestBody	true	"Admin Login Data"
+//	@Success		200						{object}	pb.AdminLoginResponse
+//	@Failure		400						{object}	pb.AdminLoginResponse
+//	@Failure		502						{object}	pb.AdminLoginResponse
 //	@Router			/adminlogin [post]
 func AdminLogin(ctx *gin.Context, c pb.AuthServiceClient) {
-	b := AdminLoginRequestBody{}
+	AdminLoginRequestBody := AdminLoginRequestBody{}
 
-	if err := ctx.BindJSON(&b); err != nil {
+	if err := ctx.BindJSON(&AdminLoginRequestBody); err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid input",
+		ctx.JSON(http.StatusBadRequest, pb.AdminLoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with request",
+			Token: "",
 		})
 		return
 	}
 	validator := validator.New()
-	if err := validator.Struct(b); err != nil {
-		log.Println("Error while validating :", err)
-		ctx.JSON(http.StatusBadRequest, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "Invalid Input",
+	if err := validator.Struct(AdminLoginRequestBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest,pb.AdminLoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Invalid data"+err.Error(),
+			Token: "",
 		})
 		return
 	}
 	res, err := c.AdminLogin(context.Background(), &pb.AdminLoginRequest{
-		Email:    b.Email,
-		Password: b.Password,
+		Email:    AdminLoginRequestBody.Email,
+		Password: AdminLoginRequestBody.Password,
 	})
 
 	if err != nil {
-		log.Println("Error while validating :", err)
-		ctx.JSON(http.StatusBadGateway, gin.H{
-			"status": http.StatusBadRequest,
-			"error":  "invalid input",
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.AdminLoginResponse{
+			Status: http.StatusBadRequest,
+			Error: "Error with internal server",
+			Token: "",
 		})
 		return
 	}
