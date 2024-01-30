@@ -37,5 +37,5 @@ jobs:
           port: 22
           script: |
             # Add commands to deploy your application to the EC2 instance
-            scp -i ~/.ssh main ubuntu@3.27.24.244:/path/to/your/app
+            scp -i ~/.ssh main ubuntu@3.27.24.244:home/ubuntu/Documents/Hand/hand-api-gateway
             ssh -i ~/.ssh ubuntu@3.27.24.244 'sudo systemctl restart main.service
