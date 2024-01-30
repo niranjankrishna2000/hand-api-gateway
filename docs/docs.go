@@ -3788,7 +3788,7 @@ const docTemplate = `{
                 }
             }
         }
-    }    },
+    },
     "securityDefinitions": {
         "api_key": {
             "type": "apiKey",
