@@ -22,7 +22,7 @@ jobs:
         run: |
           # Add commands to install dependencies and build your Go project
           go mod tidy
-          go build -o hand-api-gateway
+          go build ./... -o hand-api-gateway
 
      
       - name: Deploy to EC2
