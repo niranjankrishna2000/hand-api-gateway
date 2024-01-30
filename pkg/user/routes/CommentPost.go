@@ -11,7 +11,7 @@ import (
 )
 
 type CommentPostRequestBody struct {
-	Text   string `json:"text" validate:"required,alpha,ascii"`//test
+	Text   string `json:"text" validate:"required,ascii"`//test
 	PostId int    `json:"postid" validate:"required,min=1,max=999,number"`
 }
 
