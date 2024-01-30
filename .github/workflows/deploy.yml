@@ -1,0 +1,37 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go 1.21.1
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.21.1
+
+      - name: Install dependencies and build
+        run: |
+          # Add commands to install dependencies and build your Go project
+          go build -o hand-api-gateway
+
+     
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }} # Use GitHub Secrets to store sensitive information
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Add commands to deploy your application to the EC2 instance
+            scp -i path/to/your/private/key your-app-name your_username@3.27.24.244:/path/to/your/app
+            ssh -i path/to/your/private/key your_username@3.27.24.244 'sudo systemctl restart your-app.service'
