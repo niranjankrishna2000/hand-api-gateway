@@ -37,5 +37,5 @@ jobs:
           port: 22
           script: |
             # Add commands to deploy your application to the EC2 instance
-            scp -i /home/ubuntu/.ssh main ubuntu@3.27.24.244:/path/to/your/app
-            ssh -i /home/ubuntu/.ssh/ ubuntu@3.27.24.244 'sudo systemctl restart main.servic'
+            scp -i home/ubuntu/.ssh main ubuntu@3.27.24.244:/path/to/your/app
+            ssh -i home/ubuntu/.ssh/ ubuntu@3.27.24.244 'sudo systemctl restart main.service
