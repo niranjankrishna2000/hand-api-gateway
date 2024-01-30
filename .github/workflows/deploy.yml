@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.21.1
-          node-version: '20'
+          node-version: '16'
 
       - name: Install dependencies and build
         run: |
@@ -34,7 +34,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }} # Use GitHub Secrets to store sensitive information
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: 22
+          port: 443
           script: |
             # Add commands to deploy your application to the EC2 instance
             scp -i ~/.ssh main ubuntu@3.27.24.244:home/ubuntu/Documents/Hand/hand-api-gateway
