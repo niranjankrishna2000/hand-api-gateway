@@ -1,9 +1,9 @@
 package admin
 
 import (
+	"hand/pkg/admin/routes"
 	"hand/pkg/auth"
 	"hand/pkg/config"
-	"hand/pkg/admin/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +13,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	svc := &ServiceClient{
 		Client: InitServiceClient(c),
-		Auth: authSvc.Client,
+		Auth:   authSvc.Client,
 	}
 
 	routes := r.Group("/admin")
@@ -22,35 +22,35 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	post := routes.Group("/post")
 	post.GET("/details", svc.PostDetails)
-	post.DELETE("/delete",svc.DeletePost)
+	post.DELETE("/delete", svc.DeletePost)
 
 	users := routes.Group("/users")
-	users.GET("/list",svc.UserList)
-	users.GET("/details",svc.UserDetails)
-	users.PATCH("/changepermission",svc.ChangeUserPermission)
+	users.GET("/list", svc.UserList)
+	users.GET("/details", svc.UserDetails)
+	users.PATCH("/changepermission", svc.ChangeUserPermission)
 
-	campaigns:=routes.Group("/campaigns")
-	campaigns.GET("/requestlist",svc.CampaignRequestList)
-	campaigns.GET("/details",svc.CampaignDetails)
-	campaigns.PATCH("/approve",svc.ApproveCampaign)
-	campaigns.PATCH("/reject",svc.RejectCampaign)
-	
+	campaigns := routes.Group("/campaigns")
+	campaigns.GET("/requestlist", svc.CampaignRequestList)
+	campaigns.GET("/details", svc.CampaignDetails)
+	campaigns.PATCH("/approve", svc.ApproveCampaign)
+	campaigns.PATCH("/reject", svc.RejectCampaign)
+
 	///////////////////////////////////////////////////////////////
-	
-	reported:=campaigns.Group("/reported")
-	reported.GET("",svc.ReportedList)
-	reported.GET("/details",svc.ReportDetails)
-	reported.DELETE("/delete",svc.DeleteReport)
 
-	categories:=routes.Group("/categories")
-	categories.GET("/categorylist",svc.CategoryList)
-	categories.GET("/categorylist/posts",svc.CategoryPosts)
-	categories.POST("/new",svc.NewCategory)
-	categories.DELETE("/delete",svc.DeleteCategory)
+	reported := campaigns.Group("/reported")
+	reported.GET("", svc.ReportedList)
+	reported.GET("/details", svc.ReportDetails)
+	reported.DELETE("/delete", svc.DeleteReport)
 
-	dashboard:=routes.Group("/dashboard")
-	dashboard.GET("",svc.AdminDashboard)
-	dashboard.GET("/posts",svc.PostStats)
+	categories := routes.Group("/categories")
+	categories.GET("/categorylist", svc.CategoryList)
+	categories.GET("/categorylist/posts", svc.CategoryPosts)
+	categories.POST("/new", svc.NewCategory)
+	categories.DELETE("/delete", svc.DeleteCategory)
+
+	dashboard := routes.Group("/dashboard")
+	dashboard.GET("", svc.AdminDashboard)
+	dashboard.GET("/posts", svc.PostStats)
 	//dashboard.GET("/users",svc.UserStats)
 	//dashboard.GET("/category",svc.CategoryStats)
 
@@ -69,15 +69,15 @@ func (svc *ServiceClient) DeletePost(ctx *gin.Context) {
 }
 
 func (svc *ServiceClient) UserList(ctx *gin.Context) {
-	routes.UserList(ctx, svc.Client,svc.Auth)
+	routes.UserList(ctx, svc.Client, svc.Auth)
 }
 
 func (svc *ServiceClient) UserDetails(ctx *gin.Context) {
-	routes.UserDetails(ctx, svc.Client,svc.Auth)
+	routes.UserDetails(ctx, svc.Client, svc.Auth)
 }
 
 func (svc *ServiceClient) ChangeUserPermission(ctx *gin.Context) {
-	routes.ChangeUserPermission(ctx, svc.Client,svc.Auth)
+	routes.ChangeUserPermission(ctx, svc.Client, svc.Auth)
 
 }
 
@@ -144,6 +144,7 @@ func (svc *ServiceClient) PostStats(ctx *gin.Context) {
 	routes.PostStats(ctx, svc.Client)
 
 }
+
 //edit
 // func (svc *ServiceClient) UserStats(ctx *gin.Context) {
 // 	routes.UserStats(ctx, svc.Client)
@@ -152,3 +153,9 @@ func (svc *ServiceClient) PostStats(ctx *gin.Context) {
 // 	routes.CategoryStats(ctx, svc.Client)
 
 // }
+
+//note:
+//**not getting posts for reporteds
+//**category id
+//**update user for admin
+//**requestlist response

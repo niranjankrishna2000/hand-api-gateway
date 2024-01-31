@@ -13,42 +13,58 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	svc := &ServiceClient{
 		Client: InitServiceClient(c),
-		Auth: authSvc.Client,
+		Auth:   authSvc.Client,
 	}
 
 	routes := r.Group("/user")
 	routes.Use(a.AuthRequired)
 	routes.GET("/feeds", svc.UserFeeds)
-
+	///////////////////////////////////////////////////////
 	post := routes.Group("/post")
 	post.POST("/new", svc.CreatePost)
 	post.GET("/new", svc.GetCreatePost)
 	post.POST("/upload-image", svc.UploadImage)
+	post.POST("/upload-multiple-image") //beta
 	post.GET("/details", svc.PostDetails)
-	post.PATCH("/edit",svc.EditPost)
-	post.POST("/details/report",svc.ReportPost)
-	post.POST("/like",svc.LikePost)
-	post.POST("/comment",svc.CommentPost)
-	post.POST("/comment/report",svc.ReportComment)
-	post.DELETE("/comment/delete",svc.DeleteComment)
-
+	post.PATCH("/edit", svc.EditPost)
+	post.POST("/details/report", svc.ReportPost)
+	post.POST("/like", svc.LikePost)
+	post.POST("/comment", svc.CommentPost)
+	post.POST("/comment/report", svc.ReportComment)
+	post.DELETE("/comment/delete", svc.DeleteComment)
+	post.GET("/updates")
+	post.POST("/updates")
+	post.PATCH("/updates")
+	post.DELETE("/updates")
+	///////////////////////////////////////////////////////
 	donate := post.Group("/donate")
 	donate.POST("/", svc.Donate)
 	r.GET("/user/post/donate/razorpay", svc.MakePaymentRazorPay)
 	donate.POST("/generate-invoice", svc.GenerateInvoice)
 	donate.GET("/download-invoice", svc.DownloadInvoice)
-	donate.GET("/history",svc.DonationHistory)
-
-	profile:=routes.Group("/profile")
-	profile.GET("/details",svc.ProfileDetails)
-	profile.PATCH("/edit",svc.EditProfile)
-
-	notification:=routes.Group("/notifications")
-	notification.GET("",svc.Notifications)
-	notification.GET("/details",svc.NotificationDetail)
-	notification.DELETE("/delete",svc.DeleteNotification)
-	notification.DELETE("/clear",svc.ClearNotification)
-
+	donate.GET("/history", svc.DonationHistory)
+	///////////////////////////////////////////////////////
+	profile := routes.Group("/profile")
+	profile.GET("/details", svc.ProfileDetails) // add full details
+	profile.PATCH("/edit", svc.EditProfile)
+	profile.GET("/monthly-goal")
+	profile.POST("/monthly-goal")
+	profile.PATCH("/monthly-goal")
+	profile.GET("/my-campaigns")
+	profile.GET("/my-impact")
+	///////////////////////////////////////////////////////
+	notification := routes.Group("/notifications")
+	notification.GET("", svc.Notifications)
+	notification.GET("/details", svc.NotificationDetail)
+	notification.DELETE("/delete", svc.DeleteNotification)
+	notification.DELETE("/clear", svc.ClearNotification)
+	///////////////////////////////////////////////////////
+	success := routes.Group("/success-stories")
+	success.GET("")
+	success.POST("")
+	success.PATCH("")
+	success.DELETE("")
+	///////////////////////////////////////////////////////
 }
 
 func (svc *ServiceClient) UserFeeds(ctx *gin.Context) {
@@ -86,9 +102,8 @@ func (svc *ServiceClient) DownloadInvoice(ctx *gin.Context) {
 	routes.DownloadInvoice(ctx, svc.Client)
 }
 func (svc *ServiceClient) GenerateInvoice(ctx *gin.Context) {
-	routes.GenerateInvoice(ctx, svc.Client,svc.Auth)
+	routes.GenerateInvoice(ctx, svc.Client, svc.Auth)
 }
-
 
 func (svc *ServiceClient) LikePost(ctx *gin.Context) {
 	routes.LikePost(ctx, svc.Client)
@@ -107,8 +122,7 @@ func (svc *ServiceClient) DonationHistory(ctx *gin.Context) {
 	routes.DonationHistory(ctx, svc.Client)
 }
 
-
-//edit
+// edit
 func (svc *ServiceClient) ProfileDetails(ctx *gin.Context) {
 	//routes.ProfileDetails(ctx, svc.Client)
 }
@@ -129,16 +143,13 @@ func (svc *ServiceClient) ClearNotification(ctx *gin.Context) {
 	routes.ClearNotification(ctx, svc.Client)
 }
 
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////
-//note: 
-// **make validations
-// **keep coding standards
-// **try chats
-// **move middleware validations to service
-// **admin validation should be proper
-// **consider the omitempty, probably in posts and feeds
+//note:
+// ** try chats
+// ** consider the omitempty, probably in posts and feeds
+// ** use of actual location
+// ** feeds filter  with trending-successfull-taxbenefit-urgent, category, location
+// ** tax benefit for campaign
+// ** user profile- my donations, my campaigns, your impact and complete profile
+// ** show donations on campaign details
+// ** campaign updates and supporters

@@ -32,7 +32,7 @@ func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 	fileLink := ""
 	image, err := ctx.FormFile("image")
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, "Invalid data" + err.Error())
+		ctx.JSON(http.StatusBadRequest, "Invalid data"+err.Error())
 		return
 	}
 
@@ -52,3 +52,7 @@ func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 
 	ctx.JSON(http.StatusCreated, fileLink)
 }
+
+//note::
+// **consider adding multiple images.
+// **add images to an album and return its path or store as a string array also in db and return it.

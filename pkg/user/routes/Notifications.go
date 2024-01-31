@@ -31,11 +31,11 @@ func Notifications(ctx *gin.Context, c pb.UserServiceClient) {
 
 	page, err := strconv.Atoi(ctx.Query("page"))
 	if err != nil {
-		page=1
+		page = 1
 	}
 	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
-		limit=10
+		limit = 10
 	}
 	pageBody := PageBody{Page: page, Limit: limit}
 

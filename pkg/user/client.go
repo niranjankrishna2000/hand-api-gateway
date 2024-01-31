@@ -3,16 +3,16 @@ package user
 import (
 	"fmt"
 
-	"hand/pkg/user/pb"
 	auth "hand/pkg/auth/pb"
 	"hand/pkg/config"
+	"hand/pkg/user/pb"
 
 	"google.golang.org/grpc"
 )
 
 type ServiceClient struct {
 	Client pb.UserServiceClient
-	Auth auth.AuthServiceClient
+	Auth   auth.AuthServiceClient
 }
 
 // func InitServiceClient(c *config.Config) pb.AuthServiceClient {

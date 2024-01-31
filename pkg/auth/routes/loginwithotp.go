@@ -34,16 +34,16 @@ func LoginWithOtp(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, pb.LoginWithOtpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with request",
+			Error:  "Error with request",
 		})
 		return
 	}
 	validator := validator.New()
 	if err := validator.Struct(LoginWithOtpRequestBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest,pb.LoginWithOtpResponse{
+		ctx.JSON(http.StatusBadRequest, pb.LoginWithOtpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Invalid data"+err.Error(),
+			Error:  "Invalid data" + err.Error(),
 		})
 		return
 	}
@@ -56,7 +56,7 @@ func LoginWithOtp(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.LoginWithOtpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with internal server",
+			Error:  "Error with internal server",
 		})
 		return
 	}

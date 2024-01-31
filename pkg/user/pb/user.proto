@@ -38,7 +38,8 @@ message UserFeedsResponse {
   int64 status = 1;
   string response = 2;
   repeated Post Posts= 3;
-
+  repeated Category Categories=4;
+  repeated SuccesStory successstories=5;
 }
 
 
@@ -52,6 +53,7 @@ message CreatePostRequest {
   string accno =7;
   string address =8;
   int32 categoryid=9;
+  bool taxbenefit=10;
 }
 
 message EditPostResponse {
@@ -100,8 +102,6 @@ message UserPostDetailsResponse {
 
 }
 
-
-
 message DonateRequest {
   int32 postid = 1;
   int32 amount = 2;
@@ -142,22 +142,42 @@ message GenerateInvoiceResponse {
 }
 
 
-
-
 message Post {
   int32 id=1;
+  string title=13;
   string text = 2;
   string place = 3;
   int64 amount = 4;
   int64 collected=5;
   string image = 6;
+  string proof =14;
   string date = 7;
   int32 user_id = 8;
   string account_no =9;
   string address = 10;
   int32 likes =11;
   int32 categoryid=12;
+  bool taxbenefit=15;
 }
+message SuccesStory {
+  int32 id=1;
+  string title=2;
+  string text = 3;
+  string place = 4;
+  string image = 5;
+  string date = 6;
+  int32 user_id = 7;
+  int32 likes =8;
+  repeated Comment comments=9;
+}
+message Update {
+  int32 id=1;
+  string title=2;
+  string text = 3;
+  string date = 4;
+  int32 postid = 5;
+}
+
 message Comment {
   int32 id=1;
   int32 userid=2;
@@ -168,6 +188,7 @@ message Comment {
 message PostDetails {
   Post post=1;
   repeated Comment comments =2;
+  repeated Update updates=3;
 }
 
 message ReportPostRequest {

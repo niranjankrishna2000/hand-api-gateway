@@ -23,8 +23,6 @@ import (
 //	@securityDefinitions.Bearer		in header
 //	@securityDefinitions.BasicAuth	type basic
 
-
-
 //	@title			Hand crowdfunding API
 //	@version		1.0
 //	@description	API for crowdfunding website
@@ -36,10 +34,10 @@ import (
 //	@contact.name	Contact Developer
 //	@contact.email	niranjankrishna.thundathil@gmail.com
 
-//	@host		www.handcrowdfunding.online 
+//	@host		www.handcrowdfunding.online
 //	@BasePath	/
 
-//	@schemes	http,https 
+// @schemes	http,https
 func main() {
 
 	docs.SwaggerInfo.Title = "Hand CrowdFunding API"
@@ -47,7 +45,7 @@ func main() {
 	docs.SwaggerInfo.Version = "1.0"
 	docs.SwaggerInfo.Host = "handcrowdfunding.online"
 	docs.SwaggerInfo.BasePath = ""
-	docs.SwaggerInfo.Schemes = []string{"http","https"}
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 	c, err := config.LoadConfig()
 

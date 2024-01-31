@@ -37,11 +37,11 @@ func DonationHistory(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("starting User Donation history")
 	page, err := strconv.Atoi(ctx.Query("page"))
 	if err != nil {
-		page=1
+		page = 1
 	}
 	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
-		limit=10
+		limit = 10
 	}
 	searchkey := ctx.Query("searchkey")
 	pageBody := PageBody{Page: page, Limit: limit, Searchkey: searchkey}

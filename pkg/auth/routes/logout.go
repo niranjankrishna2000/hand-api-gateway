@@ -15,7 +15,7 @@ import (
 //	@Tags			User Auth
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	
+//	@Success		200
 //	@Router			/logout [post]
 func Logout(ctx *gin.Context, c pb.AuthServiceClient) {
 	ctx.Header("Authorization", "")

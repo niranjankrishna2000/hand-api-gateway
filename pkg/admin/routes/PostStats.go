@@ -41,7 +41,7 @@ func PostStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	if err != nil {
 		limit = 10
 	}
-	postStatsBody := PostStatsBody{Page: page,Limit: limit}
+	postStatsBody := PostStatsBody{Page: page, Limit: limit}
 
 	validator := validator.New()
 	if err := validator.Struct(postStatsBody); err != nil {

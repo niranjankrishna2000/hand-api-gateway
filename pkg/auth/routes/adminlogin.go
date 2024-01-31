@@ -35,18 +35,18 @@ func AdminLogin(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, pb.AdminLoginResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with request",
-			Token: "",
+			Error:  "Error with request",
+			Token:  "",
 		})
 		return
 	}
 	validator := validator.New()
 	if err := validator.Struct(AdminLoginRequestBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest,pb.AdminLoginResponse{
+		ctx.JSON(http.StatusBadRequest, pb.AdminLoginResponse{
 			Status: http.StatusBadRequest,
-			Error: "Invalid data"+err.Error(),
-			Token: "",
+			Error:  "Invalid data" + err.Error(),
+			Token:  "",
 		})
 		return
 	}
@@ -59,8 +59,8 @@ func AdminLogin(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.AdminLoginResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with internal server",
-			Token: "",
+			Error:  "Error with internal server",
+			Token:  "",
 		})
 		return
 	}

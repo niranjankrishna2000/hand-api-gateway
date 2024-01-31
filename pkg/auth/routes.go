@@ -16,9 +16,8 @@ func RegisterRoutes(r *gin.Engine, c *config.Config) *ServiceClient {
 	r.POST("/login", svc.Login)
 	r.POST("/adminlogin", svc.AdminLogin)
 	r.POST("/forgot-password", svc.LoginWithOtp)
-	r.PATCH("/otp-validate",svc.OtpValidate)
+	r.PATCH("/otp-validate", svc.OtpValidate)
 	r.POST("/logout", svc.Logout)
-
 
 	return svc
 }

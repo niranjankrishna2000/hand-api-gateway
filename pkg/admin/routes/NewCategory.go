@@ -38,7 +38,7 @@ func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.NewCategoryResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Error with request",
-			Category:    nil,
+			Category: nil,
 		})
 		return
 	}
@@ -48,7 +48,7 @@ func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.NewCategoryResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
-			Category:    nil,
+			Category: nil,
 		})
 		return
 	}
@@ -59,7 +59,7 @@ func NewCategory(ctx *gin.Context, c pb.AdminServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.NewCategoryResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server",
-			Category:    nil,
+			Category: nil,
 		})
 		return
 	}

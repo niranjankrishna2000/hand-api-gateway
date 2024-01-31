@@ -44,7 +44,7 @@ func ReportedList(ctx *gin.Context, c pb.AdminServiceClient) {
 		limit = 10
 	}
 	searchkey := ctx.Query("searchkey")
-	reportedListBody := ReportedListBody{Page: page,Limit: limit,Searchkey: searchkey}
+	reportedListBody := ReportedListBody{Page: page, Limit: limit, Searchkey: searchkey}
 
 	validator := validator.New()
 	if err := validator.Struct(reportedListBody); err != nil {

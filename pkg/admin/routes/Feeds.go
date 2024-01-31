@@ -45,7 +45,7 @@ func Feeds(ctx *gin.Context, c pb.AdminServiceClient) {
 		limit = 10
 	}
 	searchkey := ctx.Query("searchkey")
-	feedsBody := FeedsBody{Page: page,Limit: limit,Searchkey: searchkey}
+	feedsBody := FeedsBody{Page: page, Limit: limit, Searchkey: searchkey}
 
 	validator := validator.New()
 	if err := validator.Struct(feedsBody); err != nil {

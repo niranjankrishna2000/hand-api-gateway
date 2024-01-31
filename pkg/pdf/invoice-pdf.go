@@ -88,7 +88,7 @@ var cellStyles = map[string]cellStyle{
 
 func GenerateInvoicePdf(invoice Invoice) error {
 
-	conf:= viper.GetString("UNIDOC_LICENSE_API_KEY")
+	conf := viper.GetString("UNIDOC_LICENSE_API_KEY")
 	// if err != nil {
 	// 	return err
 	// }
@@ -137,7 +137,7 @@ func (c *Client) generatePdf(invoice Invoice) error {
 		return err
 	}
 
-	err = c.creator.WriteToFile("src/invoice/"+strings.ToLower(invoice.InvoiceID) + ".pdf")
+	err = c.creator.WriteToFile("src/invoice/" + strings.ToLower(invoice.InvoiceID) + ".pdf")
 	if err != nil {
 		return err
 	}
@@ -204,7 +204,7 @@ func (c *Client) writeInvoice(invoice Invoice) error {
 	}
 
 	// Invoice items table.
-	table = c.creator.NewTable(2)//edited
+	table = c.creator.NewTable(2) //edited
 	table.SetMargins(0, 0, 20, 0)
 	err = table.SetColumnWidths(0.6, 0.4)
 	if err != nil {

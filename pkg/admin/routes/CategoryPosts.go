@@ -49,11 +49,11 @@ func CategoryPosts(ctx *gin.Context, c pb.AdminServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.CategoryPostsResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Error with category Id",
-			Posts:     nil,
+			Posts:    nil,
 		})
 		return
 	}
-	categoryPostsBody := CategoryPostsBody{Page: page,Limit: limit,CategoryID: categoryId}
+	categoryPostsBody := CategoryPostsBody{Page: page, Limit: limit, CategoryID: categoryId}
 	validator := validator.New()
 	if err := validator.Struct(categoryPostsBody); err != nil {
 		log.Println("Error:", err)

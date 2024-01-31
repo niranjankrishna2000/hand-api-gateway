@@ -13,7 +13,8 @@ import (
 )
 
 type CreatePostRequestBody struct {
-	Text       string `json:"text" validate:"required,max=50,ascii"` //test
+	Text       string `json:"text" validate:"required,max=50,ascii"`
+	Title      string `json:"title" validate:"required,max=20,ascii"`
 	Place      string `json:"place" validate:"required,max=10,ascii"`
 	Amount     int    `json:"amount" validate:"min=100,number"`
 	AccountNo  string `json:"accno" validate:"max=17,min=9,alphanum"`
@@ -21,6 +22,7 @@ type CreatePostRequestBody struct {
 	Image      string `json:"image"`
 	Date       string `json:"date" validate:"required"`
 	CategoryId int    `json:"categoryId" validate:"required,min=1,max=10,number"`
+	TaxBenefit bool   `json:"taxbenefit" validate:"required,boolean"`
 }
 
 // create Post godoc
@@ -79,6 +81,8 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		Userid:  int32(userId),
 		Accno:   body.AccountNo,
 		Address: body.Address,
+		Categoryid: int32(body.CategoryId),
+		Taxbenefit: body.TaxBenefit,
 	})
 
 	if err != nil {
@@ -91,7 +95,7 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, &res)
+	ctx.JSON(int(res.Status), &res)
 }
 
 // create Post godoc
@@ -102,9 +106,9 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Success		200	{object}	pb.NotificationDetailsResponse
+//	@Success		200	{object}	pb.GetCreatePostRequest
 //	@Failure		403	{string}	string	"You have not logged in"
-//	@Failure		502	{object}	pb.NotificationDetailsResponse
+//	@Failure		502	{object}	pb.GetCreatePostRequest
 //	@Router			/user/post/new  [get]
 func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.GetCreatePost(context.Background(), &pb.GetCreatePostRequest{})
@@ -118,5 +122,5 @@ func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 		return
 	}
 	log.Println("Recieved Data: ", res)
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(int(res.Status), &res)
 }

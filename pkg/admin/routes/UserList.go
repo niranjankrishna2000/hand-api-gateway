@@ -46,7 +46,7 @@ func UserList(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServiceCl
 		limit = 10
 	}
 	searchkey := ctx.Query("searchkey")
-	userListBody := UserListBody{Page: page,Limit: limit,Searchkey: searchkey}
+	userListBody := UserListBody{Page: page, Limit: limit, Searchkey: searchkey}
 
 	validator := validator.New()
 	if err := validator.Struct(userListBody); err != nil {

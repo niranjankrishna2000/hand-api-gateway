@@ -12,7 +12,7 @@ import (
 
 type ServiceClient struct {
 	Client pb.AdminServiceClient
-	Auth auth.AuthServiceClient
+	Auth   auth.AuthServiceClient
 }
 
 // func InitServiceClient(c *config.Config) pb.AuthServiceClient {

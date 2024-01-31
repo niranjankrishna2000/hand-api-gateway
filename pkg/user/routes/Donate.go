@@ -62,7 +62,7 @@ func Donate(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.DonateResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server",
-			Post: nil,
+			Post:     nil,
 		})
 		return
 	}

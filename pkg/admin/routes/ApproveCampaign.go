@@ -46,7 +46,7 @@ func ApproveCampaign(ctx *gin.Context, c pb.AdminServiceClient) {
 	validator := validator.New()
 	if err := validator.Struct(approveCampaignBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest,pb.ApproveCampaignResponse{
+		ctx.JSON(http.StatusBadRequest, pb.ApproveCampaignResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid Post ID",
 			Post:     nil,

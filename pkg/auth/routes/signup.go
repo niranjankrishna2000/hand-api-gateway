@@ -12,7 +12,7 @@ import (
 )
 
 type SignUpRequestBody struct {
-	Name            string `json:"name" validate:"required,alpha,min=3,max=20"`//check what is alphaunicode
+	Name            string `json:"name" validate:"required,alpha,min=3,max=20"` //check what is alphaunicode
 	Email           string `json:"email" validate:"required,email"`
 	Phone           string `json:"phone" validate:"required,len=10,number"`
 	Password        string `json:"password" validate:"required,min=6,max=20,alphanum"`
@@ -38,18 +38,18 @@ func SignUp(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, pb.SignUpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with request",
-			User: nil,
+			Error:  "Error with request",
+			User:   nil,
 		})
 		return
 	}
 	validator := validator.New()
 	if err := validator.Struct(signupBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest,pb.SignUpResponse{
+		ctx.JSON(http.StatusBadRequest, pb.SignUpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Invalid data"+err.Error(),
-			User: nil,
+			Error:  "Invalid data" + err.Error(),
+			User:   nil,
 		})
 		return
 	}
@@ -65,8 +65,8 @@ func SignUp(ctx *gin.Context, c pb.AuthServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.SignUpResponse{
 			Status: http.StatusBadRequest,
-			Error: "Error with internal server",
-			User: nil,
+			Error:  "Error with internal server",
+			User:   nil,
 		})
 		return
 	}

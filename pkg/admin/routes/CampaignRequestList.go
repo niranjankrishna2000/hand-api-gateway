@@ -46,7 +46,7 @@ func CampaignRequestList(ctx *gin.Context, c pb.AdminServiceClient) {
 	}
 	searchkey := ctx.Query("searchkey")
 
-	campaignRequestListBody := CampaignRequestListBody{Page: page, Limit: limit,Searchkey: searchkey}
+	campaignRequestListBody := CampaignRequestListBody{Page: page, Limit: limit, Searchkey: searchkey}
 
 	validator := validator.New()
 	if err := validator.Struct(campaignRequestListBody); err != nil {

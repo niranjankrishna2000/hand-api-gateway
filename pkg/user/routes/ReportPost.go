@@ -53,7 +53,7 @@ func ReportPost(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.ReportPostResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
-			Post:    nil,
+			Post:     nil,
 		})
 		return
 	}

@@ -38,9 +38,9 @@ func ChangeUserPermission(ctx *gin.Context, c pb.AdminServiceClient, usvc user.A
 	if err := ctx.BindJSON(&changeUserPermissionBody); err != nil {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, user.ChangeUserPermissionResponse{
-			Status:   http.StatusBadRequest,
-			Error: "Error with request",
-			User:     nil,
+			Status: http.StatusBadRequest,
+			Error:  "Error with request",
+			User:   nil,
 		})
 		return
 	}
@@ -48,9 +48,9 @@ func ChangeUserPermission(ctx *gin.Context, c pb.AdminServiceClient, usvc user.A
 	if err := validator.Struct(changeUserPermissionBody); err != nil {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, user.ChangeUserPermissionResponse{
-			Status:   http.StatusBadRequest,
-			Error: "Invalid User ID",
-			User:     nil,
+			Status: http.StatusBadRequest,
+			Error:  "Invalid User ID",
+			User:   nil,
 		})
 		return
 	}
@@ -61,9 +61,9 @@ func ChangeUserPermission(ctx *gin.Context, c pb.AdminServiceClient, usvc user.A
 	if err != nil {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, user.ChangeUserPermissionResponse{
-			Status:   http.StatusBadGateway,
-			Error: "Error in internal server",
-			User:     nil,
+			Status: http.StatusBadGateway,
+			Error:  "Error in internal server",
+			User:   nil,
 		})
 		return
 	}

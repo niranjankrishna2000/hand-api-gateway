@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
 )
+
 type NotificationDetailBody struct {
 	NotificationID int `json:"notificationId" validate:"min=1,max=999,number"`
 }
@@ -38,7 +39,7 @@ func NotificationDetail(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	notificationIdBody:=NotificationIdBody{NotficationId: notificationID}
+	notificationIdBody := NotificationIdBody{NotficationId: notificationID}
 	userId := ctx.GetInt64("userId")
 	log.Println("Sending Data: ", notificationID, userId)
 	//validator
@@ -46,9 +47,9 @@ func NotificationDetail(ctx *gin.Context, c pb.UserServiceClient) {
 	if err := validator.Struct(notificationIdBody); err != nil {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, pb.NotificationDetailsResponse{
-			Status:   http.StatusBadRequest,
-			Response: "Invalid data" + err.Error(),
-			Notification:    nil,
+			Status:       http.StatusBadRequest,
+			Response:     "Invalid data" + err.Error(),
+			Notification: nil,
 		})
 		return
 	}

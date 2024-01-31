@@ -3803,7 +3803,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "www.handcrowdfunding.online",
 	BasePath:         "",
-	Schemes:          []string{"http","https"},
+	Schemes:          []string{"http", "https"},
 	Title:            "Hand Crowdfunding API",
 	Description:      "",
 	InfoInstanceName: "swagger",

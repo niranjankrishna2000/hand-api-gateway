@@ -55,7 +55,7 @@ func EditPost(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.EditPostResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
-			Post:    nil,
+			Post:     nil,
 		})
 		return
 	}

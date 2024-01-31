@@ -37,9 +37,9 @@ func UserDetails(ctx *gin.Context, c pb.AdminServiceClient, usvc user.AuthServic
 	if err != nil {
 		log.Println("Error while fetching data :", err)
 		ctx.JSON(http.StatusBadRequest, user.GetUserDetailsResponse{
-			Status:   http.StatusBadRequest,
-			Error: "Error with post Id",
-			User:     nil,
+			Status: http.StatusBadRequest,
+			Error:  "Error with post Id",
+			User:   nil,
 		})
 		return
 	}
