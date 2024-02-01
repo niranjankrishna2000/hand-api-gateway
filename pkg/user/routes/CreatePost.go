@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"hand/pkg/user/pb"
@@ -73,14 +74,14 @@ func CreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	userId := ctx.GetInt64("userId")
 	log.Println("User ID:", userId)
 	res, err := c.CreatePost(context.Background(), &pb.CreatePostRequest{
-		Text:    body.Text,
-		Place:   body.Place,
-		Amount:  int64(body.Amount),
-		Image:   body.Image,
-		Date:    body.Date,
-		Userid:  int32(userId),
-		Accno:   body.AccountNo,
-		Address: body.Address,
+		Text:       body.Text,
+		Place:      body.Place,
+		Amount:     int64(body.Amount),
+		Image:      body.Image,
+		Date:       body.Date,
+		Userid:     int32(userId),
+		Accno:      body.AccountNo,
+		Address:    body.Address,
 		Categoryid: int32(body.CategoryId),
 		Taxbenefit: body.TaxBenefit,
 	})
@@ -125,5 +126,103 @@ func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	ctx.JSON(int(res.Status), &res)
 }
 
-func ExpirePost(ctx *gin.Context, c pb.UserServiceClient){}
-func DeletePost(ctx *gin.Context, c pb.UserServiceClient){}
+// Expire Post godoc
+//
+//	@Summary		Expire Post
+//	@Description	Expire an active post
+//	@Tags			User Post
+//	@Security		api_key
+//	@Accept			json
+//	@Produce		json
+//	@Param			postid	query		string	true	"Post Id"
+//	@Success		200	{object}	pb.ExpirePostRequest
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.ExpirePostRequest
+//	@Router			/user/post/expire  [patch]
+func ExpirePost(ctx *gin.Context, c pb.UserServiceClient) {
+	postID, err := strconv.Atoi(ctx.Query("postId"))
+	if err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.ExpirePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+			Post:     nil,
+		})
+		return
+	}
+	postIdBody := PostIdBody{PostId: postID}
+	validator := validator.New()
+	if err := validator.Struct(postIdBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.ExpirePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+			Post:     nil,
+		})
+		return
+	}
+	res, err := c.ExpirePost(context.Background(), &pb.ExpirePostRequest{
+		Userid: int32(ctx.GetInt64("userId")),
+		Postid: int32(postID),
+	})
+	if err != nil {
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.ExpirePostResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+			Post:     nil,
+		})
+		return
+	}
+	log.Println("Recieved Data: ", res)
+	ctx.JSON(http.StatusCreated, &res)
+}
+
+// Delete Post godoc
+//
+//	@Summary		Delete Post
+//	@Description	Delete An expired post
+//	@Tags			User Post
+//	@Security		api_key
+//	@Accept			json
+//	@Produce		json
+//	@Param			postid	query		string	true	"Post Id"
+//	@Success		200	{object}	pb.DeletePostRequest
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.DeletePostRequest
+//	@Router			/user/post/delete  [delete]
+func DeletePost(ctx *gin.Context, c pb.UserServiceClient) {
+	postID, err := strconv.Atoi(ctx.Query("postId"))
+	if err != nil {
+		log.Println("Error while fetching data :", err)
+		ctx.JSON(http.StatusBadRequest, pb.DeletePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Error with request",
+		})
+		return
+	}
+	postIdBody := PostIdBody{PostId: postID}
+	validator := validator.New()
+	if err := validator.Struct(postIdBody); err != nil {
+		log.Println("Error:", err)
+		ctx.JSON(http.StatusBadRequest, pb.DeletePostResponse{
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data" + err.Error(),
+		})
+		return
+	}
+	res, err := c.DeletePost(context.Background(), &pb.DeletePostRequest{
+		Userid: int32(ctx.GetInt64("userId")),
+		Postid: int32(postID),
+	})
+	if err != nil {
+		log.Println("Error with internal server :", err)
+		ctx.JSON(http.StatusBadGateway, pb.DeletePostResponse{
+			Status:   http.StatusBadGateway,
+			Response: "Error in internal server",
+		})
+		return
+	}
+	log.Println("Recieved Data: ", res)
+	ctx.JSON(http.StatusCreated, &res)
+}

@@ -9,6 +9,8 @@ service UserService {
   rpc UserFeeds(UserFeedsRequest) returns (UserFeedsResponse) {}
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
   rpc GetCreatePost(GetCreatePostRequest) returns (GetCreatePostResponse){}
+  rpc ExpirePost(ExpirePostRequest) returns (ExpirePostResponse) {}
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse) {}
   rpc UserPostDetails(UserPostDetailsRequest) returns(UserPostDetailsResponse) {}
   rpc Donate(DonateRequest) returns (DonateResponse) {}
   rpc MakePaymentRazorPay(MakePaymentRazorPayRequest) returns (MakePaymentRazorPayResponse) {}
@@ -30,6 +32,15 @@ service UserService {
   rpc DeleteUpdates(DeleteUpdatesRequest) returns (DeleteUpdatesResponse) {}
   rpc EditProfile(UserProfile) returns (EditProfileResponse) {}
   rpc ProfileDetails(ProfileDetailsRequest) returns (ProfileDetailsResponse) {}
+  rpc GetmyImpact(GetmyImpactRequest) returns (GetmyImpactResponse) {}
+  rpc GetMyCampaigns(GetMyCampaignsRequest) returns (GetMyCampaignsResponse) {}
+  rpc GetSuccessStory(GetSuccessStoryRequest) returns (GetSuccessStoryResponse) {}
+  rpc AddSuccessStory(AddSuccessStoryRequest) returns (AddSuccessStoryResponse) {}
+  rpc EditSuccessStory(EditSuccessStoryRequest) returns (EditSuccessStoryResponse) {}
+  rpc DeleteSuccessStory(DeleteSuccessStoryRequest) returns (DeleteSuccessStoryResponse) {}
+  rpc GetMonthlyGoal(GetMonthlyGoalRequest) returns (GetMonthlyGoalResponse) {}
+  rpc AddMonthlyGoal(AddMonthlyGoalRequest) returns (AddMonthlyGoalResponse) {}
+  rpc EditMonthlyGoal(EditMonthlyGoalRequest) returns (EditMonthlyGoalResponse) {}
 }
 
 
@@ -49,6 +60,32 @@ message UserFeedsResponse {
   repeated SuccesStory successstories=5;
 }
 
+message GetMyCampaignsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string searchkey = 3;
+  int32 userId =4;
+}
+
+message GetMyCampaignsResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Post Posts= 3;
+}
+
+message GetmyImpactRequest {
+  int32 userId =1;
+}
+
+message GetmyImpactResponse {
+  int64 status = 1;
+  string response = 2;
+  int32 likes=3;
+  int32 views =4;
+  int64 collected=5;
+  int64 donated=6;
+  int32 lifesChanged=7;
+}
 
 message CreatePostRequest {
   string text = 1;
@@ -98,6 +135,25 @@ message GetCreatePostResponse{
   repeated Category categories=3;
 }
 
+message ExpirePostRequest {
+  int32 postid = 1;
+  int32 userid = 2;
+}
+
+message ExpirePostResponse {
+  int64 status = 1;
+  string response = 2;
+  Post Post= 3;
+}
+message DeletePostRequest {
+  int32 postid = 1;
+  int32 userid = 2;
+}
+
+message DeletePostResponse {
+  int64 status = 1;
+  string response = 2;
+}
 message UserPostDetailsRequest {
   int32 postID = 1;
   int32 userid = 2;
@@ -410,6 +466,96 @@ message DeleteUpdatesResponse {
   int64 status = 1;
   string response = 2;
   repeated Update updates =3;
+}
+
+//Monthly Goal
+
+message GetMonthlyGoalRequest {
+  int32 userid = 1;
+}
+message GetMonthlyGoalResponse {
+  int64 status = 1;
+  string response = 2;
+  int64 amount=3;
+  int32 day=4;
+}
+
+message AddMonthlyGoalRequest {
+  int32 userid = 1;
+  string category=2;//note or int 
+  int64 amount =3;
+  int32 day =4;
+}
+message AddMonthlyGoalResponse {
+  int64 status = 1;
+  string response = 2;
+  string category=5;
+  int64 amount =3;
+  int32 day =4;
+}
+
+message EditMonthlyGoalRequest {
+  int32 userid = 1;
+  string category=2;//note or int 
+  int64 amount =3;
+  int32 day =4;
+}
+message EditMonthlyGoalResponse {
+  int64 status = 1;
+  string response = 2;
+  string category=5;
+  int64 amount =3;
+  int32 day =4;
+}
+
+//success story
+
+message GetSuccessStoryRequest {
+  int32 page = 1;
+  int32 limit =2;
+  string searchkey =3;
+  int32 userid = 4;
+}
+message GetSuccessStoryResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated SuccesStory successStories =3;
+}
+
+message AddSuccessStoryRequest {
+  int32 userId=1;
+  string title=2;
+  string text = 3;
+  string place = 4;
+  string image = 5;
+}
+message AddSuccessStoryResponse {
+  int64 status = 1;
+  string response = 2;
+  SuccesStory successStory =3;
+}
+
+message EditSuccessStoryRequest {
+  int32 userId=1;
+  string title=2;
+  string text = 3;
+  string place = 4;
+  string image = 5;
+}
+message EditSuccessStoryResponse {
+  int64 status = 1;
+  string response = 2;
+  SuccesStory successStory =3;
+}
+
+message DeleteSuccessStoryRequest {
+  int32 userid = 1;
+  int32 storyid = 2;
+}
+message DeleteSuccessStoryResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated SuccesStory successStories =3;
 }
 
 //////////////////////////////////////////////////////////////

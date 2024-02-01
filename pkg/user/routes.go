@@ -51,7 +51,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	profile.PATCH("/edit", svc.EditProfile)
 	profile.GET("/monthly-goal",svc.GetMonthlyGoal)
 	profile.POST("/monthly-goal",svc.AddMonthlyGoal)
-	profile.PATCH("/monthly-goal",svc.EditMonthlyGoal)
+	profile.PUT("/monthly-goal",svc.EditMonthlyGoal)
 	profile.GET("/my-campaigns",svc.GetMyCampaigns)
 	profile.GET("/my-impact",svc.GetmyImpact)
 	///////////////////////////////////////////////////////
