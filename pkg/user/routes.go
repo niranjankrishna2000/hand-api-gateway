@@ -27,15 +27,17 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	post.POST("/upload-multiple-image") //beta
 	post.GET("/details", svc.PostDetails)
 	post.PATCH("/edit", svc.EditPost)
+	post.PATCH("/expire",svc.ExpirePost)
+	post.DELETE("/delete",svc.DeletePost)
 	post.POST("/details/report", svc.ReportPost)
 	post.POST("/like", svc.LikePost)
 	post.POST("/comment", svc.CommentPost)
 	post.POST("/comment/report", svc.ReportComment)
 	post.DELETE("/comment/delete", svc.DeleteComment)
-	post.GET("/updates")
-	post.POST("/updates")
-	post.PATCH("/updates")
-	post.DELETE("/updates")
+	post.GET("/updates",svc.GetUpdates)
+	post.POST("/updates",svc.AddUpdate)
+	post.PATCH("/updates",svc.EditUpdate)
+	post.DELETE("/updates",svc.DeleteUpdate)
 	///////////////////////////////////////////////////////
 	donate := post.Group("/donate")
 	donate.POST("/", svc.Donate)
@@ -47,11 +49,11 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	profile := routes.Group("/profile")
 	profile.GET("/details", svc.ProfileDetails) // add full details
 	profile.PATCH("/edit", svc.EditProfile)
-	profile.GET("/monthly-goal")
-	profile.POST("/monthly-goal")
-	profile.PATCH("/monthly-goal")
-	profile.GET("/my-campaigns")
-	profile.GET("/my-impact")
+	profile.GET("/monthly-goal",svc.GetMonthlyGoal)
+	profile.POST("/monthly-goal",svc.AddMonthlyGoal)
+	profile.PATCH("/monthly-goal",svc.EditMonthlyGoal)
+	profile.GET("/my-campaigns",svc.GetMyCampaigns)
+	profile.GET("/my-impact",svc.GetmyImpact)
 	///////////////////////////////////////////////////////
 	notification := routes.Group("/notifications")
 	notification.GET("", svc.Notifications)
@@ -60,10 +62,10 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	notification.DELETE("/clear", svc.ClearNotification)
 	///////////////////////////////////////////////////////
 	success := routes.Group("/success-stories")
-	success.GET("")
-	success.POST("")
-	success.PATCH("")
-	success.DELETE("")
+	success.GET("",svc.GetSuccessStory)
+	success.POST("",svc.AddSuccessStory)
+	success.PATCH("",svc.EditSuccessStory)
+	success.DELETE("",svc.DeleteSuccessStory)
 	///////////////////////////////////////////////////////
 }
 
@@ -77,6 +79,12 @@ func (svc *ServiceClient) UploadImage(ctx *gin.Context) {
 
 func (svc *ServiceClient) CreatePost(ctx *gin.Context) {
 	routes.CreatePost(ctx, svc.Client)
+}
+func (svc *ServiceClient) ExpirePost(ctx *gin.Context) {
+	routes.ExpirePost(ctx, svc.Client)
+}
+func (svc *ServiceClient) DeletePost(ctx *gin.Context) {
+	routes.DeletePost(ctx, svc.Client)
 }
 func (svc *ServiceClient) GetCreatePost(ctx *gin.Context) {
 	routes.GetCreatePost(ctx, svc.Client)
@@ -124,10 +132,10 @@ func (svc *ServiceClient) DonationHistory(ctx *gin.Context) {
 
 // edit
 func (svc *ServiceClient) ProfileDetails(ctx *gin.Context) {
-	//routes.ProfileDetails(ctx, svc.Client)
+	routes.ProfileDetails(ctx, svc.Client)
 }
 func (svc *ServiceClient) EditProfile(ctx *gin.Context) {
-	//routes.ReportComment(ctx, svc.Client)
+	routes.EditProfile(ctx, svc.Client)
 }
 func (svc *ServiceClient) Notifications(ctx *gin.Context) {
 	routes.Notifications(ctx, svc.Client)
@@ -143,13 +151,54 @@ func (svc *ServiceClient) ClearNotification(ctx *gin.Context) {
 	routes.ClearNotification(ctx, svc.Client)
 }
 
+//updates
+func (svc *ServiceClient) GetUpdates(ctx *gin.Context) {
+	routes.GetUpdates(ctx, svc.Client)
+}
+func (svc *ServiceClient) AddUpdate(ctx *gin.Context) {
+	routes.AddUpdate(ctx, svc.Client)
+}
+func (svc *ServiceClient) EditUpdate(ctx *gin.Context) {
+	routes.EditUpdate(ctx, svc.Client)
+}
+func (svc *ServiceClient) DeleteUpdate(ctx *gin.Context) {
+	routes.DeleteUpdate(ctx, svc.Client)
+}
+//monthly goal
+func (svc *ServiceClient) GetMonthlyGoal(ctx *gin.Context) {
+	routes.GetMonthlyGoal(ctx, svc.Client)
+}
+func (svc *ServiceClient) AddMonthlyGoal(ctx *gin.Context) {
+	routes.AddMonthlyGoal(ctx, svc.Client)
+}
+func (svc *ServiceClient) EditMonthlyGoal(ctx *gin.Context) {
+	routes.EditMonthlyGoal(ctx, svc.Client)
+}
+//my impact
+func (svc *ServiceClient) GetmyImpact(ctx *gin.Context) {
+	routes.GetmyImpact(ctx, svc.Client)
+}
+//my campaigns
+func (svc *ServiceClient) GetMyCampaigns(ctx *gin.Context) {
+	routes.GetMyCampaigns(ctx, svc.Client)
+}
+//success stories
+func (svc *ServiceClient) GetSuccessStory(ctx *gin.Context) {
+	routes.GetSuccessStory(ctx, svc.Client)
+}
+func (svc *ServiceClient) AddSuccessStory(ctx *gin.Context) {
+	routes.AddSuccessStory(ctx, svc.Client)
+}
+func (svc *ServiceClient) EditSuccessStory(ctx *gin.Context) {
+	routes.EditSuccessStory(ctx, svc.Client)
+}
+func (svc *ServiceClient) DeleteSuccessStory(ctx *gin.Context) {
+	routes.DeleteSuccessStory(ctx, svc.Client)
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //note:
 // ** try chats
 // ** consider the omitempty, probably in posts and feeds
 // ** use of actual location
-// ** feeds filter  with trending-successfull-taxbenefit-urgent, category, location
-// ** tax benefit for campaign
-// ** user profile- my donations, my campaigns, your impact and complete profile
-// ** show donations on campaign details
-// ** campaign updates and supporters
+ 

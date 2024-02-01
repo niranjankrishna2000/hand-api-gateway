@@ -64,5 +64,5 @@ func UserPostDetails(ctx *gin.Context, c pb.UserServiceClient) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(int(res.Status), &res)
 }

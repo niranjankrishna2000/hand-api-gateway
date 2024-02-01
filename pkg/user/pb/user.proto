@@ -5,6 +5,7 @@ package user;
 option go_package = "./pkg/user/pb";
 
 service UserService {
+//rpc (Request) returns (Response) {}
   rpc UserFeeds(UserFeedsRequest) returns (UserFeedsResponse) {}
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
   rpc GetCreatePost(GetCreatePostRequest) returns (GetCreatePostResponse){}
@@ -13,7 +14,6 @@ service UserService {
   rpc MakePaymentRazorPay(MakePaymentRazorPayRequest) returns (MakePaymentRazorPayResponse) {}
   rpc GenerateInvoice(GenerateInvoiceRequest) returns (GenerateInvoiceResponse) {}
   rpc ReportPost(ReportPostRequest) returns (ReportPostResponse) {}
-  //rpc (Request) returns (Response) {}
   rpc EditPost(EditPostRequest) returns (EditPostResponse) {}
   rpc LikePost(LikePostRequest) returns (LikePostResponse) {}
   rpc CommentPost(CommentPostRequest) returns (CommentPostResponse) {}
@@ -24,7 +24,12 @@ service UserService {
   rpc NotificationDetail(NotificationDetailsRequest) returns (NotificationDetailsResponse) {}
   rpc DeleteNotification(DeleteNotificationRequest) returns (DeleteNotificationResponse) {}
   rpc ClearNotification(ClearNotificationRequest) returns (ClearNotificationResponse) {}
-
+  rpc GetUpdates(GetUpdatesRequest) returns (GetUpdatesResponse) {}
+  rpc AddUpdates(AddUpdatesRequest) returns (AddUpdatesResponse) {}
+  rpc EditUpdates(EditUpdatesRequest) returns (EditUpdatesResponse) {}
+  rpc DeleteUpdates(DeleteUpdatesRequest) returns (DeleteUpdatesResponse) {}
+  rpc EditProfile(UserProfile) returns (EditProfileResponse) {}
+  rpc ProfileDetails(ProfileDetailsRequest) returns (ProfileDetailsResponse) {}
 }
 
 
@@ -32,6 +37,8 @@ message UserFeedsRequest {
   int32 page = 1;
   int32 limit = 2;
   string searchkey = 3;
+  int32 category =4;
+  int32 type=5;
 }
 
 message UserFeedsResponse {
@@ -71,6 +78,7 @@ message EditPostRequest {
   int32 postid = 6;
   string accno =7;
   string address =8;
+  string title =9;
 }
 
 message CreatePostResponse {
@@ -189,6 +197,7 @@ message PostDetails {
   Post post=1;
   repeated Comment comments =2;
   repeated Update updates=3;
+  repeated Donation donations =4;
 }
 
 message ReportPostRequest {
@@ -328,8 +337,80 @@ message User {
   string status = 4;
   int32 id = 5;
 }
+message UserProfile {
+  string name = 1;
+  string email = 2;
+  string phone = 3;
+  string status = 4;
+  int32 id = 5;
+  string Gender=6;
+  string DoB=7;
+  string Address=8;
+  string PAN=9;
+  string ProfilePicture=11;
+  bool Anonymous=10;
+}
 
 
+
+message ProfileDetailsRequest{
+  int32 userid=1;
+}
+message ProfileDetailsResponse{
+  int32 status =1;
+  string response =2;
+  UserProfile user =3;
+}
+
+message EditProfileResponse{
+  int32 status =1;
+  string response =2;
+  UserProfile user =3;
+}
+//updates
+
+message GetUpdatesRequest {
+  int32 postid = 1;
+}
+message GetUpdatesResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Update updates =3;
+}
+
+message AddUpdatesRequest {
+  int32 userid = 1;
+  int32 postid = 2;
+  string title =3;
+  string text =4;
+}
+message AddUpdatesResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Update updates =3;
+}
+
+message EditUpdatesRequest {
+  int32 userid = 1;
+  int32 updateid = 2;
+  string title =3;
+  string text =4;
+}
+message EditUpdatesResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Update updates =3;
+}
+
+message DeleteUpdatesRequest {
+  int32 userid = 1;
+  int32 updateid = 2;
+}
+message DeleteUpdatesResponse {
+  int64 status = 1;
+  string response = 2;
+  repeated Update updates =3;
+}
 
 //////////////////////////////////////////////////////////////
 //note: **add comments on post details

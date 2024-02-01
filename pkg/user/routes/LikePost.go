@@ -11,7 +11,7 @@ import (
 	"github.com/go-playground/validator"
 )
 
-type LikePostBody struct {
+type PostIdBody struct {
 	PostId int `json:"postId" validate:"required,min=1,max=999,number"`
 }
 
@@ -40,7 +40,7 @@ func LikePost(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	likePostBody := LikePostBody{PostId: postID}
+	likePostBody := PostIdBody{PostId: postID}
 	userId := ctx.GetInt64("userId")
 	log.Println("Sending Data: ", postID, userId)
 	validator := validator.New()

@@ -124,3 +124,6 @@ func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 	log.Println("Recieved Data: ", res)
 	ctx.JSON(int(res.Status), &res)
 }
+
+func ExpirePost(ctx *gin.Context, c pb.UserServiceClient){}
+func DeletePost(ctx *gin.Context, c pb.UserServiceClient){}

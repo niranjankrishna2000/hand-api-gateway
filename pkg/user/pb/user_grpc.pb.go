@@ -37,12 +37,19 @@ const (
 	UserService_NotificationDetail_FullMethodName  = "/user.UserService/NotificationDetail"
 	UserService_DeleteNotification_FullMethodName  = "/user.UserService/DeleteNotification"
 	UserService_ClearNotification_FullMethodName   = "/user.UserService/ClearNotification"
+	UserService_GetUpdates_FullMethodName          = "/user.UserService/GetUpdates"
+	UserService_AddUpdates_FullMethodName          = "/user.UserService/AddUpdates"
+	UserService_EditUpdates_FullMethodName         = "/user.UserService/EditUpdates"
+	UserService_DeleteUpdates_FullMethodName       = "/user.UserService/DeleteUpdates"
+	UserService_EditProfile_FullMethodName         = "/user.UserService/EditProfile"
+	UserService_ProfileDetails_FullMethodName      = "/user.UserService/ProfileDetails"
 )
 
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	// rpc (Request) returns (Response) {}
 	UserFeeds(ctx context.Context, in *UserFeedsRequest, opts ...grpc.CallOption) (*UserFeedsResponse, error)
 	CreatePost(ctx context.Context, in *CreatePostRequest, opts ...grpc.CallOption) (*CreatePostResponse, error)
 	GetCreatePost(ctx context.Context, in *GetCreatePostRequest, opts ...grpc.CallOption) (*GetCreatePostResponse, error)
@@ -51,7 +58,6 @@ type UserServiceClient interface {
 	MakePaymentRazorPay(ctx context.Context, in *MakePaymentRazorPayRequest, opts ...grpc.CallOption) (*MakePaymentRazorPayResponse, error)
 	GenerateInvoice(ctx context.Context, in *GenerateInvoiceRequest, opts ...grpc.CallOption) (*GenerateInvoiceResponse, error)
 	ReportPost(ctx context.Context, in *ReportPostRequest, opts ...grpc.CallOption) (*ReportPostResponse, error)
-	// rpc (Request) returns (Response) {}
 	EditPost(ctx context.Context, in *EditPostRequest, opts ...grpc.CallOption) (*EditPostResponse, error)
 	LikePost(ctx context.Context, in *LikePostRequest, opts ...grpc.CallOption) (*LikePostResponse, error)
 	CommentPost(ctx context.Context, in *CommentPostRequest, opts ...grpc.CallOption) (*CommentPostResponse, error)
@@ -62,6 +68,12 @@ type UserServiceClient interface {
 	NotificationDetail(ctx context.Context, in *NotificationDetailsRequest, opts ...grpc.CallOption) (*NotificationDetailsResponse, error)
 	DeleteNotification(ctx context.Context, in *DeleteNotificationRequest, opts ...grpc.CallOption) (*DeleteNotificationResponse, error)
 	ClearNotification(ctx context.Context, in *ClearNotificationRequest, opts ...grpc.CallOption) (*ClearNotificationResponse, error)
+	GetUpdates(ctx context.Context, in *GetUpdatesRequest, opts ...grpc.CallOption) (*GetUpdatesResponse, error)
+	AddUpdates(ctx context.Context, in *AddUpdatesRequest, opts ...grpc.CallOption) (*AddUpdatesResponse, error)
+	EditUpdates(ctx context.Context, in *EditUpdatesRequest, opts ...grpc.CallOption) (*EditUpdatesResponse, error)
+	DeleteUpdates(ctx context.Context, in *DeleteUpdatesRequest, opts ...grpc.CallOption) (*DeleteUpdatesResponse, error)
+	EditProfile(ctx context.Context, in *UserProfile, opts ...grpc.CallOption) (*EditProfileResponse, error)
+	ProfileDetails(ctx context.Context, in *ProfileDetailsRequest, opts ...grpc.CallOption) (*ProfileDetailsResponse, error)
 }
 
 type userServiceClient struct {
@@ -234,10 +246,65 @@ func (c *userServiceClient) ClearNotification(ctx context.Context, in *ClearNoti
 	return out, nil
 }
 
+func (c *userServiceClient) GetUpdates(ctx context.Context, in *GetUpdatesRequest, opts ...grpc.CallOption) (*GetUpdatesResponse, error) {
+	out := new(GetUpdatesResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUpdates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) AddUpdates(ctx context.Context, in *AddUpdatesRequest, opts ...grpc.CallOption) (*AddUpdatesResponse, error) {
+	out := new(AddUpdatesResponse)
+	err := c.cc.Invoke(ctx, UserService_AddUpdates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) EditUpdates(ctx context.Context, in *EditUpdatesRequest, opts ...grpc.CallOption) (*EditUpdatesResponse, error) {
+	out := new(EditUpdatesResponse)
+	err := c.cc.Invoke(ctx, UserService_EditUpdates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteUpdates(ctx context.Context, in *DeleteUpdatesRequest, opts ...grpc.CallOption) (*DeleteUpdatesResponse, error) {
+	out := new(DeleteUpdatesResponse)
+	err := c.cc.Invoke(ctx, UserService_DeleteUpdates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) EditProfile(ctx context.Context, in *UserProfile, opts ...grpc.CallOption) (*EditProfileResponse, error) {
+	out := new(EditProfileResponse)
+	err := c.cc.Invoke(ctx, UserService_EditProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ProfileDetails(ctx context.Context, in *ProfileDetailsRequest, opts ...grpc.CallOption) (*ProfileDetailsResponse, error) {
+	out := new(ProfileDetailsResponse)
+	err := c.cc.Invoke(ctx, UserService_ProfileDetails_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
+	// rpc (Request) returns (Response) {}
 	UserFeeds(context.Context, *UserFeedsRequest) (*UserFeedsResponse, error)
 	CreatePost(context.Context, *CreatePostRequest) (*CreatePostResponse, error)
 	GetCreatePost(context.Context, *GetCreatePostRequest) (*GetCreatePostResponse, error)
@@ -246,7 +313,6 @@ type UserServiceServer interface {
 	MakePaymentRazorPay(context.Context, *MakePaymentRazorPayRequest) (*MakePaymentRazorPayResponse, error)
 	GenerateInvoice(context.Context, *GenerateInvoiceRequest) (*GenerateInvoiceResponse, error)
 	ReportPost(context.Context, *ReportPostRequest) (*ReportPostResponse, error)
-	// rpc (Request) returns (Response) {}
 	EditPost(context.Context, *EditPostRequest) (*EditPostResponse, error)
 	LikePost(context.Context, *LikePostRequest) (*LikePostResponse, error)
 	CommentPost(context.Context, *CommentPostRequest) (*CommentPostResponse, error)
@@ -257,6 +323,12 @@ type UserServiceServer interface {
 	NotificationDetail(context.Context, *NotificationDetailsRequest) (*NotificationDetailsResponse, error)
 	DeleteNotification(context.Context, *DeleteNotificationRequest) (*DeleteNotificationResponse, error)
 	ClearNotification(context.Context, *ClearNotificationRequest) (*ClearNotificationResponse, error)
+	GetUpdates(context.Context, *GetUpdatesRequest) (*GetUpdatesResponse, error)
+	AddUpdates(context.Context, *AddUpdatesRequest) (*AddUpdatesResponse, error)
+	EditUpdates(context.Context, *EditUpdatesRequest) (*EditUpdatesResponse, error)
+	DeleteUpdates(context.Context, *DeleteUpdatesRequest) (*DeleteUpdatesResponse, error)
+	EditProfile(context.Context, *UserProfile) (*EditProfileResponse, error)
+	ProfileDetails(context.Context, *ProfileDetailsRequest) (*ProfileDetailsResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -317,6 +389,24 @@ func (UnimplementedUserServiceServer) DeleteNotification(context.Context, *Delet
 }
 func (UnimplementedUserServiceServer) ClearNotification(context.Context, *ClearNotificationRequest) (*ClearNotificationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClearNotification not implemented")
+}
+func (UnimplementedUserServiceServer) GetUpdates(context.Context, *GetUpdatesRequest) (*GetUpdatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUpdates not implemented")
+}
+func (UnimplementedUserServiceServer) AddUpdates(context.Context, *AddUpdatesRequest) (*AddUpdatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUpdates not implemented")
+}
+func (UnimplementedUserServiceServer) EditUpdates(context.Context, *EditUpdatesRequest) (*EditUpdatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditUpdates not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteUpdates(context.Context, *DeleteUpdatesRequest) (*DeleteUpdatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUpdates not implemented")
+}
+func (UnimplementedUserServiceServer) EditProfile(context.Context, *UserProfile) (*EditProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditProfile not implemented")
+}
+func (UnimplementedUserServiceServer) ProfileDetails(context.Context, *ProfileDetailsRequest) (*ProfileDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProfileDetails not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -655,6 +745,114 @@ func _UserService_ClearNotification_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUpdatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUpdates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetUpdates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUpdates(ctx, req.(*GetUpdatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_AddUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUpdatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).AddUpdates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_AddUpdates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).AddUpdates(ctx, req.(*AddUpdatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_EditUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditUpdatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).EditUpdates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_EditUpdates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).EditUpdates(ctx, req.(*EditUpdatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteUpdates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUpdatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteUpdates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteUpdates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteUpdates(ctx, req.(*DeleteUpdatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_EditProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserProfile)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).EditProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_EditProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).EditProfile(ctx, req.(*UserProfile))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ProfileDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProfileDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ProfileDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ProfileDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ProfileDetails(ctx, req.(*ProfileDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -733,6 +931,30 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearNotification",
 			Handler:    _UserService_ClearNotification_Handler,
+		},
+		{
+			MethodName: "GetUpdates",
+			Handler:    _UserService_GetUpdates_Handler,
+		},
+		{
+			MethodName: "AddUpdates",
+			Handler:    _UserService_AddUpdates_Handler,
+		},
+		{
+			MethodName: "EditUpdates",
+			Handler:    _UserService_EditUpdates_Handler,
+		},
+		{
+			MethodName: "DeleteUpdates",
+			Handler:    _UserService_DeleteUpdates_Handler,
+		},
+		{
+			MethodName: "EditProfile",
+			Handler:    _UserService_EditProfile_Handler,
+		},
+		{
+			MethodName: "ProfileDetails",
+			Handler:    _UserService_ProfileDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
