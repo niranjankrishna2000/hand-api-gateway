@@ -11,7 +11,7 @@ import (
 )
 
 type MonthlyGoalBody struct {
-	Category string `json:"category" validate:"required,oneof='medical' 'education' 'others'"` //note add
+	Category int `json:"category" validate:"required,min=1,max=5,number"` //note add
 	Amount   int    `json:"amount" validate:"required,min=100,max=10000,number"`
 	Day      int    `json:"day" validate:"required,min=1,max=28,number"`
 }
@@ -37,7 +37,7 @@ func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.AddMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server:" + err.Error(),
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -67,7 +67,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.AddMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Couldnt fetch data from client",
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -79,7 +79,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.AddMonthlyGoalResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -87,7 +87,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 	}
 	res, err := c.AddMonthlyGoal(context.Background(), &pb.AddMonthlyGoalRequest{
 		Userid:   int32(ctx.GetInt64("userId")),
-		Category: monthlyGoalBody.Category,
+		Category: int32(monthlyGoalBody.Category),
 		Amount:   int64(monthlyGoalBody.Amount),
 		Day:      int32(monthlyGoalBody.Day),
 	})
@@ -96,7 +96,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.AddMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server:" + err.Error(),
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -127,7 +127,7 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.EditMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Couldnt fetch data from client",
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -139,7 +139,7 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadRequest, pb.EditMonthlyGoalResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data",
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})
@@ -147,7 +147,7 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 	}
 	res, err := c.EditMonthlyGoal(context.Background(), &pb.EditMonthlyGoalRequest{
 		Userid:   int32(ctx.GetInt64("userId")),
-		Category: monthlyGoalBody.Category,
+		Category: int32(monthlyGoalBody.Category),
 		Amount:   int64(monthlyGoalBody.Amount),
 		Day:      int32(monthlyGoalBody.Day),
 	})
@@ -156,7 +156,7 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.EditMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server:" + err.Error(),
-			Category: "",
+			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})

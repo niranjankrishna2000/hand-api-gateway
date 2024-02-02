@@ -59,7 +59,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey,Category: 0,Type: 0,})
+	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey,Category: 0,Type: 0,Userid: int32(ctx.GetInt64("userid"))})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
