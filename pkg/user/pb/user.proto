@@ -116,6 +116,7 @@ message EditPostRequest {
   string accno =7;
   string address =8;
   string title =9;
+  int32 userid=10;
 }
 
 message CreatePostResponse {
