@@ -27,7 +27,7 @@ type EditProfileRequestBody struct {
 //	@Description	User can edit profile
 //	@Description	Choose Gender : male,female and others
 //	@Description	Date of Birth Format : 2006-01-02
-//	@Tags			User profile
+//	@Tags			User Profile
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key

@@ -2971,7 +2971,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User profile"
+                    "User Profile"
                 ],
                 "summary": "Edit profile",
                 "parameters": [
