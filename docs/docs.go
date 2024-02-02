@@ -5245,7 +5245,8 @@ const docTemplate = `{
                     "minLength": 1
                 }
             }
-        },
+        }
+    },
         "securityDefinitions": {
             "api_key": {
                 "type": "apiKey",
