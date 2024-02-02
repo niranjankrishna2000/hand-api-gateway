@@ -23,7 +23,7 @@ type NotificationIdBody struct {
 //	@Tags			User Notifications
 //	@Accept			json
 //	@Produce		json
-//	@Param			notificationId	query		string	false	"Notification Id"
+//	@Param			notificationId	query		int	false	"Notification Id"
 //	@Success		200				{object}	pb.DeleteNotificationResponse
 //	@Failure		400				{object}	pb.DeleteNotificationResponse
 //	@Failure		403				{string}	string	"You have not logged in"

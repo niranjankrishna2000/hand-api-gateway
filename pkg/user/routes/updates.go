@@ -33,7 +33,7 @@ type EditUpdateBody struct {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			postId	query		string	true	"Post ID"
+//	@Param			postId	query		int	true	"Post ID"
 //	@Success		200		{object}	pb.GetUpdatesResponse
 //	@Failure		400		{object}	pb.GetUpdatesResponse
 //	@Failure		403		{string}	string	"You have not logged in"

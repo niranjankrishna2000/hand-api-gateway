@@ -24,7 +24,7 @@ type CampaignDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			postid	query		string	true	"Post ID "
+//	@Param			postid	query		int	true	"Post ID "
 //	@Success		200		{object}	pb.CampaignDetailsResponse
 //	@Failure		400		{object}	pb.CampaignDetailsResponse
 //	@Failure		502		{object}	pb.CampaignDetailsResponse

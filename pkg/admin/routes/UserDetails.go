@@ -25,7 +25,7 @@ type UserDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			userid	query		string	true	"User ID "
+//	@Param			userid	query		int	true	"User ID "
 //	@Success		200		{object}	pb.GetUserDetailsResponse
 //	@Failure		400		{object}	pb.GetUserDetailsResponse
 //	@Failure		403		{string}	string	"You have not logged in"

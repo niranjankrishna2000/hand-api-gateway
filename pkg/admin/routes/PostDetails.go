@@ -24,7 +24,7 @@ type PostDetailsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			postid	query		string	true	"Post ID "
+//	@Param			postid	query		int	true	"Post ID "
 //	@Success		200		{object}	pb.PostDetailsResponse
 //	@Failure		400		{object}	pb.PostDetailsResponse
 //	@Failure		403		{string}	string	"You have not logged in"

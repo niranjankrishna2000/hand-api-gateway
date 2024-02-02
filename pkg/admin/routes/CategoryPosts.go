@@ -25,9 +25,9 @@ type CategoryPostsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
-//	@Param			categoryId	query		string	true	"Category Id"
+//	@Param			limit		query		int	false	"limit"
+//	@Param			page		query		int	false	"Page number"
+//	@Param			categoryId	query		int	true	"Category Id"
 //	@Success		200			{object}	pb.CategoryPostsResponse
 //	@Failure		400			{object}	pb.CategoryPostsResponse
 //	@Failure		403			{string}	string	"You have not logged in"

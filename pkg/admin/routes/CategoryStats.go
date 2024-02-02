@@ -24,8 +24,8 @@ type CategoryStatsBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit	query		string	false	"limit"
-//	@Param			page	query		string	false	"Page number"
+//	@Param			limit	query		int	false	"limit"
+//	@Param			page	query		int	false	"Page number"
 //	@Success		200		{object}	pb.CategoryStatsResponse
 //	@Failure		200		{object}	pb.CategoryStatsResponse
 //	@Failure		200		{object}	pb.CategoryStatsResponse

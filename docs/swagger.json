@@ -81,7 +81,7 @@
                 "summary": "Campaign Details",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -193,13 +193,13 @@
                 "summary": "Reported posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -316,7 +316,7 @@
                 "summary": "Details of reported post",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -371,13 +371,13 @@
                 "summary": "Campaign Requests",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -437,13 +437,13 @@
                 "summary": "Categories",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -503,19 +503,19 @@
                 "summary": "Admin can see Category posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Category Id",
                         "name": "categoryId",
                         "in": "query",
@@ -724,13 +724,13 @@
                 "summary": "Top Users",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -784,13 +784,13 @@
                 "summary": "Top Categories",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -832,13 +832,13 @@
                 "summary": "Top Posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -892,13 +892,13 @@
                 "summary": "Feeds",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1015,7 +1015,7 @@
                 "summary": "Post detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -1127,7 +1127,7 @@
                 "summary": "User detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "User ID ",
                         "name": "userid",
                         "in": "query",
@@ -1182,13 +1182,13 @@
                 "summary": "User List",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1511,7 +1511,7 @@
                     },
                     {
                         "type": "integer",
-                        "description": "searchkey",
+                        "description": "category",
                         "name": "category",
                         "in": "query"
                     }
@@ -1564,13 +1564,13 @@
                 "summary": "Notifications",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1670,7 +1670,7 @@
                 "summary": "Delete Notification",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Notification Id",
                         "name": "notificationId",
                         "in": "query"
@@ -1724,7 +1724,7 @@
                 "summary": "Notification Details",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Notification Id",
                         "name": "notificationId",
                         "in": "query"
@@ -1835,7 +1835,7 @@
                 "summary": "Delete a comment",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Comment ID",
                         "name": "commentId",
                         "in": "query",
@@ -1996,7 +1996,7 @@
                 "summary": "Post detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "id",
                         "in": "query",
@@ -2275,13 +2275,13 @@
                 "summary": "Donation History",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -2341,7 +2341,7 @@
                 "summary": "Donate",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "pay id Data",
                         "name": "payid",
                         "in": "query",
@@ -2502,7 +2502,7 @@
                 "summary": "User can Like a post",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postid",
                         "in": "query",
@@ -2652,7 +2652,7 @@
                 "summary": "Post Updates",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postId",
                         "in": "query",
@@ -3172,13 +3172,13 @@
                 "summary": "My Campaigns",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -3278,13 +3278,13 @@
                 "summary": "Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -3397,7 +3397,7 @@
                 "summary": "Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Success Story ID",
                         "name": "storyId",
                         "in": "query",
@@ -3450,7 +3450,7 @@
                 "summary": "Edit Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postId",
                         "in": "query",

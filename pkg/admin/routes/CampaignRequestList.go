@@ -26,8 +26,8 @@ type CampaignRequestListBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
+//	@Param			limit		query		int		false	"limit"
+//	@Param			page		query		int		false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
 //	@Success		200			{object}	pb.CampaignRequestListResponse
 //	@Failure		400			{object}	pb.CampaignRequestListResponse

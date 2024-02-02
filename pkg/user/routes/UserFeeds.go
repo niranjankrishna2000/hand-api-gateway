@@ -26,7 +26,7 @@ import (
 //	@Param			page		query		int		false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
 //	@Param			type		query		int		false	"Page number"
-//	@Param			category	query		int		false	"searchkey"
+//	@Param			category	query		int		false	"category"
 //	@Success		200			{object}	pb.UserFeedsResponse
 //	@Failure		400			{object}	pb.UserFeedsResponse
 //	@Failure		403			{string}	string	"You have not logged in"

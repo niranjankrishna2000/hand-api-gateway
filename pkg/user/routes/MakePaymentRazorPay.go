@@ -24,7 +24,7 @@ type PayIdBody struct {
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Param			payid	query		string	true	"pay id Data"
+//	@Param			payid	query		int	true	"pay id Data"
 //	@Success		200		{object}	pb.MakePaymentRazorPayResponse
 //	@Failure		400		{object}	pb.MakePaymentRazorPayResponse
 //	@Failure		403		{string}	string	"You have not logged in"

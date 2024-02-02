@@ -92,7 +92,7 @@ const docTemplate = `{
                 "summary": "Campaign Details",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -204,13 +204,13 @@ const docTemplate = `{
                 "summary": "Reported posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -327,7 +327,7 @@ const docTemplate = `{
                 "summary": "Details of reported post",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -382,13 +382,13 @@ const docTemplate = `{
                 "summary": "Campaign Requests",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -448,13 +448,13 @@ const docTemplate = `{
                 "summary": "Categories",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -514,19 +514,19 @@ const docTemplate = `{
                 "summary": "Admin can see Category posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Category Id",
                         "name": "categoryId",
                         "in": "query",
@@ -735,13 +735,13 @@ const docTemplate = `{
                 "summary": "Top Users",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -795,13 +795,13 @@ const docTemplate = `{
                 "summary": "Top Categories",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -843,13 +843,13 @@ const docTemplate = `{
                 "summary": "Top Posts",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -903,13 +903,13 @@ const docTemplate = `{
                 "summary": "Feeds",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1026,7 +1026,7 @@ const docTemplate = `{
                 "summary": "Post detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID ",
                         "name": "postid",
                         "in": "query",
@@ -1138,7 +1138,7 @@ const docTemplate = `{
                 "summary": "User detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "User ID ",
                         "name": "userid",
                         "in": "query",
@@ -1193,13 +1193,13 @@ const docTemplate = `{
                 "summary": "User List",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1522,7 +1522,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "searchkey",
+                        "description": "category",
                         "name": "category",
                         "in": "query"
                     }
@@ -1575,13 +1575,13 @@ const docTemplate = `{
                 "summary": "Notifications",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1681,7 +1681,7 @@ const docTemplate = `{
                 "summary": "Delete Notification",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Notification Id",
                         "name": "notificationId",
                         "in": "query"
@@ -1735,7 +1735,7 @@ const docTemplate = `{
                 "summary": "Notification Details",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Notification Id",
                         "name": "notificationId",
                         "in": "query"
@@ -1846,7 +1846,7 @@ const docTemplate = `{
                 "summary": "Delete a comment",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Comment ID",
                         "name": "commentId",
                         "in": "query",
@@ -2007,7 +2007,7 @@ const docTemplate = `{
                 "summary": "Post detail",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "id",
                         "in": "query",
@@ -2286,13 +2286,13 @@ const docTemplate = `{
                 "summary": "Donation History",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -2352,7 +2352,7 @@ const docTemplate = `{
                 "summary": "Donate",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "pay id Data",
                         "name": "payid",
                         "in": "query",
@@ -2513,7 +2513,7 @@ const docTemplate = `{
                 "summary": "User can Like a post",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postid",
                         "in": "query",
@@ -2663,7 +2663,7 @@ const docTemplate = `{
                 "summary": "Post Updates",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postId",
                         "in": "query",
@@ -3183,13 +3183,13 @@ const docTemplate = `{
                 "summary": "My Campaigns",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -3289,13 +3289,13 @@ const docTemplate = `{
                 "summary": "Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -3408,7 +3408,7 @@ const docTemplate = `{
                 "summary": "Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Success Story ID",
                         "name": "storyId",
                         "in": "query",
@@ -3461,7 +3461,7 @@ const docTemplate = `{
                 "summary": "Edit Success Story",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Post ID",
                         "name": "postId",
                         "in": "query",

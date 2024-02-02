@@ -32,8 +32,8 @@ type EditSuccesStoryBody struct {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
+//	@Param			limit		query		int		false	"limit"
+//	@Param			page		query		int		false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
 //	@Success		200			{object}	pb.GetSuccessStoryResponse
 //	@Failure		400			{object}	pb.GetSuccessStoryResponse
@@ -142,7 +142,7 @@ func AddSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			postId	query		string	true	"Post ID"
+//	@Param			postId	query		int	true	"Post ID"
 //	@Success		200		{object}	pb.EditSuccessStoryResponse
 //	@Failure		400		{object}	pb.EditSuccessStoryResponse
 //	@Failure		403		{string}	string	"You have not logged in"
@@ -196,7 +196,7 @@ func EditSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			storyId	query		string	true	"Success Story ID"
+//	@Param			storyId	query		int	true	"Success Story ID"
 //	@Success		200		{object}	pb.DeleteSuccessStoryResponse
 //	@Failure		400		{object}	pb.DeleteSuccessStoryResponse
 //	@Failure		403		{string}	string	"You have not logged in"

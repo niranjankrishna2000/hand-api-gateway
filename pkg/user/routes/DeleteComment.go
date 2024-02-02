@@ -23,7 +23,7 @@ type DeleteCommentBody struct {
 //	@Tags			User Post
 //	@Accept			json
 //	@Produce		json
-//	@Param			commentId	query		string	true	"Comment ID"
+//	@Param			commentId	query		int	true	"Comment ID"
 //	@Success		200			{object}	pb.DeleteCommentResponse
 //	@Failure		400			{object}	pb.DeleteCommentResponse
 //	@Failure		403			{string}	string	"You have not logged in"

@@ -1224,7 +1224,7 @@ paths:
         in: query
         name: postid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1294,11 +1294,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -1373,7 +1373,7 @@ paths:
         in: query
         name: postid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1407,11 +1407,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -1449,11 +1449,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -1491,16 +1491,16 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: Category Id
         in: query
         name: categoryId
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1631,11 +1631,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1669,11 +1669,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1699,11 +1699,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1737,11 +1737,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -1816,7 +1816,7 @@ paths:
         in: query
         name: postid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1887,7 +1887,7 @@ paths:
         in: query
         name: userid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -1921,11 +1921,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -2134,7 +2134,7 @@ paths:
         in: query
         name: type
         type: integer
-      - description: searchkey
+      - description: category
         in: query
         name: category
         type: integer
@@ -2171,11 +2171,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2238,7 +2238,7 @@ paths:
       - description: Notification Id
         in: query
         name: notificationId
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2272,7 +2272,7 @@ paths:
       - description: Notification Id
         in: query
         name: notificationId
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2343,7 +2343,7 @@ paths:
         in: query
         name: commentId
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2445,7 +2445,7 @@ paths:
         in: query
         name: id
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2621,11 +2621,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -2664,7 +2664,7 @@ paths:
         in: query
         name: payid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2766,7 +2766,7 @@ paths:
         in: query
         name: postid
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -2895,7 +2895,7 @@ paths:
         in: query
         name: postId
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -3193,11 +3193,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -3261,7 +3261,7 @@ paths:
         in: query
         name: storyId
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
@@ -3294,11 +3294,11 @@ paths:
       - description: limit
         in: query
         name: limit
-        type: string
+        type: integer
       - description: Page number
         in: query
         name: page
-        type: string
+        type: integer
       - description: searchkey
         in: query
         name: searchkey
@@ -3336,7 +3336,7 @@ paths:
         in: query
         name: postId
         required: true
-        type: string
+        type: integer
       produces:
       - application/json
       responses:
