@@ -1484,7 +1484,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can see feeds",
+                "description": "User can see feeds\nSelect Type:\nSelect Category:",
                 "consumes": [
                     "application/json"
                 ],
@@ -1497,13 +1497,13 @@ const docTemplate = `{
                 "summary": "Feeds",
                 "parameters": [
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "limit",
                         "name": "limit",
                         "in": "query"
                     },
                     {
-                        "type": "string",
+                        "type": "integer",
                         "description": "Page number",
                         "name": "page",
                         "in": "query"
@@ -1512,6 +1512,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "searchkey",
                         "name": "searchkey",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "searchkey",
+                        "name": "category",
                         "in": "query"
                     }
                 ],
@@ -1954,8 +1966,8 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/pb.UserDeletePostResponse"
                         }
@@ -5253,22 +5265,22 @@ const docTemplate = `{
                 "name": "Authorization",
                 "in": "header"
             }
-        }
-    }`
-    
-    // SwaggerInfo holds exported Swagger Info so clients can modify it
-    var SwaggerInfo = &swag.Spec{
-        Version:          "1.0",
-        Host:             "www.handcrowdfunding.online",
-        BasePath:         "",
-        Schemes:          []string{"http","https"},
-        Title:            "Hand Crowdfunding API",
-        Description:      "",
-        InfoInstanceName: "swagger",
-        SwaggerTemplate:  docTemplate,
-        LeftDelim:        "{{",
-        RightDelim:       "}}",
     }
+}`
+
+// SwaggerInfo holds exported Swagger Info so clients can modify it
+var SwaggerInfo = &swag.Spec{
+	Version:          "",
+	Host:             "",
+	BasePath:         "",
+	Schemes:          []string{},
+	Title:            "",
+	Description:      "",
+	InfoInstanceName: "swagger",
+	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
+}
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)

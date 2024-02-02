@@ -50,7 +50,10 @@ func UploadImage(ctx *gin.Context, c pb.UserServiceClient) {
 	fileLink = "/src/assets/" + filename
 	log.Println("File saved at:", fileLink)
 
-	ctx.JSON(http.StatusCreated, fileLink)
+	ctx.JSON(http.StatusCreated, gin.H{
+		"Response":"Successfully uploaded",
+		"Image Link": fileLink,
+	})
 }
 
 //note::

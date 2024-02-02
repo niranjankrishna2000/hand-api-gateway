@@ -12,7 +12,7 @@ import (
 )
 
 type SignUpRequestBody struct {
-	Name            string `json:"name" validate:"required,alpha,min=3,max=20"` //check what is alphaunicode
+	Name            string `json:"name" validate:"required,ascii,min=3,max=20"` //check what is alphaunicode
 	Email           string `json:"email" validate:"required,email"`
 	Phone           string `json:"phone" validate:"required,len=10,number"`
 	Password        string `json:"password" validate:"required,min=6,max=20,alphanum"`

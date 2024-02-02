@@ -187,7 +187,7 @@ func ExpirePost(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			postid	query		string	true	"Post Id"
-//	@Success		200		{object}	pb.UserDeletePostResponse
+//	@Success		201		{object}	pb.UserDeletePostResponse
 //	@Failure		403		{string}	string	"You have not logged in"
 //	@Failure		502		{object}	pb.UserDeletePostResponse
 //	@Router			/user/post/delete  [delete]

@@ -16,13 +16,17 @@ import (
 //
 //	@Summary		Feeds
 //	@Description	User can see feeds
+//	@Description	Select Type:
+//	@Description	Select Category:
 //	@Tags			User Post
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			limit		query		string	false	"limit"
-//	@Param			page		query		string	false	"Page number"
+//	@Param			limit		query		int		false	"limit"
+//	@Param			page		query		int		false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
+//	@Param			type		query		int		false	"Page number"
+//	@Param			category	query		int		false	"searchkey"
 //	@Success		200			{object}	pb.UserFeedsResponse
 //	@Failure		400			{object}	pb.UserFeedsResponse
 //	@Failure		403			{string}	string	"You have not logged in"
@@ -55,7 +59,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey})
+	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey,Category: 0,Type: 0,})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
