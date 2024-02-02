@@ -7,3 +7,8 @@ server:
 swag: ## Generate swagger docs
 	swag fmt
 	swag init -g ./pkg/**/routes/*.go -o ./cmd/
+
+service:
+	sudo git pull origin
+	go build cmd/main.go
+	./main
