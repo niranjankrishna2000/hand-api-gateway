@@ -1,4 +1,37 @@
 definitions:
+  pb.AddMonthlyGoalResponse:
+    properties:
+      amount:
+        type: integer
+      category:
+        type: string
+      day:
+        type: integer
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.AddSuccessStoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      successStory:
+        $ref: '#/definitions/pb.SuccesStory'
+    type: object
+  pb.AddUpdatesResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      updates:
+        items:
+          $ref: '#/definitions/pb.Update'
+        type: array
+    type: object
   pb.AdminDashboardResponse:
     properties:
       alltime:
@@ -173,6 +206,28 @@ definitions:
       status:
         type: integer
     type: object
+  pb.DeleteSuccessStoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      successStories:
+        items:
+          $ref: '#/definitions/pb.SuccesStory'
+        type: array
+    type: object
+  pb.DeleteUpdatesResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      updates:
+        items:
+          $ref: '#/definitions/pb.Update'
+        type: array
+    type: object
   pb.DonateResponse:
     properties:
       Post:
@@ -208,6 +263,19 @@ definitions:
       status:
         type: integer
     type: object
+  pb.EditMonthlyGoalResponse:
+    properties:
+      amount:
+        type: integer
+      category:
+        type: string
+      day:
+        type: integer
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
   pb.EditPostResponse:
     properties:
       post:
@@ -215,6 +283,42 @@ definitions:
       response:
         type: string
       status:
+        type: integer
+    type: object
+  pb.EditProfileResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      user:
+        $ref: '#/definitions/pb.UserProfile'
+    type: object
+  pb.EditSuccessStoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      successStory:
+        $ref: '#/definitions/pb.SuccesStory'
+    type: object
+  pb.EditUpdatesResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      updates:
+        items:
+          $ref: '#/definitions/pb.Update'
+        type: array
+    type: object
+  pb.ExpirePostRequest:
+    properties:
+      postid:
+        type: integer
+      userid:
         type: integer
     type: object
   pb.FeedsResponse:
@@ -228,6 +332,52 @@ definitions:
       status:
         type: integer
     type: object
+  pb.GetCreatePostRequest:
+    type: object
+  pb.GetMonthlyGoalResponse:
+    properties:
+      amount:
+        type: integer
+      day:
+        type: integer
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.GetMyCampaignsResponse:
+    properties:
+      Posts:
+        items:
+          $ref: '#/definitions/pkg_user_pb.Post'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
+  pb.GetSuccessStoryResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      successStories:
+        items:
+          $ref: '#/definitions/pb.SuccesStory'
+        type: array
+    type: object
+  pb.GetUpdatesResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+      updates:
+        items:
+          $ref: '#/definitions/pb.Update'
+        type: array
+    type: object
   pb.GetUserDetailsResponse:
     properties:
       error:
@@ -236,6 +386,23 @@ definitions:
         type: integer
       user:
         $ref: '#/definitions/pkg_auth_pb.User'
+    type: object
+  pb.GetmyImpactResponse:
+    properties:
+      collected:
+        type: integer
+      donated:
+        type: integer
+      lifesChanged:
+        type: integer
+      likes:
+        type: integer
+      response:
+        type: string
+      status:
+        type: integer
+      views:
+        type: integer
     type: object
   pb.LikePostResponse:
     properties:
@@ -329,8 +496,16 @@ definitions:
         items:
           $ref: '#/definitions/pb.Comment'
         type: array
+      donations:
+        items:
+          $ref: '#/definitions/pb.Donation'
+        type: array
       post:
         $ref: '#/definitions/pkg_user_pb.Post'
+      updates:
+        items:
+          $ref: '#/definitions/pb.Update'
+        type: array
     type: object
   pb.PostDetailsResponse:
     properties:
@@ -350,6 +525,11 @@ definitions:
       response:
         type: string
       status:
+        type: integer
+    type: object
+  pb.ProfileDetailsRequest:
+    properties:
+      userid:
         type: integer
     type: object
   pb.RejectCampaignResponse:
@@ -428,8 +608,55 @@ definitions:
       users:
         type: integer
     type: object
+  pb.SuccesStory:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/pb.Comment'
+        type: array
+      date:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      likes:
+        type: integer
+      place:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  pb.Update:
+    properties:
+      date:
+        type: string
+      id:
+        type: integer
+      postid:
+        type: integer
+      text:
+        type: string
+      title:
+        type: string
+    type: object
+  pb.UserDeletePostResponse:
+    properties:
+      response:
+        type: string
+      status:
+        type: integer
+    type: object
   pb.UserFeedsResponse:
     properties:
+      Categories:
+        items:
+          $ref: '#/definitions/pkg_user_pb.Category'
+        type: array
       Posts:
         items:
           $ref: '#/definitions/pkg_user_pb.Post'
@@ -438,6 +665,10 @@ definitions:
         type: string
       status:
         type: integer
+      successstories:
+        items:
+          $ref: '#/definitions/pb.SuccesStory'
+        type: array
     type: object
   pb.UserListResponse:
     properties:
@@ -458,6 +689,31 @@ definitions:
         type: string
       status:
         type: integer
+    type: object
+  pb.UserProfile:
+    properties:
+      Address:
+        type: string
+      Anonymous:
+        type: boolean
+      DoB:
+        type: string
+      Gender:
+        type: string
+      PAN:
+        type: string
+      ProfilePicture:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
     type: object
   pb.UserStatsResponse:
     properties:
@@ -524,6 +780,13 @@ definitions:
       status:
         type: string
     type: object
+  pkg_user_pb.Category:
+    properties:
+      category:
+        type: string
+      categoryid:
+        type: integer
+    type: object
   pkg_user_pb.Post:
     properties:
       account_no:
@@ -546,7 +809,13 @@ definitions:
         type: integer
       place:
         type: string
+      proof:
+        type: string
+      taxbenefit:
+        type: boolean
       text:
+        type: string
+      title:
         type: string
       user_id:
         type: integer
@@ -616,16 +885,22 @@ definitions:
       place:
         maxLength: 10
         type: string
+      taxbenefit:
+        type: boolean
       text:
-        description: test
         maxLength: 50
+        type: string
+      title:
+        maxLength: 20
         type: string
     required:
     - address
     - categoryId
     - date
     - place
+    - taxbenefit
     - text
+    - title
     type: object
   routes.DeleteCategoryBody:
     properties:
@@ -700,6 +975,50 @@ definitions:
     - postid
     - text
     type: object
+  routes.EditProfileRequestBody:
+    properties:
+      address:
+        maxLength: 50
+        type: string
+      dob:
+        type: string
+      email:
+        type: string
+      gender:
+        enum:
+        - male
+        - female
+        - others
+        type: string
+      name:
+        description: test
+        maxLength: 20
+        type: string
+      pan:
+        type: string
+      phone:
+        type: string
+      profilepic:
+        type: string
+    type: object
+  routes.EditUpdateBody:
+    properties:
+      Id:
+        maximum: 999
+        minimum: 1
+        type: integer
+      text:
+        description: test
+        maxLength: 50
+        minLength: 1
+        type: string
+      title:
+        maxLength: 20
+        minLength: 1
+        type: string
+    required:
+    - Id
+    type: object
   routes.LoginRequestBody:
     properties:
       email:
@@ -717,6 +1036,28 @@ definitions:
         type: string
     required:
     - phone
+    type: object
+  routes.MonthlyGoalBody:
+    properties:
+      amount:
+        maximum: 10000
+        minimum: 100
+        type: integer
+      category:
+        description: note add
+        enum:
+        - medical
+        - education
+        - others
+        type: string
+      day:
+        maximum: 28
+        minimum: 1
+        type: integer
+    required:
+    - amount
+    - category
+    - day
     type: object
   routes.NewCategoryBody:
     properties:
@@ -796,6 +1137,43 @@ definitions:
     - name
     - password
     - phone
+    type: object
+  routes.SuccesStoryBody:
+    properties:
+      image:
+        type: string
+      place:
+        maxLength: 10
+        type: string
+      text:
+        maxLength: 50
+        type: string
+      title:
+        maxLength: 15
+        type: string
+    required:
+    - place
+    - text
+    - title
+    type: object
+  routes.UpdateBody:
+    properties:
+      Id:
+        maximum: 999
+        minimum: 1
+        type: integer
+      text:
+        maxLength: 50
+        minLength: 1
+        type: string
+      title:
+        maxLength: 20
+        minLength: 1
+        type: string
+    required:
+    - Id
+    - text
+    - title
     type: object
 info:
   contact: {}
@@ -2015,6 +2393,37 @@ paths:
       summary: Report Comment
       tags:
       - User Post
+  /user/post/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Delete An expired post
+      parameters:
+      - description: Post Id
+        in: query
+        name: postid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.UserDeletePostResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.UserDeletePostResponse'
+      security:
+      - api_key: []
+      summary: Delete Post
+      tags:
+      - User Post
   /user/post/details:
     get:
       consumes:
@@ -2305,6 +2714,37 @@ paths:
       summary: Edit post
       tags:
       - User Post
+  /user/post/expire:
+    patch:
+      consumes:
+      - application/json
+      description: Expire an active post
+      parameters:
+      - description: Post Id
+        in: query
+        name: postid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ExpirePostRequest'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ExpirePostRequest'
+      security:
+      - api_key: []
+      summary: Expire Post
+      tags:
+      - User Post
   /user/post/like:
     post:
       consumes:
@@ -2351,7 +2791,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.NotificationDetailsResponse'
+            $ref: '#/definitions/pb.GetCreatePostRequest'
         "403":
           description: You have not logged in
           schema:
@@ -2359,7 +2799,7 @@ paths:
         "502":
           description: Bad Gateway
           schema:
-            $ref: '#/definitions/pb.NotificationDetailsResponse'
+            $ref: '#/definitions/pb.GetCreatePostRequest'
       security:
       - api_key: []
       summary: Create Post
@@ -2400,6 +2840,145 @@ paths:
       summary: Create Post
       tags:
       - User Post
+  /user/post/updates:
+    delete:
+      consumes:
+      - application/json
+      description: User can delete an updates about a campaign
+      parameters:
+      - description: Update ID
+        in: query
+        name: updateId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DeleteUpdatesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteUpdatesResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteUpdatesResponse'
+      security:
+      - api_key: []
+      summary: Delete Update
+      tags:
+      - User Post
+    get:
+      consumes:
+      - application/json
+      description: User can see updates about a campaign
+      parameters:
+      - description: Post ID
+        in: query
+        name: postId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetUpdatesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.GetUpdatesResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetUpdatesResponse'
+      security:
+      - api_key: []
+      summary: Post Updates
+      tags:
+      - User Post
+    patch:
+      consumes:
+      - application/json
+      description: User can edit an updates about a campaign
+      parameters:
+      - description: Update Data
+        in: body
+        name: editUpdateBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.EditUpdateBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.EditUpdatesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.EditUpdatesResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.EditUpdatesResponse'
+      security:
+      - api_key: []
+      summary: Edit Update
+      tags:
+      - User Post
+    post:
+      consumes:
+      - application/json
+      description: User can add an updates about a campaign
+      parameters:
+      - description: Update Data
+        in: body
+        name: updateBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.UpdateBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.AddUpdatesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.AddUpdatesResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.AddUpdatesResponse'
+      security:
+      - api_key: []
+      summary: Add Update
+      tags:
+      - User Post
   /user/post/upload-image:
     post:
       consumes:
@@ -2435,4 +3014,375 @@ paths:
       summary: Upload image
       tags:
       - User Post
+  /user/profile/details:
+    get:
+      consumes:
+      - application/json
+      description: User can see Profile Details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.ProfileDetailsRequest'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.ProfileDetailsRequest'
+      security:
+      - api_key: []
+      summary: Profile Details
+      tags:
+      - User Profile
+  /user/profile/edit:
+    patch:
+      consumes:
+      - application/json
+      description: |-
+        User can edit profile
+        Choose Gender : male,female and others
+        Date of Birth Format : 2006-01-02
+      parameters:
+      - description: Edit profile Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.EditProfileRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.EditProfileResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.EditProfileResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.EditProfileResponse'
+      security:
+      - api_key: []
+      summary: Edit profile
+      tags:
+      - User profile
+  /user/profile/monthly-goal:
+    get:
+      consumes:
+      - application/json
+      description: User can see MonthlyGoal
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetMonthlyGoalResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetMonthlyGoalResponse'
+      security:
+      - api_key: []
+      summary: User MonthlyGoal
+      tags:
+      - User Profile
+    post:
+      consumes:
+      - application/json
+      description: User can add MonthlyGoal
+      parameters:
+      - description: Monthly Goal Data
+        in: body
+        name: monthlyGoalBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.MonthlyGoalBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.AddMonthlyGoalResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.AddMonthlyGoalResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.AddMonthlyGoalResponse'
+      security:
+      - api_key: []
+      summary: Add MonthlyGoal
+      tags:
+      - User Profile
+    put:
+      consumes:
+      - application/json
+      description: User can edit an MonthlyGoal
+      parameters:
+      - description: MonthlyGoal Data
+        in: body
+        name: monthlyGoalBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.MonthlyGoalBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.EditMonthlyGoalResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.EditMonthlyGoalResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.EditMonthlyGoalResponse'
+      security:
+      - api_key: []
+      summary: Edit MonthlyGoal
+      tags:
+      - User Profile
+  /user/profile/my-campaigns:
+    get:
+      consumes:
+      - application/json
+      description: User can see their campaigns
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetMyCampaignsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.GetMyCampaignsResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetMyCampaignsResponse'
+      security:
+      - api_key: []
+      summary: My Campaigns
+      tags:
+      - User Profile
+  /user/profile/my-impact:
+    get:
+      consumes:
+      - application/json
+      description: User can see their impact on society
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetmyImpactResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetmyImpactResponse'
+      security:
+      - api_key: []
+      summary: My Impact
+      tags:
+      - User Profile
+  /user/success-stories:
+    delete:
+      consumes:
+      - application/json
+      description: User can Delete Success Stories
+      parameters:
+      - description: Success Story ID
+        in: query
+        name: storyId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.DeleteSuccessStoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.DeleteSuccessStoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.DeleteSuccessStoryResponse'
+      security:
+      - api_key: []
+      summary: Success Story
+      tags:
+      - User Success Story
+    get:
+      consumes:
+      - application/json
+      description: User can see Success Stories
+      parameters:
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: searchkey
+        in: query
+        name: searchkey
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.GetSuccessStoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.GetSuccessStoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.GetSuccessStoryResponse'
+      security:
+      - api_key: []
+      summary: Success Story
+      tags:
+      - User Success Story
+    patch:
+      consumes:
+      - application/json
+      description: User can edit Success Stories
+      parameters:
+      - description: Post ID
+        in: query
+        name: postId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.EditSuccessStoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.EditSuccessStoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.EditSuccessStoryResponse'
+      security:
+      - api_key: []
+      summary: Edit Success Story
+      tags:
+      - User Success Story
+    post:
+      consumes:
+      - application/json
+      description: User can create Success Stories
+      parameters:
+      - description: Success Story Data
+        in: body
+        name: succesStoryBody
+        required: true
+        schema:
+          $ref: '#/definitions/routes.SuccesStoryBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/pb.AddSuccessStoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/pb.AddSuccessStoryResponse'
+        "403":
+          description: You have not logged in
+          schema:
+            type: string
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/pb.AddSuccessStoryResponse'
+      security:
+      - api_key: []
+      summary: Create Success Story
+      tags:
+      - User Success Story
 swagger: "2.0"

@@ -17,9 +17,9 @@ import (
 //	@Security		api_key
 //	@Accept			json
 //	@Produce		json
-//	@Success		200				{object}	pb.ProfileDetailsRequest
-//	@Failure		403				{string}	string	"You have not logged in"
-//	@Failure		502				{object}	pb.ProfileDetailsRequest
+//	@Success		200	{object}	pb.ProfileDetailsRequest
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.ProfileDetailsRequest
 //	@Router			/user/profile/details  [get]
 func ProfileDetails(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.ProfileDetails(context.Background(), &pb.ProfileDetailsRequest{

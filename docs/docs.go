@@ -1926,6 +1926,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/post/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Delete An expired post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Delete Post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post Id",
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserDeletePostResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.UserDeletePostResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user/post/details": {
             "get": {
                 "security": [
@@ -2383,6 +2432,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/post/expire": {
+            "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "Expire an active post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Expire Post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post Id",
+                        "name": "postid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ExpirePostRequest"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ExpirePostRequest"
+                        }
+                    }
+                }
+            }
+        },
         "/user/post/like": {
             "post": {
                 "security": [
@@ -2460,7 +2558,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                            "$ref": "#/definitions/pb.GetCreatePostRequest"
                         }
                     },
                     "403": {
@@ -2472,7 +2570,7 @@ const docTemplate = `{
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
-                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
+                            "$ref": "#/definitions/pb.GetCreatePostRequest"
                         }
                     }
                 }
@@ -2533,6 +2631,224 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/post/updates": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see updates about a campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Post Updates",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID",
+                        "name": "postId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUpdatesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUpdatesResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetUpdatesResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can add an updates about a campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Add Update",
+                "parameters": [
+                    {
+                        "description": "Update Data",
+                        "name": "updateBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.UpdateBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddUpdatesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddUpdatesResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddUpdatesResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can delete an updates about a campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Delete Update",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Update ID",
+                        "name": "updateId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteUpdatesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteUpdatesResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteUpdatesResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can edit an updates about a campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Post"
+                ],
+                "summary": "Edit Update",
+                "parameters": [
+                    {
+                        "description": "Update Data",
+                        "name": "editUpdateBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.EditUpdateBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditUpdatesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditUpdatesResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditUpdatesResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/user/post/upload-image": {
             "post": {
                 "security": [
@@ -2587,9 +2903,640 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/user/profile/details": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see Profile Details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Profile Details",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ProfileDetailsRequest"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.ProfileDetailsRequest"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile/edit": {
+            "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can edit profile\nChoose Gender : male,female and others\nDate of Birth Format : 2006-01-02",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User profile"
+                ],
+                "summary": "Edit profile",
+                "parameters": [
+                    {
+                        "description": "Edit profile Data",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.EditProfileRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditProfileResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditProfileResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditProfileResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile/monthly-goal": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see MonthlyGoal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "User MonthlyGoal",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetMonthlyGoalResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetMonthlyGoalResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can edit an MonthlyGoal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Edit MonthlyGoal",
+                "parameters": [
+                    {
+                        "description": "MonthlyGoal Data",
+                        "name": "monthlyGoalBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.MonthlyGoalBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditMonthlyGoalResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditMonthlyGoalResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditMonthlyGoalResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can add MonthlyGoal",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Add MonthlyGoal",
+                "parameters": [
+                    {
+                        "description": "Monthly Goal Data",
+                        "name": "monthlyGoalBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.MonthlyGoalBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddMonthlyGoalResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddMonthlyGoalResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddMonthlyGoalResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile/my-campaigns": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see their campaigns",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "My Campaigns",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetMyCampaignsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetMyCampaignsResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetMyCampaignsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile/my-impact": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see their impact on society",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "My Impact",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetmyImpactResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetmyImpactResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/success-stories": {
+            "get": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can see Success Stories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Success Story"
+                ],
+                "summary": "Success Story",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "searchkey",
+                        "name": "searchkey",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetSuccessStoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetSuccessStoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.GetSuccessStoryResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can create Success Stories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Success Story"
+                ],
+                "summary": "Create Success Story",
+                "parameters": [
+                    {
+                        "description": "Success Story Data",
+                        "name": "succesStoryBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.SuccesStoryBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddSuccessStoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddSuccessStoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.AddSuccessStoryResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can Delete Success Stories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Success Story"
+                ],
+                "summary": "Success Story",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Success Story ID",
+                        "name": "storyId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteSuccessStoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteSuccessStoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.DeleteSuccessStoryResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "description": "User can edit Success Stories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Success Story"
+                ],
+                "summary": "Edit Success Story",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID",
+                        "name": "postId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditSuccessStoryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditSuccessStoryResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "You have not logged in",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/pb.EditSuccessStoryResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "pb.AddMonthlyGoalResponse": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "day": {
+                    "type": "integer"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.AddSuccessStoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "successStory": {
+                    "$ref": "#/definitions/pb.SuccesStory"
+                }
+            }
+        },
+        "pb.AddUpdatesResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Update"
+                    }
+                }
+            }
+        },
         "pb.AdminDashboardResponse": {
             "type": "object",
             "properties": {
@@ -2860,6 +3807,40 @@ const docTemplate = `{
                 }
             }
         },
+        "pb.DeleteSuccessStoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "successStories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.SuccesStory"
+                    }
+                }
+            }
+        },
+        "pb.DeleteUpdatesResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Update"
+                    }
+                }
+            }
+        },
         "pb.DonateResponse": {
             "type": "object",
             "properties": {
@@ -2914,6 +3895,26 @@ const docTemplate = `{
                 }
             }
         },
+        "pb.EditMonthlyGoalResponse": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "day": {
+                    "type": "integer"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
         "pb.EditPostResponse": {
             "type": "object",
             "properties": {
@@ -2924,6 +3925,62 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.EditProfileResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "user": {
+                    "$ref": "#/definitions/pb.UserProfile"
+                }
+            }
+        },
+        "pb.EditSuccessStoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "successStory": {
+                    "$ref": "#/definitions/pb.SuccesStory"
+                }
+            }
+        },
+        "pb.EditUpdatesResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Update"
+                    }
+                }
+            }
+        },
+        "pb.ExpirePostRequest": {
+            "type": "object",
+            "properties": {
+                "postid": {
+                    "type": "integer"
+                },
+                "userid": {
                     "type": "integer"
                 }
             }
@@ -2945,6 +4002,77 @@ const docTemplate = `{
                 }
             }
         },
+        "pb.GetCreatePostRequest": {
+            "type": "object"
+        },
+        "pb.GetMonthlyGoalResponse": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "day": {
+                    "type": "integer"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.GetMyCampaignsResponse": {
+            "type": "object",
+            "properties": {
+                "Posts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_user_pb.Post"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.GetSuccessStoryResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "successStories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.SuccesStory"
+                    }
+                }
+            }
+        },
+        "pb.GetUpdatesResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Update"
+                    }
+                }
+            }
+        },
         "pb.GetUserDetailsResponse": {
             "type": "object",
             "properties": {
@@ -2956,6 +4084,32 @@ const docTemplate = `{
                 },
                 "user": {
                     "$ref": "#/definitions/pkg_auth_pb.User"
+                }
+            }
+        },
+        "pb.GetmyImpactResponse": {
+            "type": "object",
+            "properties": {
+                "collected": {
+                    "type": "integer"
+                },
+                "donated": {
+                    "type": "integer"
+                },
+                "lifesChanged": {
+                    "type": "integer"
+                },
+                "likes": {
+                    "type": "integer"
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "views": {
+                    "type": "integer"
                 }
             }
         },
@@ -3101,8 +4255,20 @@ const docTemplate = `{
                         "$ref": "#/definitions/pb.Comment"
                     }
                 },
+                "donations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Donation"
+                    }
+                },
                 "post": {
                     "$ref": "#/definitions/pkg_user_pb.Post"
+                },
+                "updates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Update"
+                    }
                 }
             }
         },
@@ -3133,6 +4299,14 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.ProfileDetailsRequest": {
+            "type": "object",
+            "properties": {
+                "userid": {
                     "type": "integer"
                 }
             }
@@ -3255,9 +4429,81 @@ const docTemplate = `{
                 }
             }
         },
+        "pb.SuccesStory": {
+            "type": "object",
+            "properties": {
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.Comment"
+                    }
+                },
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "likes": {
+                    "type": "integer"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "pb.Update": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "postid": {
+                    "type": "integer"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "pb.UserDeletePostResponse": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
         "pb.UserFeedsResponse": {
             "type": "object",
             "properties": {
+                "Categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_user_pb.Category"
+                    }
+                },
                 "Posts": {
                     "type": "array",
                     "items": {
@@ -3269,6 +4515,12 @@ const docTemplate = `{
                 },
                 "status": {
                     "type": "integer"
+                },
+                "successstories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pb.SuccesStory"
+                    }
                 }
             }
         },
@@ -3300,6 +4552,44 @@ const docTemplate = `{
                 },
                 "status": {
                     "type": "integer"
+                }
+            }
+        },
+        "pb.UserProfile": {
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "type": "string"
+                },
+                "Anonymous": {
+                    "type": "boolean"
+                },
+                "DoB": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "PAN": {
+                    "type": "string"
+                },
+                "ProfilePicture": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
                 }
             }
         },
@@ -3403,6 +4693,17 @@ const docTemplate = `{
                 }
             }
         },
+        "pkg_user_pb.Category": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "categoryid": {
+                    "type": "integer"
+                }
+            }
+        },
         "pkg_user_pb.Post": {
             "type": "object",
             "properties": {
@@ -3436,7 +4737,16 @@ const docTemplate = `{
                 "place": {
                     "type": "string"
                 },
+                "proof": {
+                    "type": "string"
+                },
+                "taxbenefit": {
+                    "type": "boolean"
+                },
                 "text": {
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 },
                 "user_id": {
@@ -3511,7 +4821,9 @@ const docTemplate = `{
                 "categoryId",
                 "date",
                 "place",
-                "text"
+                "taxbenefit",
+                "text",
+                "title"
             ],
             "properties": {
                 "accno": {
@@ -3542,10 +4854,16 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 10
                 },
+                "taxbenefit": {
+                    "type": "boolean"
+                },
                 "text": {
-                    "description": "test",
                     "type": "string",
                     "maxLength": 50
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 20
                 }
             }
         },
@@ -3650,6 +4968,67 @@ const docTemplate = `{
                 }
             }
         },
+        "routes.EditProfileRequestBody": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "dob": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string",
+                    "enum": [
+                        "male",
+                        "female",
+                        "others"
+                    ]
+                },
+                "name": {
+                    "description": "test",
+                    "type": "string",
+                    "maxLength": 20
+                },
+                "pan": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "profilepic": {
+                    "type": "string"
+                }
+            }
+        },
+        "routes.EditUpdateBody": {
+            "type": "object",
+            "required": [
+                "Id"
+            ],
+            "properties": {
+                "Id": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                },
+                "text": {
+                    "description": "test",
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 1
+                }
+            }
+        },
         "routes.LoginRequestBody": {
             "type": "object",
             "required": [
@@ -3674,6 +5053,35 @@ const docTemplate = `{
             "properties": {
                 "phone": {
                     "type": "string"
+                }
+            }
+        },
+        "routes.MonthlyGoalBody": {
+            "type": "object",
+            "required": [
+                "amount",
+                "category",
+                "day"
+            ],
+            "properties": {
+                "amount": {
+                    "type": "integer",
+                    "maximum": 10000,
+                    "minimum": 100
+                },
+                "category": {
+                    "description": "note add",
+                    "type": "string",
+                    "enum": [
+                        "medical",
+                        "education",
+                        "others"
+                    ]
+                },
+                "day": {
+                    "type": "integer",
+                    "maximum": 28,
+                    "minimum": 1
                 }
             }
         },
@@ -3787,30 +5195,79 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "routes.SuccesStoryBody": {
+            "type": "object",
+            "required": [
+                "place",
+                "text",
+                "title"
+            ],
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "place": {
+                    "type": "string",
+                    "maxLength": 10
+                },
+                "text": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 15
+                }
+            }
+        },
+        "routes.UpdateBody": {
+            "type": "object",
+            "required": [
+                "Id",
+                "text",
+                "title"
+            ],
+            "properties": {
+                "Id": {
+                    "type": "integer",
+                    "maximum": 999,
+                    "minimum": 1
+                },
+                "text": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "minLength": 1
+                }
+            }
+        },
+        "securityDefinitions": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
         }
-    },
-    "securityDefinitions": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
+    }`
+    
+    // SwaggerInfo holds exported Swagger Info so clients can modify it
+    var SwaggerInfo = &swag.Spec{
+        Version:          "1.0",
+        Host:             "www.handcrowdfunding.online",
+        BasePath:         "",
+        Schemes:          []string{"http","https"},
+        Title:            "Hand Crowdfunding API",
+        Description:      "",
+        InfoInstanceName: "swagger",
+        SwaggerTemplate:  docTemplate,
+        LeftDelim:        "{{",
+        RightDelim:       "}}",
     }
-}`
-
-// SwaggerInfo holds exported Swagger Info so clients can modify it
-var SwaggerInfo = &swag.Spec{
-	Version:          "1.0",
-	Host:             "www.handcrowdfunding.online",
-	BasePath:         "",
-	Schemes:          []string{"http", "https"},
-	Title:            "Hand Crowdfunding API",
-	Description:      "",
-	InfoInstanceName: "swagger",
-	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
-}
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)

@@ -89,10 +89,10 @@ func GetSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			succesStoryBody	body		SuccesStoryBody	true	"Success Story Data"
-//	@Success		200			{object}	pb.AddSuccessStoryResponse
-//	@Failure		400			{object}	pb.AddSuccessStoryResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.AddSuccessStoryResponse
+//	@Success		200				{object}	pb.AddSuccessStoryResponse
+//	@Failure		400				{object}	pb.AddSuccessStoryResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.AddSuccessStoryResponse
 //	@Router			/user/success-stories  [post]
 func AddSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 	succesStoryBody := SuccesStoryBody{}
@@ -143,10 +143,10 @@ func AddSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			postId	query		string	true	"Post ID"
-//	@Success		200			{object}	pb.EditSuccessStoryResponse
-//	@Failure		400			{object}	pb.EditSuccessStoryResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.EditSuccessStoryResponse
+//	@Success		200		{object}	pb.EditSuccessStoryResponse
+//	@Failure		400		{object}	pb.EditSuccessStoryResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.EditSuccessStoryResponse
 //	@Router			/user/success-stories  [patch]
 func EditSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 	successStory := EditSuccesStoryBody{}
@@ -197,10 +197,10 @@ func EditSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			storyId	query		string	true	"Success Story ID"
-//	@Success		200			{object}	pb.DeleteSuccessStoryResponse
-//	@Failure		400			{object}	pb.DeleteSuccessStoryResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.DeleteSuccessStoryResponse
+//	@Success		200		{object}	pb.DeleteSuccessStoryResponse
+//	@Failure		400		{object}	pb.DeleteSuccessStoryResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.DeleteSuccessStoryResponse
 //	@Router			/user/success-stories  [delete]
 func DeleteSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 	storyId, err := strconv.Atoi(ctx.Query("storyId"))

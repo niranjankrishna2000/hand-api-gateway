@@ -135,9 +135,9 @@ func GetCreatePost(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			postid	query		string	true	"Post Id"
-//	@Success		200	{object}	pb.ExpirePostRequest
-//	@Failure		403	{string}	string	"You have not logged in"
-//	@Failure		502	{object}	pb.ExpirePostRequest
+//	@Success		200		{object}	pb.ExpirePostRequest
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.ExpirePostRequest
 //	@Router			/user/post/expire  [patch]
 func ExpirePost(ctx *gin.Context, c pb.UserServiceClient) {
 	postID, err := strconv.Atoi(ctx.Query("postId"))
@@ -187,15 +187,15 @@ func ExpirePost(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			postid	query		string	true	"Post Id"
-//	@Success		200	{object}	pb.DeletePostRequest
-//	@Failure		403	{string}	string	"You have not logged in"
-//	@Failure		502	{object}	pb.DeletePostRequest
+//	@Success		200		{object}	pb.UserDeletePostResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.UserDeletePostResponse
 //	@Router			/user/post/delete  [delete]
 func DeletePost(ctx *gin.Context, c pb.UserServiceClient) {
 	postID, err := strconv.Atoi(ctx.Query("postId"))
 	if err != nil {
 		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.DeletePostResponse{
+		ctx.JSON(http.StatusBadRequest, pb.UserDeletePostResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Error with request",
 		})
@@ -205,19 +205,19 @@ func DeletePost(ctx *gin.Context, c pb.UserServiceClient) {
 	validator := validator.New()
 	if err := validator.Struct(postIdBody); err != nil {
 		log.Println("Error:", err)
-		ctx.JSON(http.StatusBadRequest, pb.DeletePostResponse{
+		ctx.JSON(http.StatusBadRequest, pb.UserDeletePostResponse{
 			Status:   http.StatusBadRequest,
 			Response: "Invalid data" + err.Error(),
 		})
 		return
 	}
-	res, err := c.DeletePost(context.Background(), &pb.DeletePostRequest{
+	res, err := c.DeletePost(context.Background(), &pb.UserDeletePostRequest{
 		Userid: int32(ctx.GetInt64("userId")),
 		Postid: int32(postID),
 	})
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, pb.DeletePostResponse{
+		ctx.JSON(http.StatusBadGateway, pb.UserDeletePostResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server",
 		})

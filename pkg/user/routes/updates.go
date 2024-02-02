@@ -34,10 +34,10 @@ type EditUpdateBody struct {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			postId	query		string	true	"Post ID"
-//	@Success		200			{object}	pb.GetUpdatesResponse
-//	@Failure		400			{object}	pb.GetUpdatesResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.GetUpdatesResponse
+//	@Success		200		{object}	pb.GetUpdatesResponse
+//	@Failure		400		{object}	pb.GetUpdatesResponse
+//	@Failure		403		{string}	string	"You have not logged in"
+//	@Failure		502		{object}	pb.GetUpdatesResponse
 //	@Router			/user/post/updates  [get]
 func GetUpdates(ctx *gin.Context, c pb.UserServiceClient) {
 	postId, err := strconv.Atoi(ctx.Query("postId"))
@@ -139,10 +139,10 @@ func AddUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			editUpdateBody	body		EditUpdateBody	true	"Update Data"
-//	@Success		200			{object}	pb.EditUpdatesResponse
-//	@Failure		400			{object}	pb.EditUpdatesResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.EditUpdatesResponse
+//	@Success		200				{object}	pb.EditUpdatesResponse
+//	@Failure		400				{object}	pb.EditUpdatesResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.EditUpdatesResponse
 //	@Router			/user/post/updates  [patch]
 func EditUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 	editUpdateBody := EditUpdateBody{}

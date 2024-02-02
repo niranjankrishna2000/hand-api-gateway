@@ -10,7 +10,7 @@ service UserService {
   rpc CreatePost(CreatePostRequest) returns (CreatePostResponse) {}
   rpc GetCreatePost(GetCreatePostRequest) returns (GetCreatePostResponse){}
   rpc ExpirePost(ExpirePostRequest) returns (ExpirePostResponse) {}
-  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse) {}
+  rpc DeletePost(UserDeletePostRequest) returns (UserDeletePostResponse) {}
   rpc UserPostDetails(UserPostDetailsRequest) returns(UserPostDetailsResponse) {}
   rpc Donate(DonateRequest) returns (DonateResponse) {}
   rpc MakePaymentRazorPay(MakePaymentRazorPayRequest) returns (MakePaymentRazorPayResponse) {}
@@ -145,12 +145,12 @@ message ExpirePostResponse {
   string response = 2;
   Post Post= 3;
 }
-message DeletePostRequest {
+message UserDeletePostRequest {
   int32 postid = 1;
   int32 userid = 2;
 }
 
-message DeletePostResponse {
+message UserDeletePostResponse {
   int64 status = 1;
   string response = 2;
 }

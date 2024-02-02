@@ -65,7 +65,7 @@ type UserServiceClient interface {
 	CreatePost(ctx context.Context, in *CreatePostRequest, opts ...grpc.CallOption) (*CreatePostResponse, error)
 	GetCreatePost(ctx context.Context, in *GetCreatePostRequest, opts ...grpc.CallOption) (*GetCreatePostResponse, error)
 	ExpirePost(ctx context.Context, in *ExpirePostRequest, opts ...grpc.CallOption) (*ExpirePostResponse, error)
-	DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error)
+	DeletePost(ctx context.Context, in *UserDeletePostRequest, opts ...grpc.CallOption) (*UserDeletePostResponse, error)
 	UserPostDetails(ctx context.Context, in *UserPostDetailsRequest, opts ...grpc.CallOption) (*UserPostDetailsResponse, error)
 	Donate(ctx context.Context, in *DonateRequest, opts ...grpc.CallOption) (*DonateResponse, error)
 	MakePaymentRazorPay(ctx context.Context, in *MakePaymentRazorPayRequest, opts ...grpc.CallOption) (*MakePaymentRazorPayResponse, error)
@@ -142,8 +142,8 @@ func (c *userServiceClient) ExpirePost(ctx context.Context, in *ExpirePostReques
 	return out, nil
 }
 
-func (c *userServiceClient) DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error) {
-	out := new(DeletePostResponse)
+func (c *userServiceClient) DeletePost(ctx context.Context, in *UserDeletePostRequest, opts ...grpc.CallOption) (*UserDeletePostResponse, error) {
+	out := new(UserDeletePostResponse)
 	err := c.cc.Invoke(ctx, UserService_DeletePost_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -430,7 +430,7 @@ type UserServiceServer interface {
 	CreatePost(context.Context, *CreatePostRequest) (*CreatePostResponse, error)
 	GetCreatePost(context.Context, *GetCreatePostRequest) (*GetCreatePostResponse, error)
 	ExpirePost(context.Context, *ExpirePostRequest) (*ExpirePostResponse, error)
-	DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error)
+	DeletePost(context.Context, *UserDeletePostRequest) (*UserDeletePostResponse, error)
 	UserPostDetails(context.Context, *UserPostDetailsRequest) (*UserPostDetailsResponse, error)
 	Donate(context.Context, *DonateRequest) (*DonateResponse, error)
 	MakePaymentRazorPay(context.Context, *MakePaymentRazorPayRequest) (*MakePaymentRazorPayResponse, error)
@@ -480,7 +480,7 @@ func (UnimplementedUserServiceServer) GetCreatePost(context.Context, *GetCreateP
 func (UnimplementedUserServiceServer) ExpirePost(context.Context, *ExpirePostRequest) (*ExpirePostResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExpirePost not implemented")
 }
-func (UnimplementedUserServiceServer) DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error) {
+func (UnimplementedUserServiceServer) DeletePost(context.Context, *UserDeletePostRequest) (*UserDeletePostResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePost not implemented")
 }
 func (UnimplementedUserServiceServer) UserPostDetails(context.Context, *UserPostDetailsRequest) (*UserPostDetailsResponse, error) {
@@ -659,7 +659,7 @@ func _UserService_ExpirePost_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _UserService_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeletePostRequest)
+	in := new(UserDeletePostRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -671,7 +671,7 @@ func _UserService_DeletePost_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: UserService_DeletePost_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).DeletePost(ctx, req.(*DeletePostRequest))
+		return srv.(UserServiceServer).DeletePost(ctx, req.(*UserDeletePostRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

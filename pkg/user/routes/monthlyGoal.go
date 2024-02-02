@@ -24,9 +24,9 @@ type MonthlyGoalBody struct {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Success		200			{object}	pb.GetMonthlyGoalResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.GetMonthlyGoalResponse
+//	@Success		200	{object}	pb.GetMonthlyGoalResponse
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.GetMonthlyGoalResponse
 //	@Router			/user/profile/monthly-goal  [get]
 func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.GetMonthlyGoal(context.Background(), &pb.GetMonthlyGoalRequest{
@@ -56,10 +56,10 @@ func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			monthlyGoalBody	body		MonthlyGoalBody	true	"Monthly Goal Data"
-//	@Success		200			{object}	pb.AddMonthlyGoalResponse
-//	@Failure		400			{object}	pb.AddMonthlyGoalResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.AddMonthlyGoalResponse
+//	@Success		200				{object}	pb.AddMonthlyGoalResponse
+//	@Failure		400				{object}	pb.AddMonthlyGoalResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.AddMonthlyGoalResponse
 //	@Router			/user/profile/monthly-goal  [post]
 func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 	monthlyGoalBody := MonthlyGoalBody{}
@@ -116,10 +116,10 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Produce		json
 //	@Security		api_key
 //	@Param			monthlyGoalBody	body		MonthlyGoalBody	true	"MonthlyGoal Data"
-//	@Success		200			{object}	pb.EditMonthlyGoalResponse
-//	@Failure		400			{object}	pb.EditMonthlyGoalResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.EditMonthlyGoalResponse
+//	@Success		200				{object}	pb.EditMonthlyGoalResponse
+//	@Failure		400				{object}	pb.EditMonthlyGoalResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.EditMonthlyGoalResponse
 //	@Router			/user/profile/monthly-goal  [put]
 func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 	monthlyGoalBody := MonthlyGoalBody{}

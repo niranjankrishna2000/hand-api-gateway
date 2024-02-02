@@ -17,9 +17,9 @@ import (
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Success		200			{object}	pb.GetmyImpactResponse
-//	@Failure		403			{string}	string	"You have not logged in"
-//	@Failure		502			{object}	pb.GetmyImpactResponse
+//	@Success		200	{object}	pb.GetmyImpactResponse
+//	@Failure		403	{string}	string	"You have not logged in"
+//	@Failure		502	{object}	pb.GetmyImpactResponse
 //	@Router			/user/profile/my-impact  [get]
 func GetmyImpact(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.GetmyImpact(context.Background(), &pb.GetmyImpactRequest{
