@@ -52,8 +52,9 @@ func GetMyCampaigns(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	log.Println(int32(ctx.GetInt64("userid")))
-	res, err := c.GetMyCampaigns(context.Background(), &pb.GetMyCampaignsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, UserId: int32(ctx.GetInt64("userid"))})
+	res, err := c.GetMyCampaigns(context.Background(), &pb.GetMyCampaignsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, UserId: int32(userid)})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)

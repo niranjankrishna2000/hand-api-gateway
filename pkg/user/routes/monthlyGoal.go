@@ -86,8 +86,9 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.AddMonthlyGoal(context.Background(), &pb.AddMonthlyGoalRequest{
-		Userid:   int32(ctx.GetInt64("userId")),
+		Userid:   int32(userid),
 		Category: int32(monthlyGoalBody.Category),
 		Amount:   int64(monthlyGoalBody.Amount),
 		Day:      int32(monthlyGoalBody.Day),
@@ -147,8 +148,9 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.EditMonthlyGoal(context.Background(), &pb.EditMonthlyGoalRequest{
-		Userid:   int32(ctx.GetInt64("userId")),
+		Userid:   int32(userid),
 		Category: int32(monthlyGoalBody.Category),
 		Amount:   int64(monthlyGoalBody.Amount),
 		Day:      int32(monthlyGoalBody.Day),

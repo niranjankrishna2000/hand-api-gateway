@@ -111,8 +111,9 @@ func AddUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.AddUpdates(context.Background(), &pb.AddUpdatesRequest{
-		Userid: int32(ctx.GetInt64("userId")),
+		Userid: int32(userid),
 		Postid: int32(updateBody.Id),
 		Title: updateBody.Title,
 		Text: updateBody.Text,
@@ -164,8 +165,9 @@ func EditUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.EditUpdates(context.Background(), &pb.EditUpdatesRequest{
-		Userid:   int32(ctx.GetInt64("userId")),
+		Userid:   int32(userid),
 		Updateid: int32(editUpdateBody.Id),
 		Text: editUpdateBody.Text,
 		Title: editUpdateBody.Title,
@@ -220,8 +222,9 @@ func DeleteUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	Userid:=ctx.GetInt64("userid")
 	res, err := c.DeleteUpdates(context.Background(), &pb.DeleteUpdatesRequest{
-		Userid:   int32(ctx.GetInt64("userId")),
+		Userid:   int32(Userid),
 		Updateid: int32(updateId),
 	})
 	if err != nil {

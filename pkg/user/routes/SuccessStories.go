@@ -65,7 +65,8 @@ func GetSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	res, err := c.GetSuccessStory(context.Background(), &pb.GetSuccessStoryRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, Userid: int32(ctx.GetInt64("userid"))})
+	userid:=ctx.GetInt64("userid")
+	res, err := c.GetSuccessStory(context.Background(), &pb.GetSuccessStoryRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, Userid: int32(userid)})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
@@ -114,8 +115,9 @@ func AddSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.AddSuccessStory(context.Background(), &pb.AddSuccessStoryRequest{
-		UserId: int32(ctx.GetInt64("userId")),
+		UserId: int32(userid),
 		Title:  succesStoryBody.Title,
 		Text:   succesStoryBody.Text,
 		Image:  succesStoryBody.Image,
@@ -169,8 +171,9 @@ func EditSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.EditSuccessStory(context.Background(), &pb.EditSuccessStoryRequest{
-		UserId: int32(ctx.GetInt64("userId")),
+		UserId: int32(userid),
 		Title:  successStory.Title,
 		Text:   successStory.Text,
 		Image:  successStory.Image,
@@ -225,8 +228,9 @@ func DeleteSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.DeleteSuccessStory(context.Background(), &pb.DeleteSuccessStoryRequest{
-		Userid:  int32(ctx.GetInt64("userId")),
+		Userid:  int32(userid),
 		Storyid: int32(storyIdBody.PostId),
 	})
 	if err != nil {

@@ -60,8 +60,9 @@ func EditProfile(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	userid:=ctx.GetInt64("userid")
 	res, err := c.EditProfile(context.Background(), &pb.UserProfile{
-		Id:             int32(ctx.GetInt64("userid")),
+		Id:             int32(userid),
 		Name:           body.Name,
 		Email:          body.Email,
 		Phone:          body.Phone,
