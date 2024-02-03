@@ -74,7 +74,7 @@ func EditPost(ctx *gin.Context, c pb.UserServiceClient) {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.EditPostResponse{
 			Status:   http.StatusBadGateway,
-			Response: "Error in internal server",
+			Response: "Error in internal server"+err.Error(),
 			Post:     nil,
 		})
 		return

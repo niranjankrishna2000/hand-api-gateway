@@ -13,7 +13,7 @@ import (
 
 type DonateRequestBody struct {
 	PostID int `json:"postID" validate:"required,number,min=1,max=999"`
-	Amount int `json:"amount" validate:"requied,number,min=100"`
+	Amount int `json:"amount" validate:"required,number,min=100"`
 }
 
 // Donate godoc
