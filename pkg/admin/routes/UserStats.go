@@ -32,6 +32,7 @@ type UserStatsBody struct {
 //	@Failure		403		{string}	string	"You have not logged in"
 //	@Failure		502		{object}	pb.UserStatsResponse
 //	@Router			/admin/dashboard/User  [get]
+
 func UserStats(ctx *gin.Context, c pb.AdminServiceClient) {
 	log.Println("Initiating UserStats...")
 	page, err := strconv.Atoi(ctx.Query("page"))

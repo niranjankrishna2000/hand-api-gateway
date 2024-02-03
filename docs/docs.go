@@ -715,174 +715,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/admin/dashboard/User": {
-            "get": {
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Admin can see User toplist",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin Dashboard"
-                ],
-                "summary": "Top Users",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pb.UserStatsResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/pb.UserStatsResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "You have not logged in",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "502": {
-                        "description": "Bad Gateway",
-                        "schema": {
-                            "$ref": "#/definitions/pb.UserStatsResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/dashboard/category": {
-            "get": {
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Admin can see top Categories",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin Dashboard"
-                ],
-                "summary": "Top Categories",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pb.CategoryStatsResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "You have not logged in",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/dashboard/posts": {
-            "get": {
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "Admin can see Post toplist",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Admin Dashboard"
-                ],
-                "summary": "Top Posts",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Page number",
-                        "name": "page",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pb.PostStatsResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/pb.PostStatsResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "You have not logged in",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "502": {
-                        "description": "Bad Gateway",
-                        "schema": {
-                            "$ref": "#/definitions/pb.PostStatsResponse"
-                        }
-                    }
-                }
-            }
-        },
         "/admin/feeds": {
             "get": {
                 "security": [
@@ -3626,23 +3458,6 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.CategoryStatsResponse": {
-            "type": "object",
-            "properties": {
-                "categories": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/pkg_admin_pb.Category"
-                    }
-                },
-                "response": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
         "pb.ChangeUserPermissionResponse": {
             "type": "object",
             "properties": {
@@ -4250,23 +4065,6 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.PostStatsResponse": {
-            "type": "object",
-            "properties": {
-                "posts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/pkg_admin_pb.Post"
-                    }
-                },
-                "response": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
         "pb.ProfileDetailsRequest": {
             "type": "object",
             "properties": {
@@ -4545,23 +4343,6 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.UserStatsResponse": {
-            "type": "object",
-            "properties": {
-                "response": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "integer"
-                },
-                "users": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/pkg_admin_pb.User"
-                    }
-                }
-            }
-        },
         "pkg_admin_pb.Category": {
             "type": "object",
             "properties": {
@@ -4602,26 +4383,6 @@ const docTemplate = `{
                 },
                 "userid": {
                     "type": "integer"
-                }
-            }
-        },
-        "pkg_admin_pb.User": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
                 }
             }
         },

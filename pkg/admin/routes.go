@@ -50,7 +50,7 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 
 	dashboard := routes.Group("/dashboard")
 	dashboard.GET("", svc.AdminDashboard)
-	dashboard.GET("/posts", svc.PostStats)
+	//dashboard.GET("/posts", svc.PostStats)
 	//dashboard.GET("/users",svc.UserStats)
 	//dashboard.GET("/category",svc.CategoryStats)
 

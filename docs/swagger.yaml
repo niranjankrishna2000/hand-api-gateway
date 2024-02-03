@@ -111,17 +111,6 @@ definitions:
       status:
         type: integer
     type: object
-  pb.CategoryStatsResponse:
-    properties:
-      categories:
-        items:
-          $ref: '#/definitions/pkg_admin_pb.Category'
-        type: array
-      response:
-        type: string
-      status:
-        type: integer
-    type: object
   pb.ChangeUserPermissionResponse:
     properties:
       error:
@@ -514,17 +503,6 @@ definitions:
       status:
         type: integer
     type: object
-  pb.PostStatsResponse:
-    properties:
-      posts:
-        items:
-          $ref: '#/definitions/pkg_admin_pb.Post'
-        type: array
-      response:
-        type: string
-      status:
-        type: integer
-    type: object
   pb.ProfileDetailsRequest:
     properties:
       userid:
@@ -705,17 +683,6 @@ definitions:
       status:
         type: string
     type: object
-  pb.UserStatsResponse:
-    properties:
-      response:
-        type: string
-      status:
-        type: integer
-      users:
-        items:
-          $ref: '#/definitions/pkg_admin_pb.User'
-        type: array
-    type: object
   pkg_admin_pb.Category:
     properties:
       category:
@@ -743,19 +710,6 @@ definitions:
         type: string
       userid:
         type: integer
-    type: object
-  pkg_admin_pb.User:
-    properties:
-      email:
-        type: string
-      id:
-        type: integer
-      name:
-        type: string
-      phone:
-        type: string
-      status:
-        type: string
     type: object
   pkg_auth_pb.User:
     properties:
@@ -1622,112 +1576,6 @@ paths:
       security:
       - api_key: []
       summary: Admin Dashboard
-      tags:
-      - Admin Dashboard
-  /admin/dashboard/User:
-    get:
-      consumes:
-      - application/json
-      description: Admin can see User toplist
-      parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: integer
-      - description: Page number
-        in: query
-        name: page
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/pb.UserStatsResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/pb.UserStatsResponse'
-        "403":
-          description: You have not logged in
-          schema:
-            type: string
-        "502":
-          description: Bad Gateway
-          schema:
-            $ref: '#/definitions/pb.UserStatsResponse'
-      security:
-      - api_key: []
-      summary: Top Users
-      tags:
-      - Admin Dashboard
-  /admin/dashboard/category:
-    get:
-      consumes:
-      - application/json
-      description: Admin can see top Categories
-      parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: integer
-      - description: Page number
-        in: query
-        name: page
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/pb.CategoryStatsResponse'
-        "403":
-          description: You have not logged in
-          schema:
-            type: string
-      security:
-      - api_key: []
-      summary: Top Categories
-      tags:
-      - Admin Dashboard
-  /admin/dashboard/posts:
-    get:
-      consumes:
-      - application/json
-      description: Admin can see Post toplist
-      parameters:
-      - description: limit
-        in: query
-        name: limit
-        type: integer
-      - description: Page number
-        in: query
-        name: page
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/pb.PostStatsResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/pb.PostStatsResponse'
-        "403":
-          description: You have not logged in
-          schema:
-            type: string
-        "502":
-          description: Bad Gateway
-          schema:
-            $ref: '#/definitions/pb.PostStatsResponse'
-      security:
-      - api_key: []
-      summary: Top Posts
       tags:
       - Admin Dashboard
   /admin/feeds:
