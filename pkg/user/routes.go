@@ -57,7 +57,6 @@ func RegisterRoutes(r *gin.Engine, c *config.Config, authSvc *auth.ServiceClient
 	///////////////////////////////////////////////////////
 	notification := routes.Group("/notifications")
 	notification.GET("", svc.Notifications)
-	notification.GET("/details", svc.NotificationDetail)
 	notification.DELETE("/delete", svc.DeleteNotification)
 	notification.DELETE("/clear", svc.ClearNotification)
 	///////////////////////////////////////////////////////
@@ -139,9 +138,6 @@ func (svc *ServiceClient) EditProfile(ctx *gin.Context) {
 }
 func (svc *ServiceClient) Notifications(ctx *gin.Context) {
 	routes.Notifications(ctx, svc.Client)
-}
-func (svc *ServiceClient) NotificationDetail(ctx *gin.Context) {
-	routes.NotificationDetail(ctx, svc.Client)
 }
 
 func (svc *ServiceClient) DeleteNotification(ctx *gin.Context) {
