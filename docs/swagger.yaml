@@ -4,7 +4,7 @@ definitions:
       amount:
         type: integer
       category:
-        type: string
+        type: integer
       day:
         type: integer
       response:
@@ -268,7 +268,7 @@ definitions:
       amount:
         type: integer
       category:
-        type: string
+        type: integer
       day:
         type: integer
       response:
@@ -332,7 +332,16 @@ definitions:
       status:
         type: integer
     type: object
-  pb.GetCreatePostRequest:
+  pb.GetCreatePostResponse:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/pkg_user_pb.Category'
+        type: array
+      response:
+        type: string
+      status:
+        type: integer
     type: object
   pb.GetMonthlyGoalResponse:
     properties:
@@ -610,18 +619,12 @@ definitions:
     type: object
   pb.SuccesStory:
     properties:
-      comments:
-        items:
-          $ref: '#/definitions/pb.Comment'
-        type: array
       date:
         type: string
       id:
         type: integer
       image:
         type: string
-      likes:
-        type: integer
       place:
         type: string
       text:
@@ -694,8 +697,6 @@ definitions:
     properties:
       Address:
         type: string
-      Anonymous:
-        type: boolean
       DoB:
         type: string
       Gender:
@@ -784,7 +785,7 @@ definitions:
     properties:
       category:
         type: string
-      categoryid:
+      id:
         type: integer
     type: object
   pkg_user_pb.Post:
@@ -992,7 +993,6 @@ definitions:
         type: string
       name:
         description: test
-        maxLength: 20
         type: string
       pan:
         type: string
@@ -1045,11 +1045,9 @@ definitions:
         type: integer
       category:
         description: note add
-        enum:
-        - medical
-        - education
-        - others
-        type: string
+        maximum: 5
+        minimum: 1
+        type: integer
       day:
         maximum: 28
         minimum: 1
@@ -2802,7 +2800,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/pb.GetCreatePostRequest'
+            $ref: '#/definitions/pb.GetCreatePostResponse'
         "403":
           description: You have not logged in
           schema:
@@ -2810,7 +2808,7 @@ paths:
         "502":
           description: Bad Gateway
           schema:
-            $ref: '#/definitions/pb.GetCreatePostRequest'
+            $ref: '#/definitions/pb.GetCreatePostResponse'
       security:
       - api_key: []
       summary: Create Post
@@ -3088,7 +3086,7 @@ paths:
       - api_key: []
       summary: Edit profile
       tags:
-      - User profile
+      - User Profile
   /user/profile/monthly-goal:
     get:
       consumes:

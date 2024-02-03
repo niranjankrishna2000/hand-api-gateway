@@ -11,14 +11,14 @@ import (
 )
 
 type EditProfileRequestBody struct {
-	Name       string `json:"name,omitempty" validate:"max=20,ascii"` //test
-	Email      string `json:"email,omitempty" validate:"email"`
+	Name       string `json:"name,omitempty"` //test
+	Email      string `json:"email,omitempty"`
 	PanNo      string `json:"pan,omitempty" validate:"len=10,number"`
-	Phone      string `json:"phone,omitempty" validate:"len=10,number"`
-	Gender		string `json:"gender,omitempty" validate:"oneof='male' 'female' 'others'"`
+	Phone      string `json:"phone,omitempty"`
+	Gender     string `json:"gender,omitempty" validate:"oneof='male' 'female' 'others'"`
 	Address    string `json:"address,omitempty" validate:"max=50,ascii"`
 	ProfilePic string `json:"profilepic,omitempty"`
-	Dob       string `json:"dob,omitempty" validate:"datetime=2006-01-02"`
+	Dob        string `json:"dob,omitempty" validate:"datetime=2006-01-02"`
 }
 
 // Edit Profile  godoc
@@ -61,14 +61,14 @@ func EditProfile(ctx *gin.Context, c pb.UserServiceClient) {
 		return
 	}
 	res, err := c.EditProfile(context.Background(), &pb.UserProfile{
-		Id:    int32(ctx.GetInt64("userid")),
-		Name:  body.Name,
-		Email: body.Email,
-		Phone: body.Phone,
-		Gender: body.Gender,
-		DoB: body.Dob,
-		Address: body.Address,
-		PAN: body.PanNo,
+		Id:             int32(ctx.GetInt64("userid")),
+		Name:           body.Name,
+		Email:          body.Email,
+		Phone:          body.Phone,
+		Gender:         body.Gender,
+		DoB:            body.Dob,
+		Address:        body.Address,
+		PAN:            body.PanNo,
 		ProfilePicture: body.ProfilePic,
 	})
 

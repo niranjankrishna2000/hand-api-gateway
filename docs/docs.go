@@ -2570,7 +2570,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/pb.GetCreatePostRequest"
+                            "$ref": "#/definitions/pb.GetCreatePostResponse"
                         }
                     },
                     "403": {
@@ -2582,7 +2582,7 @@ const docTemplate = `{
                     "502": {
                         "description": "Bad Gateway",
                         "schema": {
-                            "$ref": "#/definitions/pb.GetCreatePostRequest"
+                            "$ref": "#/definitions/pb.GetCreatePostResponse"
                         }
                     }
                 }
@@ -3505,7 +3505,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "category": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "day": {
                     "type": "integer"
@@ -3914,7 +3914,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "category": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "day": {
                     "type": "integer"
@@ -4014,8 +4014,22 @@ const docTemplate = `{
                 }
             }
         },
-        "pb.GetCreatePostRequest": {
-            "type": "object"
+        "pb.GetCreatePostResponse": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg_user_pb.Category"
+                    }
+                },
+                "response": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
         },
         "pb.GetMonthlyGoalResponse": {
             "type": "object",
@@ -4444,12 +4458,6 @@ const docTemplate = `{
         "pb.SuccesStory": {
             "type": "object",
             "properties": {
-                "comments": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/pb.Comment"
-                    }
-                },
                 "date": {
                     "type": "string"
                 },
@@ -4458,9 +4466,6 @@ const docTemplate = `{
                 },
                 "image": {
                     "type": "string"
-                },
-                "likes": {
-                    "type": "integer"
                 },
                 "place": {
                     "type": "string"
@@ -4572,9 +4577,6 @@ const docTemplate = `{
             "properties": {
                 "Address": {
                     "type": "string"
-                },
-                "Anonymous": {
-                    "type": "boolean"
                 },
                 "DoB": {
                     "type": "string"
@@ -4711,7 +4713,7 @@ const docTemplate = `{
                 "category": {
                     "type": "string"
                 },
-                "categoryid": {
+                "id": {
                     "type": "integer"
                 }
             }
@@ -5003,8 +5005,7 @@ const docTemplate = `{
                 },
                 "name": {
                     "description": "test",
-                    "type": "string",
-                    "maxLength": 20
+                    "type": "string"
                 },
                 "pan": {
                     "type": "string"
@@ -5083,12 +5084,9 @@ const docTemplate = `{
                 },
                 "category": {
                     "description": "note add",
-                    "type": "string",
-                    "enum": [
-                        "medical",
-                        "education",
-                        "others"
-                    ]
+                    "type": "integer",
+                    "maximum": 5,
+                    "minimum": 1
                 },
                 "day": {
                     "type": "integer",
