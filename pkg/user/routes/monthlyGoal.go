@@ -29,15 +29,15 @@ type MonthlyGoalBody struct {
 //	@Failure		502	{object}	pb.GetMonthlyGoalResponse
 //	@Router			/user/profile/monthly-goal  [get]
 func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
+	userid:=ctx.GetInt64("userid")
 	res, err := c.GetMonthlyGoal(context.Background(), &pb.GetMonthlyGoalRequest{
-		Userid: int32(ctx.GetInt64("userid")),
+		Userid: int32(userid),
 	})
 	if err != nil {
 		log.Println("Error with internal server :", err)
-		ctx.JSON(http.StatusBadGateway, pb.AddMonthlyGoalResponse{
+		ctx.JSON(http.StatusBadGateway, pb.GetMonthlyGoalResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Error in internal server:" + err.Error(),
-			Category: 0,
 			Amount:   0,
 			Day:      0,
 		})

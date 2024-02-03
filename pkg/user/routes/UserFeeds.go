@@ -12,12 +12,20 @@ import (
 	"github.com/go-playground/validator"
 )
 
+type FeedsPageBody struct {
+	Limit     int    `json:"limit" validate:"min=0,max=50,number"`
+	Page      int    `json:"page" validate:"min=0,max=99,number"`
+	Searchkey string `json:"searchkey" validate:"max=10,ascii"`
+	PostType  int    `json:"type" validate:"min=0,max=3,number"`
+	Category  int    `json:"category" validate:"min=0,max=5,number"`
+}
+
 // Feeds godoc
 //
 //	@Summary		Feeds
 //	@Description	User can see feeds
-//	@Description	Select Type:
-//	@Description	Select Category:
+//	@Description	Select Type: 1. Trending 2. Expired 3. Tax benefit 
+//	@Description	select category: 0.All category 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
 //	@Tags			User Post
 //	@Accept			json
 //	@Produce		json
@@ -42,9 +50,18 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 	if err != nil {
 		limit = 10
 	}
+	posttype, err := strconv.Atoi(ctx.Query("type"))
+	if err != nil {
+		posttype = 1
+	}
+	category, err := strconv.Atoi(ctx.Query("category"))
+	if err != nil {
+		category = 0
+	}
 	searchkey := ctx.Query("searchkey")
-	pageBody := PageBody{Page: page, Limit: limit, Searchkey: searchkey}
-	log.Println("Collected data : ", page, limit, searchkey)
+
+	pageBody := FeedsPageBody{Page: page, Limit: limit, Searchkey: searchkey,PostType: posttype,Category: category}
+	log.Println("Collected data : ", page, limit, searchkey, posttype, category)
 	//note: ** need userid?
 	validator := validator.New()
 	if err := validator.Struct(pageBody); err != nil {
@@ -58,7 +75,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey,Category: 0,Type: 0,Userid: int32(ctx.GetInt64("userid"))})
+	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, Category: int32(category), Type: int32(posttype), Userid: int32(ctx.GetInt64("userid"))})
 	if err != nil {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.UserFeedsResponse{
@@ -72,6 +89,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 	}
 	ctx.JSON(http.StatusOK, &res)
 }
+
 //note:
 //**add categories list
 //**success stories
