@@ -22,7 +22,7 @@ type UpdateBody struct {
 type EditUpdateBody struct {
 	Id    int    `json:"Id" validate:"required,min=1,max=999,number"`
 	Title string `json:"title,omitempty" validate:"min=1,max=20,ascii"`
-	Text  string `json:"text,omitempty" validate:"min=1,max=50,ascii"`//test
+	Text  string `json:"text,omitempty" validate:"min=1,max=50,ascii"` //test
 }
 
 // Updates godoc
@@ -97,7 +97,7 @@ func AddUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.AddUpdatesResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Couldnt fetch data from client",
-			Updates:     []*pb.Update{},
+			Updates:  []*pb.Update{},
 		})
 		return
 	}
@@ -106,17 +106,17 @@ func AddUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, pb.AddUpdatesResponse{
 			Status:   http.StatusBadRequest,
-			Response: "Invalid data"+err.Error(),
+			Response: "Invalid data" + err.Error(),
 			Updates:  []*pb.Update{},
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.AddUpdates(context.Background(), &pb.AddUpdatesRequest{
 		Userid: int32(userid),
 		Postid: int32(updateBody.Id),
-		Title: updateBody.Title,
-		Text: updateBody.Text,
+		Title:  updateBody.Title,
+		Text:   updateBody.Text,
 	})
 	if err != nil {
 		log.Println("Error with internal server :", err)
@@ -131,6 +131,7 @@ func AddUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 	ctx.JSON(int(res.Status), &res)
 
 }
+
 // Edit Update godoc
 //
 //	@Summary		Edit Update
@@ -151,7 +152,7 @@ func EditUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		ctx.JSON(http.StatusBadGateway, pb.EditUpdatesResponse{
 			Status:   http.StatusBadGateway,
 			Response: "Couldnt fetch data from client",
-			Updates:     []*pb.Update{},
+			Updates:  []*pb.Update{},
 		})
 		return
 	}
@@ -165,12 +166,12 @@ func EditUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.EditUpdates(context.Background(), &pb.EditUpdatesRequest{
 		Userid:   int32(userid),
 		Updateid: int32(editUpdateBody.Id),
-		Text: editUpdateBody.Text,
-		Title: editUpdateBody.Title,
+		Text:     editUpdateBody.Text,
+		Title:    editUpdateBody.Title,
 	})
 	if err != nil {
 		log.Println("Error with internal server :", err)
@@ -222,7 +223,7 @@ func DeleteUpdate(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	Userid:=ctx.GetInt64("userid")
+	Userid := ctx.GetInt64("userId")
 	res, err := c.DeleteUpdates(context.Background(), &pb.DeleteUpdatesRequest{
 		Userid:   int32(Userid),
 		Updateid: int32(updateId),

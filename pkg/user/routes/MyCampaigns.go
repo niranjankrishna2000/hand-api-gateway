@@ -46,22 +46,22 @@ func GetMyCampaigns(ctx *gin.Context, c pb.UserServiceClient) {
 	if err := validator.Struct(pageBody); err != nil {
 		log.Println("Error:", err)
 		ctx.JSON(http.StatusBadRequest, pb.GetMyCampaignsResponse{
-			Status:         http.StatusBadRequest,
-			Response:       "Invalid data :" + err.Error(),
-			Posts:          []*pb.Post{},
+			Status:   http.StatusBadRequest,
+			Response: "Invalid data :" + err.Error(),
+			Posts:    []*pb.Post{},
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
-	log.Println(int32(ctx.GetInt64("userid")))
+	userid := ctx.GetInt64("userId")
+	log.Println(int32(ctx.GetInt64("userId")))
 	res, err := c.GetMyCampaigns(context.Background(), &pb.GetMyCampaignsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, UserId: int32(userid)})
 
 	if err != nil {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.GetMyCampaignsResponse{
-			Status:         http.StatusBadGateway,
-			Response:       err.Error(),
-			Posts:          []*pb.Post{},
+			Status:   http.StatusBadGateway,
+			Response: err.Error(),
+			Posts:    []*pb.Post{},
 		})
 		return
 	}

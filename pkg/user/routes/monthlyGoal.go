@@ -12,8 +12,8 @@ import (
 
 type MonthlyGoalBody struct {
 	Category int `json:"category" validate:"required,min=1,max=5,number"` //note add
-	Amount   int    `json:"amount" validate:"required,min=100,max=10000,number"`
-	Day      int    `json:"day" validate:"required,min=1,max=28,number"`
+	Amount   int `json:"amount" validate:"required,min=100,max=10000,number"`
+	Day      int `json:"day" validate:"required,min=1,max=28,number"`
 }
 
 // MonthlyGoal godoc
@@ -29,7 +29,7 @@ type MonthlyGoalBody struct {
 //	@Failure		502	{object}	pb.GetMonthlyGoalResponse
 //	@Router			/user/profile/monthly-goal  [get]
 func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.GetMonthlyGoal(context.Background(), &pb.GetMonthlyGoalRequest{
 		Userid: int32(userid),
 	})
@@ -86,7 +86,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.AddMonthlyGoal(context.Background(), &pb.AddMonthlyGoalRequest{
 		Userid:   int32(userid),
 		Category: int32(monthlyGoalBody.Category),
@@ -148,7 +148,7 @@ func EditMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.EditMonthlyGoal(context.Background(), &pb.EditMonthlyGoalRequest{
 		Userid:   int32(userid),
 		Category: int32(monthlyGoalBody.Category),

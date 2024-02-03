@@ -24,7 +24,7 @@ type FeedsPageBody struct {
 //
 //	@Summary		Feeds
 //	@Description	User can see feeds
-//	@Description	Select Type: 1. Trending 2. Expired 3. Tax benefit 
+//	@Description	Select Type: 1. Trending 2. Expired 3. Tax benefit
 //	@Description	select category: 0.All category 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
 //	@Tags			User Post
 //	@Accept			json
@@ -60,7 +60,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 	}
 	searchkey := ctx.Query("searchkey")
 
-	pageBody := FeedsPageBody{Page: page, Limit: limit, Searchkey: searchkey,PostType: posttype,Category: category}
+	pageBody := FeedsPageBody{Page: page, Limit: limit, Searchkey: searchkey, PostType: posttype, Category: category}
 	log.Println("Collected data : ", page, limit, searchkey, posttype, category)
 	//note: ** need userid?
 	validator := validator.New()
@@ -75,7 +75,7 @@ func UserFeeds(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.UserFeeds(context.Background(), &pb.UserFeedsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, Category: int32(category), Type: int32(posttype), Userid: int32(userid)})
 	if err != nil {
 		log.Println("Error with internal server :", err)

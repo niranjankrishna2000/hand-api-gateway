@@ -161,7 +161,7 @@ func ExpirePost(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
-	userid:=ctx.GetInt64("userid")
+	userid := ctx.GetInt64("userId")
 	res, err := c.ExpirePost(context.Background(), &pb.ExpirePostRequest{
 		Userid: int32(userid),
 		Postid: int32(postID),

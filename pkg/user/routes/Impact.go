@@ -23,17 +23,17 @@ import (
 //	@Router			/user/profile/my-impact  [get]
 func GetmyImpact(ctx *gin.Context, c pb.UserServiceClient) {
 	res, err := c.GetmyImpact(context.Background(), &pb.GetmyImpactRequest{
-		UserId: int32(ctx.GetInt64("userid")),
+		UserId: int32(ctx.GetInt64("userId")),
 	})
 	if err != nil {
 		log.Println("Error with internal server :", err)
 		ctx.JSON(http.StatusBadGateway, pb.GetmyImpactResponse{
-			Status:   http.StatusBadGateway,
-			Response: "Error in internal server:" + err.Error(),
-			Likes: 0,
-			Views: 0,
-			Collected: 0,
-			Donated: 0,
+			Status:       http.StatusBadGateway,
+			Response:     "Error in internal server:" + err.Error(),
+			Likes:        0,
+			Views:        0,
+			Collected:    0,
+			Donated:      0,
 			LifesChanged: 0,
 		})
 		return
