@@ -1484,7 +1484,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can see feeds\nSelect Type:\nSelect Category:",
+                "description": "User can see feeds\nSelect Type: 1. Trending 2. Expired 3. Tax benefit\nselect category: 0.All category 1. medical,2. child care,3. animal care, 4. Education,5. Memorial",
                 "consumes": [
                     "application/json"
                 ],
@@ -1710,60 +1710,6 @@ const docTemplate = `{
                         "description": "Bad Gateway",
                         "schema": {
                             "$ref": "#/definitions/pb.DeleteNotificationResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/user/notifications/details": {
-            "get": {
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "description": "User can see Notification Details",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "User Notifications"
-                ],
-                "summary": "Notification Details",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Notification Id",
-                        "name": "notificationId",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
-                        }
-                    },
-                    "403": {
-                        "description": "You have not logged in",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "502": {
-                        "description": "Bad Gateway",
-                        "schema": {
-                            "$ref": "#/definitions/pb.NotificationDetailsResponse"
                         }
                     }
                 }
@@ -4236,9 +4182,6 @@ const docTemplate = `{
                 "id": {
                     "type": "integer"
                 },
-                "post": {
-                    "$ref": "#/definitions/pb.PostDetails"
-                },
                 "text": {
                     "type": "string"
                 },
@@ -4246,20 +4189,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "userid": {
-                    "type": "integer"
-                }
-            }
-        },
-        "pb.NotificationDetailsResponse": {
-            "type": "object",
-            "properties": {
-                "notification": {
-                    "$ref": "#/definitions/pb.Notification"
-                },
-                "response": {
-                    "type": "string"
-                },
-                "status": {
                     "type": "integer"
                 }
             }
@@ -4932,6 +4861,7 @@ const docTemplate = `{
         "routes.DonateRequestBody": {
             "type": "object",
             "required": [
+                "amount",
                 "postID"
             ],
             "properties": {

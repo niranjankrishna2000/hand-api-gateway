@@ -470,22 +470,11 @@ definitions:
     properties:
       id:
         type: integer
-      post:
-        $ref: '#/definitions/pb.PostDetails'
       text:
         type: string
       time:
         type: string
       userid:
-        type: integer
-    type: object
-  pb.NotificationDetailsResponse:
-    properties:
-      notification:
-        $ref: '#/definitions/pb.Notification'
-      response:
-        type: string
-      status:
         type: integer
     type: object
   pb.NotificationResponse:
@@ -940,6 +929,7 @@ definitions:
         minimum: 1
         type: integer
     required:
+    - amount
     - postID
     type: object
   routes.EditPostRequestBody:
@@ -2127,8 +2117,8 @@ paths:
       - application/json
       description: |-
         User can see feeds
-        Select Type:
-        Select Category:
+        Select Type: 1. Trending 2. Expired 3. Tax benefit
+        select category: 0.All category 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
       parameters:
       - description: limit
         in: query
@@ -2273,40 +2263,6 @@ paths:
       security:
       - api_key: []
       summary: Delete Notification
-      tags:
-      - User Notifications
-  /user/notifications/details:
-    get:
-      consumes:
-      - application/json
-      description: User can see Notification Details
-      parameters:
-      - description: Notification Id
-        in: query
-        name: notificationId
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/pb.NotificationDetailsResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/pb.NotificationDetailsResponse'
-        "403":
-          description: You have not logged in
-          schema:
-            type: string
-        "502":
-          description: Bad Gateway
-          schema:
-            $ref: '#/definitions/pb.NotificationDetailsResponse'
-      security:
-      - api_key: []
-      summary: Notification Details
       tags:
       - User Notifications
   /user/post/comment:
