@@ -35,5 +35,5 @@ func ProfileDetails(ctx *gin.Context, c pb.UserServiceClient) {
 		return
 	}
 	log.Println("Recieved Data: ", res)
-	ctx.JSON(http.StatusOK, &res)
+	ctx.JSON(int(res.Status), &res)
 }

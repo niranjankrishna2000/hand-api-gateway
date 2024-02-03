@@ -3022,7 +3022,7 @@ paths:
       - api_key: []
       summary: Upload image
       tags:
-      - User Post
+      - User Upload Image
   /user/profile/details:
     get:
       consumes:

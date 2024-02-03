@@ -2876,7 +2876,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "User Post"
+                    "User Upload Image"
                 ],
                 "summary": "Upload image",
                 "parameters": [

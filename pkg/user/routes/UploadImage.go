@@ -15,7 +15,7 @@ import (
 //
 //	@Summary		Upload image
 //	@Description	User can upload image
-//	@Tags			User Post
+//	@Tags			User Upload Image
 //	@Accept			multipart/form-data
 //	@Produce		json
 //	@Security		api_key
