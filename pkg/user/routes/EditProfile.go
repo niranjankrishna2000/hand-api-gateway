@@ -38,7 +38,7 @@ type EditProfileRequestBody struct {
 //	@Failure		502		{object}	pb.EditProfileResponse
 //	@Router			/user/profile/edit  [patch]
 func EditProfile(ctx *gin.Context, c pb.UserServiceClient) {
-	log.Println("Edit profile started...")
+	log.Println("Edit profile started...",int32(ctx.GetInt64("userid")))
 	body := EditProfileRequestBody{}
 
 	if err := ctx.BindJSON(&body); err != nil {
