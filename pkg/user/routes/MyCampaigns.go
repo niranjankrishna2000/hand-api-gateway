@@ -52,6 +52,7 @@ func GetMyCampaigns(ctx *gin.Context, c pb.UserServiceClient) {
 		})
 		return
 	}
+	log.Println(int32(ctx.GetInt64("userid")))
 	res, err := c.GetMyCampaigns(context.Background(), &pb.GetMyCampaignsRequest{Page: int32(page), Limit: int32(limit), Searchkey: searchkey, UserId: int32(ctx.GetInt64("userid"))})
 
 	if err != nil {
