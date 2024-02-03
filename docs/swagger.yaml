@@ -1001,6 +1001,20 @@ definitions:
       profilepic:
         type: string
     type: object
+  routes.EditSuccesStoryBody:
+    properties:
+      image:
+        type: string
+      place:
+        maxLength: 10
+        type: string
+      text:
+        maxLength: 50
+        type: string
+      title:
+        maxLength: 15
+        type: string
+    type: object
   routes.EditUpdateBody:
     properties:
       Id:
@@ -3055,7 +3069,7 @@ paths:
       description: |-
         User can edit profile
         Choose Gender : male,female and others
-        Date of Birth Format : 2006-01-02
+        Date of Birth Format : 2006-01-02 00:00:00
       parameters:
       - description: Edit profile Data
         in: body
@@ -3115,7 +3129,9 @@ paths:
     post:
       consumes:
       - application/json
-      description: User can add MonthlyGoal
+      description: |-
+        User can add MonthlyGoal
+        category: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
       parameters:
       - description: Monthly Goal Data
         in: body
@@ -3150,7 +3166,9 @@ paths:
     put:
       consumes:
       - application/json
-      description: User can edit an MonthlyGoal
+      description: |-
+        User can edit an MonthlyGoal
+        category: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
       parameters:
       - description: MonthlyGoal Data
         in: body
@@ -3335,6 +3353,12 @@ paths:
         name: postId
         required: true
         type: integer
+      - description: Story Data
+        in: body
+        name: successStory
+        required: true
+        schema:
+          $ref: '#/definitions/routes.EditSuccesStoryBody'
       produces:
       - application/json
       responses:

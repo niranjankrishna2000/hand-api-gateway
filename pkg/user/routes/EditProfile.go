@@ -18,7 +18,7 @@ type EditProfileRequestBody struct {
 	Gender     string `json:"gender,omitempty" validate:"oneof='male' 'female' 'others'"`
 	Address    string `json:"address,omitempty" validate:"max=50,ascii"`
 	ProfilePic string `json:"profilepic,omitempty"`
-	Dob        string `json:"dob,omitempty" validate:"datetime=2006-01-02"`
+	Dob        string `json:"dob,omitempty" validate:"datetime=2006-01-02 00:00:00"`
 }
 
 // Edit Profile  godoc
@@ -26,7 +26,7 @@ type EditProfileRequestBody struct {
 //	@Summary		Edit profile
 //	@Description	User can edit profile
 //	@Description	Choose Gender : male,female and others
-//	@Description	Date of Birth Format : 2006-01-02
+//	@Description	Date of Birth Format : 2006-01-02 00:00:00
 //	@Tags			User Profile
 //	@Accept			json
 //	@Produce		json

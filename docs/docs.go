@@ -2963,7 +2963,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can edit profile\nChoose Gender : male,female and others\nDate of Birth Format : 2006-01-02",
+                "description": "User can edit profile\nChoose Gender : male,female and others\nDate of Birth Format : 2006-01-02 00:00:00",
                 "consumes": [
                     "application/json"
                 ],
@@ -3058,7 +3058,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can edit an MonthlyGoal",
+                "description": "User can edit an MonthlyGoal\ncategory: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial",
                 "consumes": [
                     "application/json"
                 ],
@@ -3113,7 +3113,7 @@ const docTemplate = `{
                         "api_key": []
                     }
                 ],
-                "description": "User can add MonthlyGoal",
+                "description": "User can add MonthlyGoal\ncategory: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial",
                 "consumes": [
                     "application/json"
                 ],
@@ -3466,6 +3466,15 @@ const docTemplate = `{
                         "name": "postId",
                         "in": "query",
                         "required": true
+                    },
+                    {
+                        "description": "Story Data",
+                        "name": "successStory",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/routes.EditSuccesStoryBody"
+                        }
                     }
                 ],
                 "responses": {
@@ -5015,6 +5024,26 @@ const docTemplate = `{
                 },
                 "profilepic": {
                     "type": "string"
+                }
+            }
+        },
+        "routes.EditSuccesStoryBody": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "place": {
+                    "type": "string",
+                    "maxLength": 10
+                },
+                "text": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 15
                 }
             }
         },

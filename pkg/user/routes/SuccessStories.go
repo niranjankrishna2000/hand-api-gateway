@@ -142,11 +142,12 @@ func AddSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		api_key
-//	@Param			postId	query		int	true	"Post ID"
-//	@Success		200		{object}	pb.EditSuccessStoryResponse
-//	@Failure		400		{object}	pb.EditSuccessStoryResponse
-//	@Failure		403		{string}	string	"You have not logged in"
-//	@Failure		502		{object}	pb.EditSuccessStoryResponse
+//	@Param			postId			query		int					true	"Post ID"
+//	@Param			successStory	body		EditSuccesStoryBody	true	"Story Data"
+//	@Success		200				{object}	pb.EditSuccessStoryResponse
+//	@Failure		400				{object}	pb.EditSuccessStoryResponse
+//	@Failure		403				{string}	string	"You have not logged in"
+//	@Failure		502				{object}	pb.EditSuccessStoryResponse
 //	@Router			/user/success-stories  [patch]
 func EditSuccessStory(ctx *gin.Context, c pb.UserServiceClient) {
 	successStory := EditSuccesStoryBody{}

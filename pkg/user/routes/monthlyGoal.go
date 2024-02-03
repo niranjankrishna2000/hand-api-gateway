@@ -51,6 +51,7 @@ func GetMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 //
 //	@Summary		Add MonthlyGoal
 //	@Description	User can add MonthlyGoal
+//	@Description	category: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
 //	@Tags			User Profile
 //	@Accept			json
 //	@Produce		json
@@ -111,6 +112,7 @@ func AddMonthlyGoal(ctx *gin.Context, c pb.UserServiceClient) {
 //
 //	@Summary		Edit MonthlyGoal
 //	@Description	User can edit an MonthlyGoal
+//	@Description	category: 1. medical,2. child care,3. animal care, 4. Education,5. Memorial
 //	@Tags			User Profile
 //	@Accept			json
 //	@Produce		json
