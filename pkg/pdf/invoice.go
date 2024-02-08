@@ -23,7 +23,7 @@ func (i *Invoice) CalculateInvoiceTotalAmount() float64 {
 		invoiceTotalAmount += data.Price
 	}
 
-	totalAmount := float64(invoiceTotalAmount) / 100
+	totalAmount := float64(invoiceTotalAmount) 
 
 	return totalAmount
 }
