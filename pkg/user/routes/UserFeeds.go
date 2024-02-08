@@ -33,7 +33,7 @@ type FeedsPageBody struct {
 //	@Param			limit		query		int		false	"limit"
 //	@Param			page		query		int		false	"Page number"
 //	@Param			searchkey	query		string	false	"searchkey"
-//	@Param			type		query		int		false	"Page number"
+//	@Param			type		query		int		false	"Type"
 //	@Param			category	query		int		false	"category"
 //	@Success		200			{object}	pb.UserFeedsResponse
 //	@Failure		400			{object}	pb.UserFeedsResponse

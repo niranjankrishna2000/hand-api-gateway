@@ -43,16 +43,6 @@ func PostDetails(ctx *gin.Context, c pb.AdminServiceClient) {
 		return
 	}
 	postDetailsBody := PostDetailsBody{PostId: postId}
-
-	if err := ctx.BindJSON(&postDetailsBody); err != nil {
-		log.Println("Error while fetching data :", err)
-		ctx.JSON(http.StatusBadRequest, pb.PostDetailsResponse{
-			Status:   http.StatusBadRequest,
-			Response: "Error with request",
-			Post:     nil,
-		})
-		return
-	}
 	validator := validator.New()
 	if err := validator.Struct(postDetailsBody); err != nil {
 		log.Println("Error:", err)

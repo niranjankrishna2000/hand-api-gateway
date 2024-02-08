@@ -1980,7 +1980,7 @@ paths:
         in: query
         name: searchkey
         type: string
-      - description: Page number
+      - description: Type
         in: query
         name: type
         type: integer

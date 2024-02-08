@@ -1348,7 +1348,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "integer",
-                        "description": "Page number",
+                        "description": "Type",
                         "name": "type",
                         "in": "query"
                     },
