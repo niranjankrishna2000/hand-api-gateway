@@ -75,6 +75,5 @@ func MakePaymentRazorPay(ctx *gin.Context, c pb.UserServiceClient) {
 	// 	return
 	// }
 	log.Println("collected data ", res)
-	res.FinalPrice*=100
 	ctx.HTML(http.StatusOK, "razorpay.html", res)
 }
