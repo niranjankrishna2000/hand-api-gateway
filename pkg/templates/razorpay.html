@@ -41,9 +41,10 @@
     <script>
       var userid = document.getElementById("user").innerHTML;
       var paymentid = document.getElementById("payment").innerHTML;
+      var finalPrice = parseInt("{{.FinalPrice}}") * 100;
       var options = {
         key: "rzp_test_zzmWMLGS9uRsb7", // Enter the Key ID generated from the Dashboard
-        amount: "{{.FinalPrice}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        amount: finalPrice, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "Hand",
         description: "Test Transaction",
