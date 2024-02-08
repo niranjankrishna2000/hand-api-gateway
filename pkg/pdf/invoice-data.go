@@ -24,7 +24,7 @@ type InvoiceData struct {
 // }
 
 func (d *InvoiceData) ReturnItemPrice() float64 {
-	converted := float64(d.Price) / 100
+	converted := float64(d.Price) // 100
 	return converted
 }
 
@@ -34,13 +34,13 @@ func NewInvoiceData(title string, price interface{}) (*InvoiceData, error) {
 
 	switch priceValue := price.(type) {
 	case int:
-		convertedPrice = priceValue * 100
+		convertedPrice = priceValue
 	case int64:
-		convertedPrice = int(priceValue * 100)
+		convertedPrice = int(priceValue)
 	case float32:
-		convertedPrice = int(priceValue * 100)
+		convertedPrice = int(priceValue)
 	case float64:
-		convertedPrice = int(priceValue * 100)
+		convertedPrice = int(priceValue)
 	default:
 		return nil, errors.New("type not permitted")
 	}
