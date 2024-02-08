@@ -24,7 +24,7 @@ type InvoiceData struct {
 // }
 
 func (d *InvoiceData) ReturnItemPrice() float64 {
-	converted := float64(d.Price) // 100
+	converted := float64(d.Price) * 100
 	return converted
 }
 
